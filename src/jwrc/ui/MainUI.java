@@ -15,6 +15,7 @@ public class MainUI extends JFrame {
 
         GameSetupUI gameSetupUI = new GameSetupUI();
         add(gameSetupUI.getPlayerNumbersPanel());
+        add(gameSetupUI.getPlayerSelectionPanel());
 
         this.setVisible(true);
     }
