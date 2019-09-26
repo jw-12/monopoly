@@ -64,11 +64,6 @@ public class Game {
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }
 
-        int x=0;
-        while(x<12) {
-            x = this.players.get(whoseTurn).rollDice();
-        }
-        System.out.println(x);
     }
 
 }
