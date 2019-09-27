@@ -13,4 +13,6 @@ public abstract class BoardSpace {
     public int getBoardIndex() {
         return index;
     }
+    
+    
 }
