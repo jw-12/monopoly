@@ -6,6 +6,7 @@ public class Penalties extends BoardSpace {
     private int penaltyAmount;
 
     public Penalties(int penaltyAmount) {
+        super(SpaceType.PENALTY);
         this.penaltyAmount = penaltyAmount;
     }
 
