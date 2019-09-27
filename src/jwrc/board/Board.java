@@ -6,10 +6,8 @@ public class Board {
 
     ArrayList<BoardSpace> boardSpaces;
 
-    ArrayList<BoardSpace> communityChestCards;
+    //ArrayList<BoardSpace> communityChestCards;
     //<BoardSpace> currentCommunityChest =
-
-
 
 
 }
