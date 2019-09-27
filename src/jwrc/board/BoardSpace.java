@@ -4,7 +4,11 @@ public abstract class BoardSpace {
 
     private int index;
 
-    BoardSpace() {
-
+    public BoardSpace(int index) {
+    	this.index = index;
+    }
+    
+    public int getBoardIndex() {
+    	return index;
     }
 }
