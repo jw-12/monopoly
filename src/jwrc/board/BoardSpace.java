@@ -1,5 +1,7 @@
 package jwrc.board;
 
+import jwrc.player.*;
+
 public abstract class BoardSpace {
 
     private int index;
@@ -13,6 +15,7 @@ public abstract class BoardSpace {
     public int getBoardIndex() {
         return index;
     }
-    
+
+    public abstract void takeAction(Player player);
     
 }
