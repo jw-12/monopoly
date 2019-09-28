@@ -1,5 +1,6 @@
 package jwrc.game;
 
+import jwrc.board.Board;
 import jwrc.player.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,15 +13,16 @@ public class Game {
 
     private int numPlayers;
     private static int maxPlayers = 6, minPlayers = 2;
-    //private ArrayList <Player> players;
     private ArrayList <Player> players;
     private int whoseTurn;
     private Scanner input;  // to read input stream
+    private Board board;
 
     public Game(Scanner input) {
         this.input = input;
         this.players = new ArrayList<Player>();
         this.whoseTurn = 0;
+        this.board = new Board();
     }
 
     public void preGame() {
