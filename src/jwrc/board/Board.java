@@ -12,6 +12,7 @@ public class Board {
     public Board() {
     	this.propertyBoard = new ArrayList<BoardSpace>();
     	this.penaltyBoard = new ArrayList<BoardSpace>();
+    	setPenaltyBoard();
     }
 
     // just a simple board to test functionality of penalty components.
@@ -40,6 +41,10 @@ public class Board {
     	this.penaltyBoard.add(b9);
     	this.penaltyBoard.add(b10);
     }
+
+    public ArrayList<BoardSpace> getPenaltyBoard() {
+    	return this.penaltyBoard;
+	}
 
 
     public void setBoard() { // will think of more efficient way to create board.

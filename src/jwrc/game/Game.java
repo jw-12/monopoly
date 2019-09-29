@@ -1,6 +1,7 @@
 package jwrc.game;
 
 import jwrc.board.Board;
+import jwrc.board.BoardSpace;
 import jwrc.player.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,12 +18,15 @@ public class Game {
     private int whoseTurn;
     private Scanner input;  // to read input stream
     private Board board;
+    private ArrayList<BoardSpace> boardArray;
 
     public Game(Scanner input) {
         this.input = input;
         this.players = new ArrayList<Player>();
         this.whoseTurn = 0;
         this.board = new Board();
+        this.boardArray = board.getPenaltyBoard();
+        System.out.println("Size: " + this.boardArray.size());
     }
 
     public void preGame() {
@@ -62,6 +66,7 @@ public class Game {
             System.out.println("Rolled a " + diceVal);
             currentPlayer.evaluatePosition(diceVal);
             System.out.println("Moved to position: " + currentPlayer.getBoardIndex());
+            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer);
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }

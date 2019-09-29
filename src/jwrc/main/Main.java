@@ -14,8 +14,8 @@ public class Main {
         game.preGame();
         game.start();
         
-        Board newBoard = new Board();
-        newBoard.setBoard();
+        //Board newBoard = new Board();
+        //newBoard.setBoard();
 
     }
 }
