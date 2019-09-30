@@ -57,4 +57,8 @@ public class Property extends BoardSpace {
 		System.out.println("You have landed on " + this.name);
 	}
 
+	public SpaceType getSpaceType() {
+		return this.spaceType;
+	}
+
 }

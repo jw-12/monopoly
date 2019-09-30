@@ -27,4 +27,8 @@ public class Penalties extends BoardSpace {
     public String getPenaltyName() {
         return penaltyName;
     }
+
+    public SpaceType getSpaceType() {
+        return this.spaceType;
+    }
 }

@@ -17,5 +17,7 @@ public abstract class BoardSpace {
     }
 
     public abstract void takeAction(Player player);
+
+    public abstract SpaceType getSpaceType();
     
 }

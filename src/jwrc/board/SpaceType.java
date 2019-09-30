@@ -7,4 +7,5 @@ package jwrc.board;
 public enum SpaceType {
 
     NO_ACTION, GO_TO_JAIL, PROPERTY, COMMUNITY_CHEST, CHANCE, FREE_PARKING, PENALTY
+    //may need multiple property types: prop_owned etc
 }

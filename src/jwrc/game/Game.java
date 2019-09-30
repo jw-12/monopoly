@@ -61,12 +61,13 @@ public class Game {
 
         for(int i=0; i<10; i++) {  // only ten turns taken for now
             currentPlayer = this.players.get(whoseTurn);
-            System.out.println( currentPlayer.getName() + ", it's your turn! Currently on position: " + currentPlayer.getBoardIndex());
-            diceVal = currentPlayer.rollDice();
-            System.out.println("Rolled a " + diceVal);
-            currentPlayer.evaluatePosition(diceVal);
-            System.out.println("Moved to position: " + currentPlayer.getBoardIndex());
+
+            Turn.beginTurn(currentPlayer, input);
+
             this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer);
+
+            Turn.endTurn(currentPlayer, input);
+
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }

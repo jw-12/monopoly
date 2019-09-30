@@ -42,4 +42,11 @@ public class Player {
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.
         this.accountBalance += delta;
     }
+
+    public void printPlayerDetails() {
+        System.out.println(
+                "Balance: €" + this.getAccountBalance() +
+                "\nBoard Position: " + this.getBoardIndex() + "/40"
+        );
+    }
 }
