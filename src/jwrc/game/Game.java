@@ -1,5 +1,7 @@
 package jwrc.game;
 
+import jwrc.board.Board;
+import jwrc.board.BoardSpace;
 import jwrc.player.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,15 +14,19 @@ public class Game {
 
     private int numPlayers;
     private static int maxPlayers = 6, minPlayers = 2;
-    //private ArrayList <Player> players;
     private ArrayList <Player> players;
     private int whoseTurn;
     private Scanner input;  // to read input stream
+    private Board board;
+    private ArrayList<BoardSpace> boardArray;
 
     public Game(Scanner input) {
         this.input = input;
         this.players = new ArrayList<Player>();
         this.whoseTurn = 0;
+        this.board = new Board();
+        this.boardArray = board.getPenaltyBoard();
+        System.out.println("Size: " + this.boardArray.size());
     }
 
     public void preGame() {
@@ -55,20 +61,17 @@ public class Game {
 
         for(int i=0; i<10; i++) {  // only ten turns taken for now
             currentPlayer = this.players.get(whoseTurn);
-            System.out.println( currentPlayer.getName() + ", it's your turn! Currently on position: " + currentPlayer.getBoardIndex());
-            diceVal = currentPlayer.rollDice();
-            System.out.println("Rolled a " + diceVal);
-            currentPlayer.evaluatePosition(diceVal);
-            System.out.println("Moved to position: " + currentPlayer.getBoardIndex());
+
+            Turn.beginTurn(currentPlayer, input);
+
+            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer);
+
+            Turn.endTurn(currentPlayer, input);
+
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }
 
-        int x=0;
-        while(x<12) {
-            x = this.players.get(whoseTurn).rollDice();
-        }
-        System.out.println(x);
     }
 
 }
