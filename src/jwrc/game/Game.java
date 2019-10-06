@@ -4,6 +4,7 @@ import jwrc.board.Board;
 import jwrc.board.BoardSpace;
 import jwrc.player.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -30,17 +31,21 @@ public class Game {
     }
 
     public void preGame() {
-        int numPlayers;
+        int numPlayers = 0;
 
         //  user interaction
         System.out.println("Welkom!");
-        System.out.println("How many players? (2-6 players)");
-        numPlayers= input.nextInt();
 
         // ensure valid number before proceeding
         while(numPlayers > maxPlayers || numPlayers < minPlayers) {
-            System.out.println("Must be between 2 and 6 players.");
-            numPlayers= input.nextInt();
+            System.out.println("How many players? (must be 2-6 players)");
+            try {
+                numPlayers= input.nextInt();
+
+            } catch (InputMismatchException e) {
+                input.next();
+                System.out.println("Must enter integer between 2 and 6");
+            }
         }
         this.numPlayers = numPlayers;
         System.out.println("Number of players: " + this.numPlayers);

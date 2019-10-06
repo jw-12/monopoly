@@ -17,5 +17,7 @@ public class Main {
         //Board newBoard = new Board();
         //newBoard.setBoard();
 
+        input.close();
+
     }
 }
