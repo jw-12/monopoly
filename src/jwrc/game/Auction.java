@@ -39,11 +39,18 @@ public class Auction {
             try {
                 currentBid = input.nextInt();
 
-                if (previousBid >= currentBid) {
+                if (currentBid == 0) {
+                    currentBid = previousBid;  // needs to be reset to previous non-zero value
+                    participants.remove(currentPlayer);
+                    System.out.println(currentPlayer.getName() + " has left the auction by choice.");
+                    continue;
+                }
+                else if (previousBid >= currentBid) {
                     System.out.println("Bid must greater than €" + previousBid);
                     continue;
                 } else if (currentBid > currentPlayer.getAccountBalance()) {
                     System.out.println("Bid cannot exceed account balance");
+                    continue;
                 }
 
                 previousBid = currentBid;
@@ -56,7 +63,9 @@ public class Auction {
             }
         }
 
-        System.out.println(participants.get(0).getName() + " you bought " + property.getName() + " for €" + currentBid);
+        currentPlayer = participants.get(0);
+        currentPlayer.changeAccountBalance(-currentBid);
+        System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
     }
 
     public static void testAuction() {
