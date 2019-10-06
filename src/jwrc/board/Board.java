@@ -20,6 +20,7 @@ public class Board {
 
     // just a simple board to test functionality of penalty components.
     public void setPenaltyBoard() {
+    	
     	BoardSpace b0 = new Penalties(0, 100, "Income Tax");
     	BoardSpace b1 = new Penalties(1, 100, "Income Tax");
     	BoardSpace b2 = new Penalties(2, 100, "Income Tax");
@@ -43,24 +44,26 @@ public class Board {
     	this.penaltyBoard.add(b8);
     	this.penaltyBoard.add(b9);
     	this.penaltyBoard.add(b10);
+
     }
 
     public ArrayList<BoardSpace> getPenaltyBoard() {
     	return this.penaltyBoard;
 	}
+    
 
 
     public void setBoard() {
-    	propertyBoard[0] = new Property("Mediterranean Avenue",60 ,"Brown",1);
+    	propertyBoard[0] = new Utility("Water works",60,1);
+    	((Utility)propertyBoard[0]).readDetails();
     	
-    	propertyBoard[1] = new Property("Baltic Avenue",60,"Brown",3);
+    	propertyBoard[1] = new Utility("Electric Company",60,1);
+    	((Utility)propertyBoard[1]).readDetails();
     
-    	propertyBoard[2] = new Property("Oriental Avenue",100,"LightBlue",6);
-    
-    	propertyBoard[3] = new Property("Vermont Avenue",100,"LightBlue",8);
-    
-    	propertyBoard[4] = new Property("Connecticut Avenue",120,"LightBlue",9);
- 
+    	propertyBoard[2] = new Sites("Oriental Avenue",100,6,"LightBlue");
+    	propertyBoard[3] = new Sites("Vermont Avenue",100,8,"LightBlue");
+    	propertyBoard[4] = new Sites("Connecticut Avenue",120,9,"LightBlue");
+    	
     }
 
     // ArrayList<BoardSpace> communityChestCards;
