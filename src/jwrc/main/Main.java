@@ -12,7 +12,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         Game game = new Game(input);
         game.preGame();
-       // game.start();
+        game.start();
         
         
         

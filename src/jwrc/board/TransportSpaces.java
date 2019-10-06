@@ -1,9 +1,12 @@
 package jwrc.board;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import jwrc.player.Player;
 
 public class TransportSpaces extends Property {
+	
+	private Scanner input = new Scanner(System.in);
 	
 	public TransportSpaces(String name, int cost, int index) {
 		super(name,cost,index);
@@ -15,8 +18,24 @@ public class TransportSpaces extends Property {
 			System.out.println("You own this Transport.");
 		}
 		else if(this.getOwnerIndex() == 99) {
-			System.out.println("Would you like to buy this Transport");
-		// if yes player.transportsOwned ++; else auction it 
+			int exit =0;
+			while(exit == 0) {
+			System.out.println("Would you like to buy this Transport? Enter y/n");
+			String ans = input.next();
+			switch(ans) {
+			case "y":
+				this.changeOwner(whoseturn);
+				player.changeAccountBalance(this.getCost());
+				exit = 1;
+				break;
+			case "n":
+				System.out.println("Go to auction");
+				exit = 1;
+				break;
+			default:
+				System.out.println("not a valid input!");
+			}
+			}
 		}
 		else {
 			Player payPlayer;

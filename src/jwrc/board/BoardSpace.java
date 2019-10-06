@@ -21,6 +21,8 @@ public abstract class BoardSpace {
     }
 
     public abstract void takeAction(Player player, ArrayList <Player> players, int whoseturn);
+    public abstract void readDetails();
+    
 
    // public abstract SpaceType getSpaceType();
     

@@ -25,7 +25,7 @@ public class Game {
         this.players = new ArrayList<Player>();
         this.whoseTurn = 0;
         this.board = new Board();
-        this.boardArray = board.getPenaltyBoard();
+        this.boardArray = board.getTestBoard();
         System.out.println("Size: " + this.boardArray.size());
     }
 
@@ -52,7 +52,7 @@ public class Game {
             Player player = new Player(str);
             this.players.add(player);
         }
-
+        
     }
 
     public void start() {
@@ -60,11 +60,12 @@ public class Game {
         int diceVal;
         
 
-        for(int i=0; i<10; i++) {  // only ten turns taken for now
+        for(int i=0; i<2; i++) {  // only ten turns taken for now
             currentPlayer = this.players.get(whoseTurn);
 
             Turn.beginTurn(currentPlayer, input);
 
+            this.boardArray.get(currentPlayer.getBoardIndex()).readDetails();
             this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, this.players, this.whoseTurn);
 
             Turn.endTurn(currentPlayer, input);

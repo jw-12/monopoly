@@ -9,12 +9,29 @@ public class Board {
 	//ArrayList<BoardSpace> propertyBoard;  // just for testing 
 	BoardSpace[] propertyBoard;
 	ArrayList<BoardSpace> penaltyBoard;  // likewise, for testing -james
+	ArrayList<BoardSpace> testBoard;
     
     public Board() {
     	//this.propertyBoard = new ArrayList<BoardSpace>();
     	this.propertyBoard = new BoardSpace[5];
-    	this.penaltyBoard = new ArrayList<BoardSpace>();
-    	setPenaltyBoard();
+    	this.testBoard = new ArrayList<BoardSpace>();
+    	setTestBoard();
+    }
+    
+    public void setTestBoard() {
+    	
+    	BoardSpace b0 = new Utility("waterWorks", 200, 0);
+    	BoardSpace b1 = new Utility("Electricity", 400, 1);
+    	BoardSpace b2 = new Utility("waterWorks1", 200, 2);
+    	BoardSpace b3 = new Utility("waterWorks2", 200, 3);
+    	BoardSpace b4 = new Utility("waterWorks3", 200, 4);
+    	
+    	
+    	this.testBoard.add(b0);
+    	this.testBoard.add(b1);
+    	this.testBoard.add(b2);
+    	this.testBoard.add(b3);
+    	this.testBoard.add(b4);
     }
 
 
@@ -49,6 +66,10 @@ public class Board {
 
     public ArrayList<BoardSpace> getPenaltyBoard() {
     	return this.penaltyBoard;
+	}
+    
+    public ArrayList<BoardSpace> getTestBoard() {
+    	return this.testBoard;
 	}
     
 
