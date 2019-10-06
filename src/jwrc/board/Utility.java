@@ -18,7 +18,6 @@ public class Utility extends Property {
 				System.out.println("You own this Property.");
 		}
 		else if(this.getOwnerIndex() == 99) {
-			
 			int exit =0;
 			while(exit == 0) {
 			System.out.println("Would you like to buy this Utility? Enter y/n");
@@ -26,6 +25,7 @@ public class Utility extends Property {
 			switch(ans) {
 			case "y":
 				this.changeOwner(whoseturn);
+				player.changeAccountBalance(this.getCost());
 				exit = 1;
 				break;
 			case "n":
