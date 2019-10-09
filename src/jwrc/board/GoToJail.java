@@ -13,7 +13,7 @@ public class GoToJail extends BoardSpace {
     }
 
     public void takeAction(Player player) {
-        System.out.println("You are being sent to jail.");
+        System.out.println("You are being sent to jail, ya durty bowsie.");
         player.sendToJail();
     }
 
