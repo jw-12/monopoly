@@ -57,6 +57,11 @@ public class Turn {
     }
 
 
+    /**
+     * return the ArrayList of Options that are given to the current player at the end of their turn
+     * @param player the person whose turn it currently is
+     * @return ArrayList of Options that are given to the current player at the end of this turn
+     */
     public static ArrayList<Options> getEndOptions(Player player) {
         ArrayList<Options> optArray = new ArrayList<Options>();
 
@@ -70,6 +75,10 @@ public class Turn {
         return optArray;
     }
 
+    /**
+     * prints the possible options to the user given the ArrayList of options they have
+     * @param opt the ArrayList of possible actions the user can take at this time
+     */
     public static void printOptions(ArrayList<Options> opt) {
         StringBuilder strOut = new StringBuilder();
 
