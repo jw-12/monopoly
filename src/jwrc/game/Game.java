@@ -15,8 +15,8 @@ public class Game {
 
     private int numPlayers;
     private static int maxPlayers = 6, minPlayers = 2;
-    public ArrayList <Player> players;
-    public int whoseTurn;
+    private ArrayList <Player> players;
+    private int whoseTurn;
     private Scanner input;  // to read input stream
     private Board board;
     private ArrayList<BoardSpace> boardArray;
@@ -65,7 +65,7 @@ public class Game {
         int diceVal;
         
 
-        for(int i=0; i<6; i++) {  // only ten turns taken for now
+        for(int i=0; i<10; i++) {  // only ten turns taken for now
             currentPlayer = this.players.get(whoseTurn);
 
             Turn.beginTurn(currentPlayer, input);
@@ -79,10 +79,6 @@ public class Game {
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }
 
-    }
-    
-    public int getWhoseTurn() {
-    	return this.whoseTurn;
     }
 
 }

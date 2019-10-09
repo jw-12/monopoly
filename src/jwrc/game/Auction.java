@@ -74,9 +74,9 @@ public class Auction {
         players.add(new Player("ronan"));
         players.add(new Player("cathy"));
         players.add(new Player("gav"));
-        Scanner scanner = new Scanner(System.in);
+       // Scanner scanner = new Scanner(System.in);
 
-        Auction.startAuction(players, new Property("Seamount", 200, "blue", 54), scanner);
+       // Auction.startAuction(players, new Property("Seamount", 200, 54), scanner);
 
     }
 }

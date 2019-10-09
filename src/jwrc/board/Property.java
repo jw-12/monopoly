@@ -43,8 +43,6 @@ public abstract class Property extends BoardSpace {
 	public String getOwner() {
 		return this.owner;
 	}
-	
-	
 
 	//public SpaceType getSpaceType() {
 	//	return this.spaceType;

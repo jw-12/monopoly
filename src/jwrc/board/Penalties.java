@@ -20,7 +20,7 @@ public class Penalties extends BoardSpace {
         return this.penaltyAmount;
     }
 
-    public void takeAction(Player player, ArrayList <Player> players, int whoseturn) {
+    public void takeAction(Player player, ArrayList <Player> players) {
         System.out.println("You landed on " + this.getPenaltyName() + ".\nDeducting €" + this.getPenaltyAmount() + " from your account.");
         player.changeAccountBalance(-penaltyAmount);
         System.out.println("New account balance: €" + player.getAccountBalance());
@@ -29,6 +29,10 @@ public class Penalties extends BoardSpace {
     public String getPenaltyName() {
         return penaltyName;
     }
+    
+    public void readDetails() {
+		System.out.println("This is a Penalty called "+ this.getPenaltyName() +" of amount " +this.getPenaltyAmount());
+	}
 
     //public SpaceType getSpaceType() {
     //    return this.spaceType;

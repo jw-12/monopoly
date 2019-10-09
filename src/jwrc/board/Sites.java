@@ -2,6 +2,7 @@ package jwrc.board;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import jwrc.game.Auction;
 import jwrc.player.Player;
 
 public class Sites extends Property {
@@ -51,6 +52,7 @@ public class Sites extends Property {
 					break;
 				case "n":
 					System.out.println("Go to auction");
+					Auction.startAuction(players, this, input);
 					exit = 1;
 					break;
 				default:

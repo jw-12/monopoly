@@ -13,7 +13,7 @@ public abstract class BoardSpace {
 
     public BoardSpace(int index) {
         this.index = index;
-       // this.spaceType = spaceType;
+        // this.spaceType = spaceType;
     }
 
     public int getBoardIndex() {

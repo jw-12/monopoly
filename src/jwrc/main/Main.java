@@ -15,10 +15,6 @@ public class Main {
         game.preGame();
         game.start();
         
-
-      
-        System.out.println("whose turn = "+ game.getWhoseTurn());
-        
         //Board newBoard = new Board();
         //newBoard.setBoard();
 
