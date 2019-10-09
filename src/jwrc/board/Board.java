@@ -27,11 +27,21 @@ public class Board {
     	BoardSpace b4 = new Utility("waterWorks3", 200, 4);
     	
     	
+    	
+    	BoardSpace b5 = new Sites("Ha'Penny Bridge",60,5,"brown",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b6 = new Sites("MM Statue",60,6,"brown",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b7 = new Sites("Zoo",100,7,"blue",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b8 = new Sites("Dildo Store",100,8,"blue",new int[] { 2,4,10,30,90,160,250}) ;
+    	
     	this.testBoard.add(b0);
     	this.testBoard.add(b1);
     	this.testBoard.add(b2);
     	this.testBoard.add(b3);
     	this.testBoard.add(b4);
+    	this.testBoard.add(b5);
+    	this.testBoard.add(b6);
+    	this.testBoard.add(b7);
+    	this.testBoard.add(b8);
     }
 
 
@@ -74,7 +84,7 @@ public class Board {
     
 
 
-    public void setBoard() {
+ /*   public void setBoard() {
     	propertyBoard[0] = new Utility("Water works",60,1);
     	((Utility)propertyBoard[0]).readDetails();
     	
@@ -86,7 +96,7 @@ public class Board {
     	propertyBoard[4] = new Sites("Connecticut Avenue",120,9,"LightBlue");
     	
     }
-
+*/
     // ArrayList<BoardSpace> communityChestCards;
     //<BoardSpace> currentCommunityChest =
 }

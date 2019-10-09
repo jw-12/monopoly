@@ -60,13 +60,13 @@ public class Game {
         int diceVal;
         
 
-        for(int i=0; i<2; i++) {  // only ten turns taken for now
+        for(int i=0; i<6; i++) {  // only ten turns taken for now
             currentPlayer = this.players.get(whoseTurn);
 
             Turn.beginTurn(currentPlayer, input);
 
             this.boardArray.get(currentPlayer.getBoardIndex()).readDetails();
-            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, this.players, this.whoseTurn);
+            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, this.players);
 
             Turn.endTurn(currentPlayer, input);
 

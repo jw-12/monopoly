@@ -2,7 +2,10 @@ package jwrc.board;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import jwrc.game.Auction;
 import jwrc.player.Player;
+
+
 
 public class Utility extends Property {
 	
@@ -12,50 +15,52 @@ public class Utility extends Property {
 		super(name,cost,index);
 	}
 	
-	public void takeAction(Player player, ArrayList <Player> players, int whoseturn) {
+	public void takeAction(Player player, ArrayList <Player> players) {
 		
-		if (whoseturn == this.getOwnerIndex()) {
-				System.out.println("You own this Property.");
+		if (player.getName() == this.getOwner()) {
+				System.out.println("You own this Utility.");
 		}
-		else if(this.getOwnerIndex() == 99) {
+		else if(this.getOwner() == "null") {
 			int exit =0;
 			while(exit == 0) {
-			System.out.println("Would you like to buy this Utility? Enter y/n");
+			System.out.println("Would you like to buy this Utility? Enter y/n. Cost = "+ this.getCost());
 			String ans = input.next();
 			switch(ans) {
-			case "y":
-				this.changeOwner(whoseturn);
-				player.changeAccountBalance(this.getCost());
-				exit = 1;
-				break;
-			case "n":
-				System.out.println("Go to auction");
-				exit = 1;
-				break;
-			default:
-				System.out.println("not a valid input!");
+				case "y":
+					this.changeOwner(player.getName());
+					player.changeAccountBalance(-this.getCost());
+					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+					exit = 1;
+					break;
+				case "n":
+					System.out.println("Go to auction");
+					Auction.startAuction(players, this, input);
+					exit = 1;
+					break;
+				default:
+					System.out.println("not a valid input!");
+				}
 			}
-			}
-			
-			
 		}
 		else {
-			System.out.println("owned by another player!!");
-			Player payPlayer;
-			payPlayer = players.get(this.getOwnerIndex());
-			// prompt to roll dice!!
-			int payAmount = player.rollDice()*4;
-			System.out.println("You must pay the owner "+ payAmount);
+			Player payPlayer = new Player("null");
+			for(Player p : players) {
+				if(p.getName() == this.getOwner()) {
+					payPlayer = p;
+				}
+			}
+			System.out.println("Owned by "+ payPlayer.getName());
+			int payAmount = (player.rollDice())*4; //just for now. should be previous roll, not a new dice roll.
+			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);
-			System.out.println(player.getAccountBalance());
-			System.out.println(payPlayer.getAccountBalance());
+			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
+			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}
 	}
 			
 	public void readDetails() {
 		System.out.println("This is a Utility called "+ this.getName() +" at board index " +this.getBoardIndex());
-		System.out.println("cost = "+ this.getCost()+ "ownerIndex = " + this.getOwnerIndex());
 	}
 	
 }

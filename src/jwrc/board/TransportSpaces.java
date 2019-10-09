@@ -12,20 +12,21 @@ public class TransportSpaces extends Property {
 		super(name,cost,index);
 	}
 	
-	public void takeAction(Player player, ArrayList <Player> players, int whoseturn) {
+	public void takeAction(Player player, ArrayList <Player> players) {
 		
-		if (whoseturn == this.getOwnerIndex()) {
+		if (player.getName() == this.getOwner()) {
 			System.out.println("You own this Transport.");
 		}
-		else if(this.getOwnerIndex() == 99) {
+		else if(this.getOwner() == "null") {
 			int exit =0;
 			while(exit == 0) {
-			System.out.println("Would you like to buy this Transport? Enter y/n");
+			System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
 			String ans = input.next();
 			switch(ans) {
 			case "y":
-				this.changeOwner(whoseturn);
+				this.changeOwner(player.getName());
 				player.changeAccountBalance(this.getCost());
+				System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 				exit = 1;
 				break;
 			case "n":
@@ -38,9 +39,14 @@ public class TransportSpaces extends Property {
 			}
 		}
 		else {
-			Player payPlayer;
+			Player payPlayer = new Player("null");
 			int payAmount = 0;
-			payPlayer = players.get(this.getOwnerIndex());
+			for(Player p : players) {
+				if(p.getName() == this.getOwner()) {
+					payPlayer = p;
+				}
+			}
+			System.out.println("Owned by "+ payPlayer.getName());
 			switch (payPlayer.getTransportsOwned()) {
 			case 1:
 				payAmount = 25;
@@ -55,8 +61,11 @@ public class TransportSpaces extends Property {
 				payAmount = 200;
 				break;
 			}
+			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);
+			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
+			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}
 	}
 	
