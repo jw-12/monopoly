@@ -26,7 +26,8 @@ public class Game {
         this.players = new ArrayList<Player>();
         this.whoseTurn = 0;
         this.board = new Board();
-        this.boardArray = board.getPenaltyBoard();
+        this.boardArray = board.getTestBoard();
+        System.out.println("Size: " + this.boardArray.size());
     }
 
     public void preGame() {
@@ -56,12 +57,13 @@ public class Game {
             Player player = new Player(str);
             this.players.add(player);
         }
-
+        
     }
 
     public void start() {
         Player currentPlayer;
-        int currentNumPlayers;
+        int diceVal;
+        
 
         while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
             currentPlayer = this.players.get(whoseTurn);

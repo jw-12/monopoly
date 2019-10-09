@@ -10,6 +10,7 @@ public class Player {
     private boolean jailStatus;  //true if in jail
     private int doubles;  //how many doubles a player has rolled in successive turns
     private int turnsInJail;
+    private int transportsOwned;
 
     public Player(String name) {
         this.name = name;
@@ -17,6 +18,7 @@ public class Player {
         this.jailStatus = false;
         this.doubles = 0;
         this.turnsInJail = 0;
+        this.transportsOwned = 0;
     }
 
     public int [] rollDice() {
@@ -43,6 +45,10 @@ public class Player {
 
     public int getAccountBalance() {
         return this.accountBalance;
+    }
+    
+    public int getTransportsOwned() {
+    	return this.transportsOwned;
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.

@@ -1,6 +1,6 @@
 package jwrc.main;
 
-import jwrc.board.Board;
+import jwrc.board.*;
 import jwrc.game.Game;
 
 import java.util.Scanner;
