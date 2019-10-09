@@ -25,7 +25,8 @@ public class Turn {
         player.printPlayerDetails();
         System.out.println("----------------------\nPress 'r' to roll dice:");
         input.next();
-        int diceVal = player.rollDice();
+        //int diceVal = player.rollDice();
+        int diceVal = 2;
         System.out.println("Rolled a " + diceVal);
         player.evaluatePosition(diceVal);
         System.out.println("Moved to position: " + player.getBoardIndex());

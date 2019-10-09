@@ -1,5 +1,7 @@
 package jwrc.board;
 
+import java.util.ArrayList;
+
 import jwrc.player.*;
 
 public class Penalties extends BoardSpace {
@@ -9,7 +11,7 @@ public class Penalties extends BoardSpace {
     private int penaltyAmount;  //initialised as positive
 
     public Penalties(int boardIndex, int penaltyAmount, String penaltyName) {
-        super(boardIndex, SpaceType.PENALTY);
+        super(boardIndex);
         this.penaltyAmount = penaltyAmount;
         this.penaltyName = penaltyName;
     }
@@ -18,7 +20,7 @@ public class Penalties extends BoardSpace {
         return this.penaltyAmount;
     }
 
-    public void takeAction(Player player) {
+    public void takeAction(Player player, ArrayList <Player> players, int whoseturn) {
         System.out.println("You landed on " + this.getPenaltyName() + ".\nDeducting €" + this.getPenaltyAmount() + " from your account.");
         player.changeAccountBalance(-penaltyAmount);
         System.out.println("New account balance: €" + player.getAccountBalance());
@@ -28,7 +30,7 @@ public class Penalties extends BoardSpace {
         return penaltyName;
     }
 
-    public SpaceType getSpaceType() {
-        return this.spaceType;
-    }
+    //public SpaceType getSpaceType() {
+    //    return this.spaceType;
+    //}
 }

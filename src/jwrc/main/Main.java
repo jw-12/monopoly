@@ -1,6 +1,6 @@
 package jwrc.main;
 
-import jwrc.board.Board;
+import jwrc.board.*;
 import jwrc.game.Game;
 
 import java.util.Scanner;
@@ -14,6 +14,10 @@ public class Main {
         Game game = new Game(input);
         game.preGame();
         game.start();
+        
+
+      
+        System.out.println("whose turn = "+ game.getWhoseTurn());
         
         //Board newBoard = new Board();
         //newBoard.setBoard();

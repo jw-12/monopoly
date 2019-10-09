@@ -7,10 +7,12 @@ public class Player {
     private String name;
     private int boardIndex;
     private int accountBalance;
+    private int transportsOwned;
 
     public Player(String name) {
         this.name = name;
         this.accountBalance = 1500;
+        this.transportsOwned = 0;
     }
 
     public int rollDice() {
@@ -37,6 +39,10 @@ public class Player {
 
     public int getAccountBalance() {
         return this.accountBalance;
+    }
+    
+    public int getTransportsOwned() {
+    	return this.transportsOwned;
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.

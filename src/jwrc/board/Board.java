@@ -9,17 +9,45 @@ public class Board {
 	//ArrayList<BoardSpace> propertyBoard;  // just for testing 
 	BoardSpace[] propertyBoard;
 	ArrayList<BoardSpace> penaltyBoard;  // likewise, for testing -james
+	ArrayList<BoardSpace> testBoard;
     
     public Board() {
     	//this.propertyBoard = new ArrayList<BoardSpace>();
     	this.propertyBoard = new BoardSpace[5];
-    	this.penaltyBoard = new ArrayList<BoardSpace>();
-    	setPenaltyBoard();
+    	this.testBoard = new ArrayList<BoardSpace>();
+    	setTestBoard();
+    }
+    
+    public void setTestBoard() {
+    	
+    	BoardSpace b0 = new Utility("waterWorks", 200, 0);
+    	BoardSpace b1 = new Utility("Electricity", 400, 1);
+    	BoardSpace b2 = new Utility("waterWorks1", 200, 2);
+    	BoardSpace b3 = new Utility("waterWorks2", 200, 3);
+    	BoardSpace b4 = new Utility("waterWorks3", 200, 4);
+    	
+    	
+    	
+    	BoardSpace b5 = new Sites("Ha'Penny Bridge",60,5,"brown",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b6 = new Sites("MM Statue",60,6,"brown",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b7 = new Sites("Zoo",100,7,"blue",new int[] { 2,4,10,30,90,160,250}) ;
+    	BoardSpace b8 = new Sites("Dildo Store",100,8,"blue",new int[] { 2,4,10,30,90,160,250}) ;
+    	
+    	this.testBoard.add(b0);
+    	this.testBoard.add(b1);
+    	this.testBoard.add(b2);
+    	this.testBoard.add(b3);
+    	this.testBoard.add(b4);
+    	this.testBoard.add(b5);
+    	this.testBoard.add(b6);
+    	this.testBoard.add(b7);
+    	this.testBoard.add(b8);
     }
 
 
     // just a simple board to test functionality of penalty components.
     public void setPenaltyBoard() {
+    	
     	BoardSpace b0 = new Penalties(0, 100, "Income Tax");
     	BoardSpace b1 = new Penalties(1, 100, "Income Tax");
     	BoardSpace b2 = new Penalties(2, 100, "Income Tax");
@@ -43,26 +71,32 @@ public class Board {
     	this.penaltyBoard.add(b8);
     	this.penaltyBoard.add(b9);
     	this.penaltyBoard.add(b10);
+
     }
 
     public ArrayList<BoardSpace> getPenaltyBoard() {
     	return this.penaltyBoard;
 	}
+    
+    public ArrayList<BoardSpace> getTestBoard() {
+    	return this.testBoard;
+	}
+    
 
 
-    public void setBoard() {
-    	propertyBoard[0] = new Property("Mediterranean Avenue",60 ,"Brown",1);
+ /*   public void setBoard() {
+    	propertyBoard[0] = new Utility("Water works",60,1);
+    	((Utility)propertyBoard[0]).readDetails();
     	
-    	propertyBoard[1] = new Property("Baltic Avenue",60,"Brown",3);
+    	propertyBoard[1] = new Utility("Electric Company",60,1);
+    	((Utility)propertyBoard[1]).readDetails();
     
-    	propertyBoard[2] = new Property("Oriental Avenue",100,"LightBlue",6);
-    
-    	propertyBoard[3] = new Property("Vermont Avenue",100,"LightBlue",8);
-    
-    	propertyBoard[4] = new Property("Connecticut Avenue",120,"LightBlue",9);
- 
+    	propertyBoard[2] = new Sites("Oriental Avenue",100,6,"LightBlue");
+    	propertyBoard[3] = new Sites("Vermont Avenue",100,8,"LightBlue");
+    	propertyBoard[4] = new Sites("Connecticut Avenue",120,9,"LightBlue");
+    	
     }
-
+*/
     // ArrayList<BoardSpace> communityChestCards;
     //<BoardSpace> currentCommunityChest =
 }
