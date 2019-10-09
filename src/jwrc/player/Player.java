@@ -8,11 +8,15 @@ public class Player {
     private int boardIndex;
     private int accountBalance;
     private boolean jailStatus;  //true if in jail
+    private int doubles;  //how many doubles a player has rolled in successive turns
+    private int turnsInJail;
 
     public Player(String name) {
         this.name = name;
         this.accountBalance = 1500;
         this.jailStatus = false;
+        this.doubles = 0;
+        this.turnsInJail = 0;
     }
 
     public int [] rollDice() {
@@ -50,6 +54,22 @@ public class Player {
                 "Balance: €" + this.getAccountBalance() +
                 "\nBoard Position: " + this.getBoardIndex() + "/40"
         );
+    }
+
+    public int getDoubles() {
+        return this.doubles;
+    }
+
+    public void setDoubles(int doubles) {
+        this.doubles = doubles;
+    }
+
+    public int getTurnsInJail() {
+        return this.turnsInJail;
+    }
+
+    public void setTurnsInJail(int turnsInJail) {
+        this.turnsInJail = turnsInJail;
     }
 
     //return true if player is in jail
