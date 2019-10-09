@@ -65,16 +65,9 @@ public class Game {
         int diceVal;
         
 
-        for(int i=0; i<10; i++) {  // only ten turns taken for now
+        while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
             currentPlayer = this.players.get(whoseTurn);
-
-            Turn.beginTurn(currentPlayer, input);
-
-            this.boardArray.get(currentPlayer.getBoardIndex()).readDetails();
-            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, this.players);
-
-            Turn.endTurn(currentPlayer, input);
-
+            Turn.takeTurn(currentPlayer, input, boardArray);
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }

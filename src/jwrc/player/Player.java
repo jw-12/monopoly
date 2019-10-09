@@ -7,16 +7,22 @@ public class Player {
     private String name;
     private int boardIndex;
     private int accountBalance;
+    private boolean jailStatus;  //true if in jail
+    private int doubles;  //how many doubles a player has rolled in successive turns
+    private int turnsInJail;
     private int transportsOwned;
 
     public Player(String name) {
         this.name = name;
         this.accountBalance = 1500;
+        this.jailStatus = false;
+        this.doubles = 0;
+        this.turnsInJail = 0;
         this.transportsOwned = 0;
     }
 
-    public int rollDice() {
-        return ThreadLocalRandom.current().nextInt(2, 13);  // must be max+1
+    public int [] rollDice() {
+        return new int[] {ThreadLocalRandom.current().nextInt(1, 7), ThreadLocalRandom.current().nextInt(1, 7)};  //must be max+1
     }
 
     public void evaluatePosition(int diceVal) {
@@ -54,5 +60,36 @@ public class Player {
                 "Balance: €" + this.getAccountBalance() +
                 "\nBoard Position: " + this.getBoardIndex() + "/40"
         );
+    }
+
+    public int getDoubles() {
+        return this.doubles;
+    }
+
+    public void setDoubles(int doubles) {
+        this.doubles = doubles;
+    }
+
+    public int getTurnsInJail() {
+        return this.turnsInJail;
+    }
+
+    public void setTurnsInJail(int turnsInJail) {
+        this.turnsInJail = turnsInJail;
+    }
+
+    //return true if player is in jail
+    public boolean getJailStatus() {
+        return this.jailStatus;
+    }
+
+    //inverts current jail status
+    public void changeJailStatus() {
+        this.jailStatus = !this.jailStatus;
+    }
+
+    public void sendToJail() {
+        this.boardIndex = 10;  // TODO: change this to some sort of macro
+        this.changeJailStatus();
     }
 }
