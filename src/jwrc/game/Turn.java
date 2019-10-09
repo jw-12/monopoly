@@ -21,7 +21,7 @@ public class Turn {
 
     }
 
-    public static void takeTurn(Player player, Scanner scnr, ArrayList<BoardSpace> boardArray) {
+    public static void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr, ArrayList<BoardSpace> boardArray) {
         int userInput;
         int[] diceVal;
         String promptString = "";
@@ -63,7 +63,7 @@ public class Turn {
                     hasRolled = true;
                     System.out.println("Rolled a " + diceVal[0] + " and a " + diceVal[1]);
                     if (inJail) {
-                        tryLeaveJail(player, diceVal, boardArray);
+                        tryLeaveJail(player, playerList, diceVal, boardArray);
                     } else {
                         if (diceVal[0] == diceVal[1]) {
                             System.out.println("You have rolled doubles, and get to go again.");
@@ -81,7 +81,7 @@ public class Turn {
                         }
                         player.evaluatePosition(diceVal[0] + diceVal[1]);
                         System.out.println("Moved to position: " + player.getBoardIndex());
-                        boardArray.get(player.getBoardIndex()).takeAction(player);
+                        boardArray.get(player.getBoardIndex()).takeAction(player, playerList);
                     }
                     break;
                 case 1:
@@ -129,21 +129,21 @@ public class Turn {
         }
     }
 
-    public static void tryLeaveJail(Player player, int[] diceVal, ArrayList<BoardSpace> boardArray) {
+    public static void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal, ArrayList<BoardSpace> boardArray) {
         //need to verify doubles
         if (diceVal[0] == diceVal[1]) {
             System.out.println("You rolled doubles and have escaped from jail.");
-            player.changeJailStatus();  // freed from jail
-            player.evaluatePosition(diceVal[0] + diceVal[1]);
-            boardArray.get(player.getBoardIndex()).takeAction(player);
-        } else if (player.getTurnsInJail() >= 2) {  //todo: set as macro
+            currentPlayer.changeJailStatus();  // freed from jail
+            currentPlayer.evaluatePosition(diceVal[0] + diceVal[1]);
+            boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, playerList);
+        } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
             System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
             //force payment of fine
-            player.changeAccountBalance(-50);  //todo: set as macro
-            player.changeJailStatus();
+            currentPlayer.changeAccountBalance(-50);  //todo: set as macro
+            currentPlayer.changeJailStatus();
         } else {
             System.out.println("You have failed to escape from jail.");
-            player.setTurnsInJail(player.getTurnsInJail() + 1);
+            currentPlayer.setTurnsInJail(currentPlayer.getTurnsInJail() + 1);
         }
     }
 
