@@ -15,7 +15,7 @@ public class Game {
 
     private int numPlayers;
     private static int maxPlayers = 6, minPlayers = 2;
-    private ArrayList <Player> players;
+    private ArrayList <Player> playerList;
     private int whoseTurn;
     private Scanner input;  // to read input stream
     private Board board;
@@ -23,7 +23,7 @@ public class Game {
 
     public Game(Scanner input) {
         this.input = input;
-        this.players = new ArrayList<Player>();
+        this.playerList = new ArrayList<Player>();
         this.whoseTurn = 0;
         this.board = new Board();
         this.boardArray = board.getTestBoard();
@@ -55,7 +55,7 @@ public class Game {
             System.out.println("Name for Player " + (i + 1) + ": ");
             str = input.next();
             Player player = new Player(str);
-            this.players.add(player);
+            this.playerList.add(player);
         }
         
     }
@@ -65,16 +65,9 @@ public class Game {
         int diceVal;
         
 
-        for(int i=0; i<10; i++) {  // only ten turns taken for now
-            currentPlayer = this.players.get(whoseTurn);
-
-            Turn.beginTurn(currentPlayer, input);
-
-            this.boardArray.get(currentPlayer.getBoardIndex()).readDetails();
-            this.boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, this.players);
-
-            Turn.endTurn(currentPlayer, input);
-
+        while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
+            currentPlayer = this.playerList.get(whoseTurn);
+            Turn.takeTurn(currentPlayer, playerList, input, boardArray);
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }

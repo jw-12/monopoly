@@ -1,11 +1,11 @@
 package jwrc.game;
 
 import jwrc.board.BoardSpace;
-import jwrc.board.SpaceType;
 import jwrc.player.Player;
 
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -16,84 +16,135 @@ import java.util.Scanner;
 
 public class Turn {
 
+
     public Turn() {
 
     }
 
-    public static void beginTurn(Player player, Scanner input) {
+    public static void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr, ArrayList<BoardSpace> boardArray) {
+        int userInput;
+        int[] diceVal;
+        String promptString = "";
+        boolean hasRolled = false;
+        boolean inJail;
+        boolean endTurn = false;
+
         System.out.println(player.getName() + " it's your turn.");
         player.printPlayerDetails();
-        System.out.println("----------------------\nPress 'r' to roll dice:");
-        input.next();
-        int diceVal = player.rollDice();
-        System.out.println("Rolled a " + diceVal);
-        player.evaluatePosition(diceVal);
-        System.out.println("Moved to position: " + player.getBoardIndex());
-    }
 
-    /*
-    * Present and prompt the options the user can input at the end of their turn
-    * */
-    public static void endTurn(Player player, Scanner input) {
-        ArrayList<Options> optArray;
-        optArray = getEndOptions(player);
-        printOptions(optArray);
-        String keyIn = input.next();
+        while (!endTurn) {
 
-        // get input keys for allowed options
-        ArrayList<String> possibleKeys = new ArrayList<>();
-        for (Options opt : optArray) {
-            possibleKeys.add(opt.keyIn);
-        }
+            inJail = player.getJailStatus();
 
-        // keep asking if they press a key which does not relate to an option they currently have
-        while (!possibleKeys.contains(keyIn)) {
-            System.out.println("Invalid option, try again.");
-            keyIn = input.next();
-        }
+            if (inJail) {
+                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
+            } else {
+                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
+            }
 
-        System.out.println("----------------------");
-    }
+            System.out.println(promptString);
 
+            try {
+                userInput = scnr.nextInt();
+            } catch (InputMismatchException e) {
+                scnr.next();
+                System.out.println("Must enter an integer");
+                continue;
+            }
 
-    /**
-     * return the ArrayList of Options that are given to the current player at the end of their turn
-     * @param player the person whose turn it currently is
-     * @return ArrayList of Options that are given to the current player at the end of this turn
-     */
-    public static ArrayList<Options> getEndOptions(Player player) {
-        ArrayList<Options> optArray = new ArrayList<Options>();
+            switch (userInput) {
+                case 0:
+                    //roll
+                    if (hasRolled) {
+                        System.out.println("You have already rolled on this turn, can't roll again.");
+                        break;
+                    }
+                    diceVal = player.rollDice();
+                    hasRolled = true;
+                    System.out.println("Rolled a " + diceVal[0] + " and a " + diceVal[1]);
+                    if (inJail) {
+                        tryLeaveJail(player, playerList, diceVal, boardArray);
+                    } else {
+                        if (diceVal[0] == diceVal[1]) {
+                            System.out.println("You have rolled doubles, and get to go again.");
+                            hasRolled = false;  // as if player has not rolled yet
+                            player.setDoubles(player.getDoubles() + 1);
 
-        optArray.add(Options.E_TO_END);  // always added so long as options only at end of turn
-        optArray.add(Options.B_TO_BUY);  // buy property off another player
-        optArray.add(Options.S_TO_SELL);  // sell property to another player
+                            if (player.getDoubles() >= 3) {
+                                //three in succession
+                                System.out.println("You have been caught speeding (rolling three doubles in succession). Go straight to jail.");
+                                player.sendToJail();
+                                player.setDoubles(0);
+                                hasRolled = true;
+                                break;
+                            }
+                        }
+                        player.evaluatePosition(diceVal[0] + diceVal[1]);
+                        System.out.println("Moved to position: " + player.getBoardIndex());
+                        boardArray.get(player.getBoardIndex()).takeAction(player, playerList);
+                    }
+                    break;
+                case 1:
+                    //trade
+                    System.out.println("<Trade menu here>");
+                    break;
+                case 2:
+                    //bank/property-authority options
+                    System.out.println("<Property Overlord Menu Here>");
+                    break;
+                case 3:
+                    //check if has rolled, then end
+                    if (hasRolled) {
+                        endTurn = true;
+                    } else {
+                        System.out.println("You must roll the dice before being able to end your turn");
+                    }
+                    break;
 
-        //conditional check if player can build etc
+                    /*
+                    * todo: collapse 4 and 5 into JailOptions
+                    * */
 
-
-        return optArray;
-    }
-
-    /**
-     * prints the possible options to the user given the ArrayList of options they have
-     * @param opt the ArrayList of possible actions the user can take at this time
-     */
-    public static void printOptions(ArrayList<Options> opt) {
-        StringBuilder strOut = new StringBuilder();
-
-        strOut.append("Press:\t");
-
-        for (Options o : opt) {
-            if (o == Options.E_TO_END) {
-                strOut.append("e to end\t");
-            } else if (o == Options.B_TO_BUY) {
-                strOut.append("b to buy a property (from another player)\t");
-            } else if (o == Options.S_TO_SELL) {
-                strOut.append("s to sell a property\t");
+                case 4:
+                    //get out of jail free card
+                    if (inJail) {
+                        System.out.println("<Use Get out of Jail Free Card> (not implemented)");
+                        break;
+                    }
+                case 5:
+                    //pay out of jail
+                    if (inJail) {
+                        if (player.getAccountBalance() >= 50) {
+                            System.out.println("Paying bail of €50. You have now been released from jail.");
+                            player.changeAccountBalance(-50);
+                            System.out.println("New account balance: " + player.getAccountBalance());
+                        } else {
+                            System.out.println("Insufficient balance to post bail.");
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid entry");
             }
         }
+    }
 
-        System.out.println(strOut.toString());
+    public static void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal, ArrayList<BoardSpace> boardArray) {
+        //need to verify doubles
+        if (diceVal[0] == diceVal[1]) {
+            System.out.println("You rolled doubles and have escaped from jail.");
+            currentPlayer.changeJailStatus();  // freed from jail
+            currentPlayer.evaluatePosition(diceVal[0] + diceVal[1]);
+            boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, playerList);
+        } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
+            System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
+            //force payment of fine
+            currentPlayer.changeAccountBalance(-50);  //todo: set as macro
+            currentPlayer.changeJailStatus();
+        } else {
+            System.out.println("You have failed to escape from jail.");
+            currentPlayer.setTurnsInJail(currentPlayer.getTurnsInJail() + 1);
+        }
     }
 
 }
