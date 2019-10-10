@@ -87,5 +87,19 @@ public class Sites extends Property {
 		System.out.println("This is a Site called "+ this.getName() + "of colour "+ this.getColour());
 	}
 	
+	public int getHouseCost() {
+		return this.houseCost;
+	}
+	public int getRentCost() {
+		return this.rentValues[this.rentIndex];
+	}
+	
+	public int getNoOfHouses() {
+		return this.noOfHouses;
+	}
+	public void addHouse() {
+		this.noOfHouses++;
+		this.rentIndex++;
+	}
 	
 }
