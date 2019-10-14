@@ -50,7 +50,8 @@ public class Utility extends Property {
 				}
 			}
 			System.out.println("Owned by "+ payPlayer.getName());
-			int payAmount = (player.rollDice())*4; //just for now. should be previous roll, not a new dice roll.
+			int payAmount = 100; //todo: change this temp fix
+			// (player.rollDice())*4; //just for now. should be previous roll, not a new dice roll.
 			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);
