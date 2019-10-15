@@ -1,6 +1,5 @@
 package jwrc.main;
 
-import jwrc.board.*;
 import jwrc.game.Game;
 
 import java.util.Scanner;
@@ -14,9 +13,6 @@ public class Main {
         Game game = new Game(input);
         game.preGame();
         game.start();
-        
-        //Board newBoard = new Board();
-        //newBoard.setBoard();
 
         input.close();
 

@@ -13,7 +13,6 @@ public abstract class BoardSpace {
 
     public BoardSpace(int index) {
         this.index = index;
-        // this.spaceType = spaceType;
     }
 
     public int getBoardIndex() {
@@ -22,8 +21,5 @@ public abstract class BoardSpace {
 
     public abstract void takeAction(Player player, ArrayList <Player> players);
     public abstract void readDetails();
-    
-
-   // public abstract SpaceType getSpaceType();
     
 }
