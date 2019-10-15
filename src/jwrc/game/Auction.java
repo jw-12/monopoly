@@ -65,6 +65,7 @@ public class Auction {
 
         currentPlayer = participants.get(0);
         currentPlayer.changeAccountBalance(-currentBid);
+        property.changeOwner(currentPlayer.getName());
         System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
     }
 

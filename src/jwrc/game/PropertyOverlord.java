@@ -1,4 +1,5 @@
 package jwrc.game;
+import jwrc.board.Board;
 import jwrc.board.BoardSpace;
 import jwrc.board.Sites;
 import jwrc.player.*;
@@ -10,24 +11,28 @@ import java.util.Map;
 public class PropertyOverlord {
 	
 	private int numOfHouses;
-	public Map<String, ArrayList<Sites>> map;
+	//public Map<String, ArrayList<Sites>> map;   // static map in Board class instead.
 	
 	public PropertyOverlord() {
 		numOfHouses = 32;
-		this.map = new HashMap<String, ArrayList<Sites>>();
+		//this.map = new HashMap<String, ArrayList<Sites>>();
 	}
 	
-	public void BuildHouse(Player player, Sites site) {
+	public static void BuildHouse(Player player, Sites site) {
 		
 		String siteKey = site.getColour();
 		ArrayList<Sites> temp = new ArrayList<Sites>();
-		temp = map.get(siteKey);
+		temp = Board.map.get(siteKey);
 		String owner = temp.get(0).getOwner();
 		int minHouses = site.getNoOfHouses();
 		//housing checks
-		for(int i=1 ; i<temp.size(); i++) {
+		if(site.getOwner().equals("null")) {
+			System.out.println("you cannot build on unowned sites");
+			return;
+		}
+		for(int i=1 ; i<temp.size(); i++) {			
 			if(owner != temp.get(i).getOwner()) {
-				System.out.println("You must own all Sites of colour "+ site.getBoardIndex()+ " to build houses!");
+				System.out.println("You must own all Sites of colour "+ site.getColour()+ " to build houses!");
 				return;
 			}
 			if(temp.get(i).getNoOfHouses() < minHouses) {
@@ -43,19 +48,19 @@ public class PropertyOverlord {
 		
 	}
 	
-	public void buildHouseMap() {
+	/*public void buildHouseMap() {
 		
-	    Sites b1 = new Sites("Ha'Penny Bridge",60,5,"Brown",new int[] { 2,4,10,30,90,160,250}) ;
-	    Sites b2 = new Sites("MM Statue",60,5,"Brown",new int[] { 2,4,10,30,90,160,250}) ;
+	    Sites b1 = new Sites("Ha'Penny Bridge",60,5,"Brown",new int[] { 2,4,10,30,90,160,250},20) ;
+	    Sites b2 = new Sites("MM Statue",60,5,"Brown",new int[] { 2,4,10,30,90,160,250},20) ;
 	    
 		
 		ArrayList<Sites> brown = new ArrayList<Sites>();
         brown.add(b1);
         brown.add(b2);
         
-        Sites bl1 = new Sites("Zoo",60,5,"Blue",new int[] { 2,4,10,30,90,160,250}) ;
-	    Sites bl2 = new Sites("Kilmainham",60,5,"Blue",new int[] { 2,4,10,30,90,160,250}) ;
-	    Sites bl3 = new Sites("Museum",60,5,"Blue",new int[] { 2,4,10,30,90,160,250}) ;
+        Sites bl1 = new Sites("Zoo",60,5,"Blue",new int[] { 2,4,10,30,90,160,250},50) ;
+	    Sites bl2 = new Sites("Kilmainham",60,5,"Blue",new int[] { 2,4,10,30,90,160,250},50) ;
+	    Sites bl3 = new Sites("Museum",60,5,"Blue",new int[] { 2,4,10,30,90,160,250},50) ;
 	    
 	    ArrayList<Sites> blue = new ArrayList<Sites>();
         blue.add(bl1);
@@ -107,9 +112,9 @@ public class PropertyOverlord {
         this.map.put("Green", green);
         this.map.put("Purple", purple);
         
-        */
+        
         this.map.put("Brown", brown);
         this.map.put("Blue", blue);
         
-	}
+	}*/
 }

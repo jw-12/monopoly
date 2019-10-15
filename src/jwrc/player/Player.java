@@ -10,7 +10,7 @@ public class Player {
     private boolean jailStatus;  //true if in jail
     private int doubles;  //how many doubles a player has rolled in successive turns
     private int turnsInJail;
-    private int transportsOwned;
+    private int transportsOwned;//will need to decrement this value when a transport is sold/mortgaged
 
     public Player(String name) {
         this.name = name;
@@ -49,6 +49,10 @@ public class Player {
     
     public int getTransportsOwned() {
     	return this.transportsOwned;
+    }
+    
+    public void transportBought() {
+    	this.transportsOwned++;
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.

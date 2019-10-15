@@ -1,7 +1,9 @@
 package jwrc.game;
 
+import jwrc.board.Board;
 import jwrc.board.BoardSpace;
 import jwrc.player.Player;
+import jwrc.board.Sites;
 
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
@@ -79,9 +81,12 @@ public class Turn {
                                 break;
                             }
                         }
-                        player.evaluatePosition(diceVal[0] + diceVal[1]);
+                        //player.evaluatePosition(diceVal[0] + diceVal[1]);
+                        player.evaluatePosition(1);
                         System.out.println("Moved to position: " + player.getBoardIndex());
+                        boardArray.get(player.getBoardIndex()).readDetails();
                         boardArray.get(player.getBoardIndex()).takeAction(player, playerList);
+                        boardArray.get(player.getBoardIndex()).readDetails();
                     }
                     break;
                 case 1:
@@ -90,7 +95,24 @@ public class Turn {
                     break;
                 case 2:
                     //bank/property-authority options
+                	//testing buying houses for now.
+                	String str="";
                     System.out.println("<Property Overlord Menu Here>");
+                    System.out.print("what property would you like to build on?");
+                    scnr.nextLine();
+                    str += scnr.nextLine();
+                    System.out.println(str);
+                    Sites constructionSite;
+                    for (Sites s : Board.sitesBoard) {
+                    	if(s.getName().equals(str)) {
+                    		constructionSite = s;
+                    		System.out.println("the owner of site "+constructionSite.getName()+" is "+  constructionSite.getOwner() );
+                    		System.out.println("accepted : calling buildHouse Function");
+                    		PropertyOverlord.BuildHouse(player, constructionSite);
+                    		boardArray.get(player.getBoardIndex()).readDetails();
+                    		break;
+                    	}
+                    }                                       
                     break;
                 case 3:
                     //check if has rolled, then end
@@ -99,8 +121,7 @@ public class Turn {
                     } else {
                         System.out.println("You must roll the dice before being able to end your turn");
                     }
-                    break;
-
+                    break;             
                     /*
                     * todo: collapse 4 and 5 into JailOptions
                     * */

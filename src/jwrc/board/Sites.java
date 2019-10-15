@@ -8,16 +8,15 @@ import jwrc.player.Player;
 public class Sites extends Property {
 	
 	private Scanner input = new Scanner(System.in);
-	
 	private String colour;
 	private int noOfHouses;
 	private int houseCost;
 	public boolean hotelRights;
-	private int[] rentValues;
+	private int[] rentValues;//need to implement when all sites of same colour are owned.
 	private int rentIndex;
 	
 
-	public Sites(String name, int cost, int index, String colour, int[] rentValues) {
+	public Sites(String name, int cost, int index, String colour, int[] rentValues, int houseCost) {
 		
 		super(name, cost, index);
 		this.colour = colour;
@@ -25,6 +24,7 @@ public class Sites extends Property {
 		this.hotelRights = false;
 		this.rentValues = rentValues;
 		this.rentIndex = 0;
+		this.houseCost = houseCost;
 	}
 	
 	
@@ -46,7 +46,7 @@ public class Sites extends Property {
 			switch(ans) {
 				case "y":
 					this.changeOwner(player.getName());
-					player.changeAccountBalance(this.getCost());
+					player.changeAccountBalance(-this.getCost());
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 					exit = 1;
 					break;
@@ -84,7 +84,7 @@ public class Sites extends Property {
 	}
 	
 	public void readDetails() {
-		System.out.println("This is a Site called "+ this.getName() + "of colour "+ this.getColour());
+		System.out.println("Site: "+ this.getName() + "  Colour: "+ this.getColour()+ "  Houses: "+this.getNoOfHouses()+"  Owner: "+this.getOwner());
 	}
 	
 	public int getHouseCost() {
