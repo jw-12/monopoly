@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import jwrc.game.*;
 
-public abstract class Property extends BoardSpace {
+public abstract class Property extends BoardSpace implements Sellable {
 	
 	private String name;
 	private int cost;
