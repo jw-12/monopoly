@@ -4,6 +4,7 @@ import jwrc.board.Board;
 import jwrc.board.BoardSpace;
 import jwrc.player.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,6 +21,8 @@ public class Game {
     private Scanner input;  // to read input stream
     private Board board;
     private ArrayList<BoardSpace> boardArray;
+    private ArrayList<Integer> commDeckIndices;
+    private ArrayList<Integer> chanceDeckIndices;
 
     public Game(Scanner input) {
         this.input = input;
@@ -27,7 +30,8 @@ public class Game {
         this.whoseTurn = 0;
         this.board = new Board();
         this.boardArray = board.getTestBoard();
-        System.out.println("Size: " + this.boardArray.size());
+        this.commDeckIndices = this.generateDeck();
+        this.chanceDeckIndices = this.generateDeck();
     }
 
     public void preGame() {
@@ -57,21 +61,31 @@ public class Game {
             Player player = new Player(str);
             this.playerList.add(player);
         }
-        
+
     }
 
     public void start() {
         Player currentPlayer;
-        int diceVal;
+
+        Turn turn = new Turn(boardArray, this.commDeckIndices, this.chanceDeckIndices);
         
 
         while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
             currentPlayer = this.playerList.get(whoseTurn);
-            Turn.takeTurn(currentPlayer, playerList, input, boardArray);
+            turn.takeTurn(currentPlayer, playerList, input);
             this.whoseTurn++;
             this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
         }
 
+    }
+
+    public ArrayList<Integer> generateDeck() {
+        ArrayList<Integer> deckIndices = new ArrayList<>(16);
+        for (int i=0; i<16;i++) {
+            deckIndices.add(i);
+        }
+        Collections.shuffle(deckIndices);
+        return deckIndices;
     }
 
 }
