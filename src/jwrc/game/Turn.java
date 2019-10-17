@@ -18,8 +18,8 @@ import java.util.Scanner;
 public class Turn {
 
     private ArrayList<BoardSpace> boardSpaces;
-    private ArrayList<Integer> commDeckIndices;
-    private ArrayList<Integer> chanceDeckIndices;
+    public static ArrayList<Integer> commDeckIndices;
+    public static ArrayList<Integer> chanceDeckIndices;
 
     public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> commDeckIndices, ArrayList<Integer> chanceDeckIndices) {
         this.boardSpaces = boardSpaces;
@@ -158,9 +158,9 @@ public class Turn {
         if (bs instanceof Sellable) {
             ((Property) bs).takeAction(player, playerList);
         } else if (bs instanceof CommunityChest) {
-            ((CommunityChest) bs).takeAction(player, playerList, this.commDeckIndices.get(0));
+            ((CommunityChest) bs).takeAction(player, playerList, commDeckIndices.get(0));
         } else if (bs instanceof Chance) {
-            ((Chance) bs).takeAction(player, playerList, this.chanceDeckIndices.get(0));
+            ((Chance) bs).takeAction(player, playerList, chanceDeckIndices.get(0));
         } else if (bs instanceof Penalties) {
             ((Penalties) bs).takeAction(player);
         }
