@@ -157,11 +157,14 @@ public class Turn {
         bs.readDetails();
         if (bs instanceof Sellable) {
             ((Property) bs).takeAction(player, playerList);
-        } else if (this.boardSpaces.get(player.getBoardIndex()) instanceof CommunityChest) {
+        } else if (bs instanceof CommunityChest) {
             ((CommunityChest) bs).takeAction(player, playerList, this.commDeckIndices.get(0));
-        } else if (this.boardSpaces.get(player.getBoardIndex()) instanceof Chance) {
+        } else if (bs instanceof Chance) {
             ((Chance) bs).takeAction(player, playerList, this.chanceDeckIndices.get(0));
+        } else if (bs instanceof Penalties) {
+            ((Penalties) bs).takeAction(player);
         }
+        // otherwise the BoardSpace doesn't require an action so can continue without further action
     }
 
     public void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal) {
