@@ -154,7 +154,7 @@ public class Turn {
 
     public void movePlayerForward(Player player, ArrayList<Player> playerList) {
         BoardSpace bs = this.boardSpaces.get(player.getBoardIndex());
-       bs.readDetails();
+        bs.readDetails();
         if (bs instanceof Sellable) {
             ((Property) bs).takeAction(player, playerList);
         } else if (this.boardSpaces.get(player.getBoardIndex()) instanceof CommunityChest) {
