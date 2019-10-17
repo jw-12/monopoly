@@ -1,5 +1,6 @@
 package jwrc.game;
 
+import jdk.jshell.execution.Util;
 import jwrc.board.*;
 import jwrc.player.Player;
 
@@ -18,13 +19,13 @@ import java.util.Scanner;
 public class Turn {
 
     private ArrayList<BoardSpace> boardSpaces;
-    private ArrayList<Integer> commDeckIndices;
-    private ArrayList<Integer> chanceDeckIndices;
+    public static ArrayList<Integer> commDeckIndices;
+    public static ArrayList<Integer> chanceDeckIndices;
 
     public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> commDeckIndices, ArrayList<Integer> chanceDeckIndices) {
         this.boardSpaces = boardSpaces;
-        this.commDeckIndices = commDeckIndices;
-        this.chanceDeckIndices = chanceDeckIndices;
+        commDeckIndices = commDeckIndices;
+        chanceDeckIndices = chanceDeckIndices;
     }
 
     public void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr) {
@@ -88,7 +89,7 @@ public class Turn {
                         //player.evaluatePosition(diceVal[0] + diceVal[1]);
                         player.evaluatePosition(1);
                         System.out.println("Moved to position: " + player.getBoardIndex());
-                        this.movePlayerForward(player, playerList);
+                        movePlayerForward(player, playerList);
                     }
                     break;
                 case 1:
@@ -152,15 +153,25 @@ public class Turn {
         }
     }
 
-    public void movePlayerForward(Player player, ArrayList<Player> playerList) {
-        BoardSpace bs = this.boardSpaces.get(player.getBoardIndex());
+    /*
+    * Acts as a filter for defining what action is performed when a player lands on a specific
+    * BoardSpace. Static context means takeAction should not need to be called for a space anywhere
+    * else as this can act as the interface for actions.
+    * */
+
+    public static void movePlayerForward(Player player, ArrayList<Player> playerList) {
+        BoardSpace bs = Board.chanceBoard.get(player.getBoardIndex());
         bs.readDetails();
-        if (bs instanceof Sellable) {
-            ((Property) bs).takeAction(player, playerList);
+        if (bs instanceof Sites) {
+            ((Sites) bs).takeAction(player, playerList);
+        } else if (bs instanceof TransportSpaces) {
+            ((TransportSpaces) bs).takeAction(player, playerList);
+        } else if (bs instanceof Utility) {
+            ((Utility) bs).takeAction(player, playerList);
         } else if (bs instanceof CommunityChest) {
-            ((CommunityChest) bs).takeAction(player, playerList, this.commDeckIndices.get(0));
+            ((CommunityChest) bs).takeAction(player, playerList, commDeckIndices.get(0));
         } else if (bs instanceof Chance) {
-            ((Chance) bs).takeAction(player, playerList, this.chanceDeckIndices.get(0));
+            ((Chance) bs).takeAction(player, playerList, chanceDeckIndices.get(0));
         } else if (bs instanceof Penalties) {
             ((Penalties) bs).takeAction(player);
         }
@@ -173,7 +184,7 @@ public class Turn {
             System.out.println("You rolled doubles and have escaped from jail.");
             currentPlayer.changeJailStatus();  // freed from jail
             currentPlayer.evaluatePosition(diceVal[0] + diceVal[1]);
-            this.movePlayerForward(currentPlayer, playerList);
+            movePlayerForward(currentPlayer, playerList);
         } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
             System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
             //force payment of fine

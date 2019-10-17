@@ -14,6 +14,7 @@ public class Board {
 	ArrayList<BoardSpace> testBoard;
 	public static ArrayList<Sites> sitesBoard;
 	public  static Map<String, ArrayList<Sites>> map;
+	public static ArrayList<BoardSpace> chanceBoard;
 	
     
     public Board() {
@@ -25,6 +26,49 @@ public class Board {
     	setTestBoard();
     	//setSitesBoard();
     }
+
+    public void setChanceBoard() {
+    	chanceBoard.add(new Chance(0));
+    	chanceBoard.add(new Chance(1));
+    	chanceBoard.add(new Chance(2));
+    	chanceBoard.add(new Chance(3));
+    	chanceBoard.add(new Chance(4));
+    	chanceBoard.add(new Chance(5));
+    	chanceBoard.add(new Chance(6));
+    	chanceBoard.add(new Chance(7));
+    	chanceBoard.add(new Chance(8));
+    	chanceBoard.add(new Chance(9));
+    	chanceBoard.add(new Chance(10));
+    	chanceBoard.add(new Chance(11));
+    	chanceBoard.add(new Chance(12));
+    	chanceBoard.add(new Chance(13));
+    	chanceBoard.add(new Chance(14));
+    	chanceBoard.add(new Chance(15));
+    	chanceBoard.add(new Chance(16));
+    	chanceBoard.add(new Chance(17));
+    	chanceBoard.add(new Chance(18));
+    	chanceBoard.add(new Chance(19));
+    	chanceBoard.add(new Chance(20));
+    	chanceBoard.add(new Chance(21));
+    	chanceBoard.add(new Chance(22));
+    	chanceBoard.add(new Chance(23));
+    	chanceBoard.add(new Chance(24));
+    	chanceBoard.add(new Chance(25));
+    	chanceBoard.add(new Chance(26));
+    	chanceBoard.add(new Chance(27));
+    	chanceBoard.add(new Chance(28));
+    	chanceBoard.add(new Chance(29));
+    	chanceBoard.add(new Chance(30));
+    	chanceBoard.add(new Chance(31));
+    	chanceBoard.add(new Chance(32));
+    	chanceBoard.add(new Chance(33));
+    	chanceBoard.add(new Chance(34));
+    	chanceBoard.add(new Chance(35));
+    	chanceBoard.add(new Chance(36));
+    	chanceBoard.add(new Chance(37));
+    	chanceBoard.add(new Chance(38));
+    	chanceBoard.add(new Chance(39));
+	}
     
     
     public void setTestBoard() {
