@@ -11,6 +11,7 @@ public class Player {
     private int doubles;  //how many doubles a player has rolled in successive turns
     private int turnsInJail;
     private int transportsOwned;//will need to decrement this value when a transport is sold/mortgaged
+    private int getOutOfJailFreeCard;  // number of GOOJF cards owned
 
     public Player(String name) {
         this.name = name;
@@ -19,6 +20,7 @@ public class Player {
         this.doubles = 0;
         this.turnsInJail = 0;
         this.transportsOwned = 0;
+        this.getOutOfJailFreeCard = 0;
     }
 
     public int [] rollDice() {
@@ -41,6 +43,10 @@ public class Player {
 
     public int getBoardIndex() {
         return boardIndex;
+    }
+
+    public void setBoardIndex(int boardIndex) {
+        this.boardIndex = boardIndex;
     }
 
     public int getAccountBalance() {
@@ -95,5 +101,13 @@ public class Player {
     public void sendToJail() {
         this.boardIndex = 10;  // TODO: change this to some sort of macro
         this.changeJailStatus();
+    }
+
+    public int getGetOutOfJailFreeCard() {
+        return this.getOutOfJailFreeCard;
+    }
+
+    public void setGetOutOfJailFreeCard(int number) {
+        this.getOutOfJailFreeCard = number;
     }
 }
