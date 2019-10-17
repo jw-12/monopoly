@@ -1,11 +1,10 @@
 package jwrc.game;
 
-import jwrc.board.Board;
-import jwrc.board.BoardSpace;
+import jwrc.board.*;
 import jwrc.player.Player;
-import jwrc.board.Sites;
 
 import javax.swing.text.html.Option;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,12 +17,17 @@ import java.util.Scanner;
 
 public class Turn {
 
+    private ArrayList<BoardSpace> boardSpaces;
+    private ArrayList<Integer> commDeckIndices;
+    private ArrayList<Integer> chanceDeckIndices;
 
-    public Turn() {
-
+    public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> commDeckIndices, ArrayList<Integer> chanceDeckIndices) {
+        this.boardSpaces = boardSpaces;
+        this.commDeckIndices = commDeckIndices;
+        this.chanceDeckIndices = chanceDeckIndices;
     }
 
-    public static void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr, ArrayList<BoardSpace> boardArray) {
+    public void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr) {
         int userInput;
         int[] diceVal;
         String promptString = "";
@@ -65,7 +69,7 @@ public class Turn {
                     hasRolled = true;
                     System.out.println("Rolled a " + diceVal[0] + " and a " + diceVal[1]);
                     if (inJail) {
-                        tryLeaveJail(player, playerList, diceVal, boardArray);
+                        tryLeaveJail(player, playerList, diceVal);
                     } else {
                         if (diceVal[0] == diceVal[1]) {
                             System.out.println("You have rolled doubles, and get to go again.");
@@ -84,9 +88,7 @@ public class Turn {
                         //player.evaluatePosition(diceVal[0] + diceVal[1]);
                         player.evaluatePosition(1);
                         System.out.println("Moved to position: " + player.getBoardIndex());
-                        boardArray.get(player.getBoardIndex()).readDetails();
-                        boardArray.get(player.getBoardIndex()).takeAction(player, playerList);
-                        boardArray.get(player.getBoardIndex()).readDetails();
+                        this.movePlayerForward(player, playerList);
                     }
                     break;
                 case 1:
@@ -109,7 +111,7 @@ public class Turn {
                     		System.out.println("the owner of site "+constructionSite.getName()+" is "+  constructionSite.getOwner() );
                     		System.out.println("accepted : calling buildHouse Function");
                     		PropertyOverlord.BuildHouse(player, constructionSite);
-                    		boardArray.get(player.getBoardIndex()).readDetails();
+                    		this.boardSpaces.get(player.getBoardIndex()).readDetails();
                     		break;
                     	}
                     }                                       
@@ -150,13 +152,25 @@ public class Turn {
         }
     }
 
-    public static void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal, ArrayList<BoardSpace> boardArray) {
+    public void movePlayerForward(Player player, ArrayList<Player> playerList) {
+        BoardSpace bs = this.boardSpaces.get(player.getBoardIndex());
+       bs.readDetails();
+        if (bs instanceof Sellable) {
+            ((Property) bs).takeAction(player, playerList);
+        } else if (this.boardSpaces.get(player.getBoardIndex()) instanceof CommunityChest) {
+            ((CommunityChest) bs).takeAction(player, playerList, this.commDeckIndices.get(0));
+        } else if (this.boardSpaces.get(player.getBoardIndex()) instanceof Chance) {
+            ((Chance) bs).takeAction(player, playerList, this.chanceDeckIndices.get(0));
+        }
+    }
+
+    public void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal) {
         //need to verify doubles
         if (diceVal[0] == diceVal[1]) {
             System.out.println("You rolled doubles and have escaped from jail.");
             currentPlayer.changeJailStatus();  // freed from jail
             currentPlayer.evaluatePosition(diceVal[0] + diceVal[1]);
-            boardArray.get(currentPlayer.getBoardIndex()).takeAction(currentPlayer, playerList);
+            this.movePlayerForward(currentPlayer, playerList);
         } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
             System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
             //force payment of fine
@@ -167,5 +181,4 @@ public class Turn {
             currentPlayer.setTurnsInJail(currentPlayer.getTurnsInJail() + 1);
         }
     }
-
 }

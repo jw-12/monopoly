@@ -19,7 +19,6 @@ public abstract class BoardSpace {
         return index;
     }
 
-    public abstract void takeAction(Player player, ArrayList <Player> players);
     public abstract void readDetails();
     
 }
