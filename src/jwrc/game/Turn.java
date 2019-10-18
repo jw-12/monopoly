@@ -1,14 +1,9 @@
 package jwrc.game;
 
-import jdk.jshell.execution.Util;
 import jwrc.board.*;
 import jwrc.player.Player;
-
-import javax.swing.text.html.Option;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 
 /**
@@ -18,12 +13,10 @@ import java.util.Scanner;
 
 public class Turn {
 
-    private ArrayList<BoardSpace> boardSpaces;
     public static ArrayList<Integer> commDeckIndices;
     public static ArrayList<Integer> chanceDeckIndices;
 
-    public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> inputCommDeckIndices, ArrayList<Integer> inputChanceDeckIndices) {
-        this.boardSpaces = boardSpaces;
+    public Turn(ArrayList<Integer> inputCommDeckIndices, ArrayList<Integer> inputChanceDeckIndices) {
         commDeckIndices = inputCommDeckIndices;
         chanceDeckIndices = inputChanceDeckIndices;
     }
@@ -112,7 +105,7 @@ public class Turn {
                     		System.out.println("the owner of site "+constructionSite.getName()+" is "+  constructionSite.getOwner() );
                     		System.out.println("accepted : calling buildHouse Function");
                     		PropertyOverlord.BuildHouse(player, constructionSite);
-                    		this.boardSpaces.get(player.getBoardIndex()).readDetails();
+                    		Board.spaces.get(player.getBoardIndex()).readDetails();
                     		break;
                     	}
                     }                                       
@@ -160,7 +153,7 @@ public class Turn {
     * */
 
     public static void movePlayerForward(Player player, ArrayList<Player> playerList) {
-        BoardSpace bs = Board.chanceBoard.get(player.getBoardIndex());
+        BoardSpace bs = Board.spaces.get(player.getBoardIndex());
         bs.readDetails();
         if (bs instanceof Sites) {
             ((Sites) bs).takeAction(player, playerList);
