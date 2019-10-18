@@ -1,8 +1,7 @@
 package jwrc.board;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import jwrc.game.Auction;
+import jwrc.game.Trade;
 import jwrc.game.Game;
 import jwrc.player.Player;
 
@@ -33,7 +32,7 @@ public class Utility extends Property {
 					break;
 				case "n":
 					System.out.println("Go to auction");
-					Auction.startAuction(players, this, Game.scanner);
+					Trade.startAuction(players, this, Game.scanner);
 					exit = 1;
 					break;
 				default:
