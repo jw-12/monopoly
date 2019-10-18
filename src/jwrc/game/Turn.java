@@ -28,7 +28,7 @@ public class Turn {
         chanceDeckIndices = inputChanceDeckIndices;
     }
 
-    public void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr) {
+    public void takeTurn(Player player, ArrayList<Player> playerList) {
         int userInput;
         int[] diceVal;
         String promptString = "";
@@ -52,9 +52,9 @@ public class Turn {
             System.out.println(promptString);
 
             try {
-                userInput = scnr.nextInt();
+                userInput = Game.scanner.nextInt();
             } catch (InputMismatchException e) {
-                scnr.next();
+                Game.scanner.next();
                 System.out.println("Must enter an integer");
                 continue;
             }
@@ -102,8 +102,8 @@ public class Turn {
                 	String str="";
                     System.out.println("<Property Overlord Menu Here>");
                     System.out.print("what property would you like to build on?");
-                    scnr.nextLine();
-                    str += scnr.nextLine();
+                    Game.scanner.nextLine();
+                    str += Game.scanner.nextLine();
                     System.out.println(str);
                     Sites constructionSite;
                     for (Sites s : Board.sitesBoard) {

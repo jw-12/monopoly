@@ -8,13 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
-
-        Game game = new Game(input);
+        Game game = new Game();
         game.preGame();
         game.start();
-
-        input.close();
 
     }
 }

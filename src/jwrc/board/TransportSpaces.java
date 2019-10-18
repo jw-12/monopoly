@@ -3,11 +3,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import jwrc.game.Auction;
+import jwrc.game.Game;
 import jwrc.player.Player;
 
 public class TransportSpaces extends Property {
-	
-	private Scanner input = new Scanner(System.in);
 	
 	public TransportSpaces(String name, int cost, int index) {
 		super(name,cost,index);
@@ -22,7 +21,7 @@ public class TransportSpaces extends Property {
 			int exit =0;
 			while(exit == 0) {
 			System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
-			String ans = input.next();
+			String ans = Game.scanner.next();
 			switch(ans) {
 			case "y":
 				this.changeOwner(player.getName());
@@ -33,7 +32,7 @@ public class TransportSpaces extends Property {
 				break;
 			case "n":
 				System.out.println("Go to auction");
-				Auction.startAuction(players, this, input);
+				Auction.startAuction(players, this, Game.scanner);
 				exit = 1;
 				break;
 			default:
