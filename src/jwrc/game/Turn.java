@@ -22,10 +22,10 @@ public class Turn {
     public static ArrayList<Integer> commDeckIndices;
     public static ArrayList<Integer> chanceDeckIndices;
 
-    public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> commDeckIndices, ArrayList<Integer> chanceDeckIndices) {
+    public Turn(ArrayList<BoardSpace> boardSpaces, ArrayList<Integer> inputCommDeckIndices, ArrayList<Integer> inputChanceDeckIndices) {
         this.boardSpaces = boardSpaces;
-        commDeckIndices = commDeckIndices;
-        chanceDeckIndices = chanceDeckIndices;
+        commDeckIndices = inputCommDeckIndices;
+        chanceDeckIndices = inputChanceDeckIndices;
     }
 
     public void takeTurn(Player player, ArrayList<Player> playerList, Scanner scnr) {
