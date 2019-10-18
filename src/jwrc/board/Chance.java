@@ -38,10 +38,10 @@ public class Chance extends BoardSpace implements RandomizedSpace {
             case 3:
                 System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
                 i = player.getBoardIndex();
-                bs = Board.chanceBoard.get(player.getBoardIndex());
+                bs = Board.spaces.get(player.getBoardIndex());
 
                 while (!(bs instanceof Utility)) {
-                    bs = Board.chanceBoard.get((player.getBoardIndex() + (++i)) % 40); // overflows
+                    bs = Board.spaces.get((player.getBoardIndex() + (++i)) % 40); // overflows
                 }
 
                 if (i >= 40) {
@@ -62,10 +62,10 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which he/she {he} is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
                 System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
                 i = player.getBoardIndex();
-                bs = Board.chanceBoard.get(player.getBoardIndex());
+                bs = Board.spaces.get(player.getBoardIndex());
 
                 while (!(bs instanceof TransportSpaces)) {
-                    bs = Board.chanceBoard.get((player.getBoardIndex() + (++i)) % 40); // overflows
+                    bs = Board.spaces.get((player.getBoardIndex() + (++i)) % 40); // overflows
                 }
 
                 if (i >= 40) {

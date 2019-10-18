@@ -1,79 +1,79 @@
 package jwrc.board;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Board {
 
-   // ArrayList<BoardSpace> boardSpaces;
-	
-	//ArrayList<BoardSpace> propertyBoard;  // just for testing 
 	BoardSpace[] propertyBoard;
-	ArrayList<BoardSpace> penaltyBoard;  // likewise, for testing -james
 	ArrayList<BoardSpace> testBoard;
 	public static ArrayList<Sites> sitesBoard;
-	public  static Map<String, ArrayList<Sites>> map;
+	public static Map<String, ArrayList<Sites>> map;
 	public static ArrayList<BoardSpace> chanceBoard;
-	
+	public static ArrayList<BoardSpace> spaces;
+
     
     public Board() {
-    	//this.propertyBoard = new ArrayList<BoardSpace>();
     	this.propertyBoard = new BoardSpace[5];
     	this.testBoard = new ArrayList<BoardSpace>();
     	Board.sitesBoard = new ArrayList<Sites>();
     	Board.map = new HashMap<String, ArrayList<Sites>>();
-    	setTestBoard();
-    	//setSitesBoard();
+    	spaces = generateSpaces();
     }
 
-    public void setChanceBoard() {
-    	chanceBoard.add(new Chance(0));
-    	chanceBoard.add(new Chance(1));
-    	chanceBoard.add(new Chance(2));
-    	chanceBoard.add(new Chance(3));
-    	chanceBoard.add(new Chance(4));
-    	chanceBoard.add(new Chance(5));
-    	chanceBoard.add(new Chance(6));
-    	chanceBoard.add(new Chance(7));
-    	chanceBoard.add(new Chance(8));
-    	chanceBoard.add(new Chance(9));
-    	chanceBoard.add(new Chance(10));
-    	chanceBoard.add(new Chance(11));
-    	chanceBoard.add(new Chance(12));
-    	chanceBoard.add(new Chance(13));
-    	chanceBoard.add(new Chance(14));
-    	chanceBoard.add(new Chance(15));
-    	chanceBoard.add(new Chance(16));
-    	chanceBoard.add(new Chance(17));
-    	chanceBoard.add(new Chance(18));
-    	chanceBoard.add(new Chance(19));
-    	chanceBoard.add(new Chance(20));
-    	chanceBoard.add(new Chance(21));
-    	chanceBoard.add(new Chance(22));
-    	chanceBoard.add(new Chance(23));
-    	chanceBoard.add(new Chance(24));
-    	chanceBoard.add(new Chance(25));
-    	chanceBoard.add(new Chance(26));
-    	chanceBoard.add(new Chance(27));
-    	chanceBoard.add(new Chance(28));
-    	chanceBoard.add(new Chance(29));
-    	chanceBoard.add(new Chance(30));
-    	chanceBoard.add(new Chance(31));
-    	chanceBoard.add(new Chance(32));
-    	chanceBoard.add(new Chance(33));
-    	chanceBoard.add(new Chance(34));
-    	chanceBoard.add(new Chance(35));
-    	chanceBoard.add(new Chance(36));
-    	chanceBoard.add(new Chance(37));
-    	chanceBoard.add(new Chance(38));
-    	chanceBoard.add(new Chance(39));
+    public ArrayList<BoardSpace> generateSpaces() {
+		return (
+				new ArrayList<>(Arrays.asList(
+					new BlankSpace(0),
+					new Sites("Mediterranean Avenue", 60, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50),
+					new CommunityChest(2),
+					new Sites("Baltic Avenue", 60, 3, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50),
+					new Penalties(4, 200, "Income Tax"),
+					new TransportSpaces("Reading Railroad", 200, 5),
+					new Sites("Oriental Avenue", 100, 6, "Blue", new int[]{2, 4, 10, 30, 90, 160, 250}, 100),
+					new Chance(7),
+					new Sites("Vermont Avenue", 100, 8, "Blue", new int[]{2, 4, 10, 30, 90, 160, 250}, 100),
+					new Sites("Connecticut Avenue", 120, 9, "Blue", new int[]{2, 4, 10, 30, 90, 160, 250}, 100),
+					new BlankSpace(10),
+					new Sites("St. Charles Place", 140, 11, "Pink", new int[]{2, 4, 10, 30, 90, 160, 250}, 150),
+					new Utility("Electric Company", 150, 12),
+					new Sites("States Avenue", 140, 13, "Pink", new int[]{2, 4, 10, 30, 90, 160, 250}, 150),
+					new Sites("Virginia Avenue", 160, 14, "Pink", new int[]{2, 4, 10, 30, 90, 160, 250}, 150),
+					new TransportSpaces("Pennsylvania Railroad", 200, 15),
+					new Sites("St James Place", 180, 16, "Orange", new int[]{2, 4, 10, 30, 90, 160, 250}, 200),
+					new CommunityChest(17),
+					new Sites("Tennessee Avenue", 180, 18, "Orange", new int[]{2, 4, 10, 30, 90, 160, 250}, 200),
+					new Sites("New York Avenue", 200, 19, "Orange", new int[]{2, 4, 10, 30, 90, 160, 250}, 200),
+					new BlankSpace(20),
+					new Sites("Kentucky Avenue", 220, 21, "Red", new int[]{2, 4, 10, 30, 90, 160, 250}, 250),
+					new Chance(22),
+					new Sites("Indiana Avenue", 220, 23, "Red", new int[]{2, 4, 10, 30, 90, 160, 250}, 250),
+					new Sites("Illinois Avenue", 240, 24, "Red", new int[]{2, 4, 10, 30, 90, 160, 250}, 250),
+					new TransportSpaces("B. & O. Railroad", 200, 25),
+					new Sites("Atlantic Avenue", 260, 26, "Yellow", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new Sites("Ventnor Avenue", 260, 27, "Yellow", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new Utility("Water Works", 150, 28),
+					new Sites("Marvin Gardens", 280, 29, "Yellow", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new GoToJail(30),
+					new Sites("Pacific Avenue", 300, 31, "Green", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new Sites("North Carolina Avenue", 300, 32, "Green", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new CommunityChest(33),
+					new Sites("Pennsylvania Avenue", 320, 34, "Green", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new TransportSpaces("Short Line", 200, 35),
+					new Chance(36),
+					new Sites("Park Place", 350, 31, "Purple", new int[]{2, 4, 10, 30, 90, 160, 250}, 300),
+					new Penalties(38, 75, "Luxury Tax"),
+					new Sites("BoardWalk", 350, 31, "Purple", new int[]{2, 4, 10, 30, 90, 160, 250}, 400)
+				)
+			)
+		);
 	}
-    
-    
+
     public void setTestBoard() {
-    	
-    	
+
+
     	BoardSpace b0 = new BlankSpace(0);
     	//BoardSpace b1 = new Sites("Medeteranian Avenue",60,1,"Brown",new int[] { 2,4,10,30,90,160,250},50) ;
     	BoardSpace b2 = new BlankSpace(2);
@@ -84,7 +84,7 @@ public class Board {
     	BoardSpace b7 = new BlankSpace(7);
     	//BoardSpace b8 = new Sites("Vermont Avenue",100,8,"Blue",new int[] { 2,4,10,30,90,160,250}, 100) ;
     	//BoardSpace b9 = new Sites("Connecticut Avenue",120,9,"Blue",new int[] { 2,4,10,30,90,160,250}, 100) ;
-    	
+
     	BoardSpace b10 = new BlankSpace(10);
     	//BoardSpace b11 = new Sites("St Charles Place",140,11,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);
     	BoardSpace b12 = new Utility("Electric Company",150, 12);
@@ -95,7 +95,7 @@ public class Board {
     	BoardSpace b17 = new BlankSpace(17);
     	//BoardSpace b18 = new Sites("Tennessee Avenue",180,18,"Orange",new int[] { 2,4,10,30,90,160,250},200);
     	//BoardSpace b19 = new Sites("New York Avenue",200,19,"Orange",new int[] { 2,4,10,30,90,160,250},200);
-    	
+
     	BoardSpace b20 = new BlankSpace(20);
     	//BoardSpace b21 = new Sites("Kentucky Avenue",220,21,"Red",new int[] { 2,4,10,30,90,160,250},250);
     	BoardSpace b22 = new BlankSpace(22);
@@ -106,7 +106,7 @@ public class Board {
     	//BoardSpace b27 = new Sites("Ventnor Avenue",260,27,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
     	BoardSpace b28 = new Utility("Water Works", 150, 28);
     	//BoardSpace b29 = new Sites("Marvin Gardens",280,29,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
-    	
+
     	BoardSpace b30 = new BlankSpace(30);
     	//BoardSpace b31 = new Sites("Pecific Avenue",300,31,"Green",new int[] { 2,4,10,30,90,160,250},300);
     	//BoardSpace b32 = new Sites("North Carolina Avenue",300,32,"Green",new int[] { 2,4,10,30,90,160,250},300);
@@ -117,8 +117,8 @@ public class Board {
     	//BoardSpace b37 = new Sites("Park Place",350,31,"Purple",new int[] { 2,4,10,30,90,160,250},300);
     	BoardSpace b38 = new Penalties(38, 100, "Income Tax");
     	//BoardSpace b39 = new Sites("Park Place",350,39,"Purple",new int[] { 2,4,10,30,90,160,250},300);
-    	
-    	
+
+
     	Sites b1 = new Sites("Medeteranian Avenue",60,1,"Brown",new int[] { 2,4,10,30,90,160,250},50);
     	Sites b3 = new Sites("Baltic Avenue",60,3,"Brown",new int[] { 2,4,10,30,90,160,250},50);
     	Sites b6 = new Sites("Oriantal Avenue",100,6,"Blue",new int[] { 2,4,10,30,90,160,250}, 100);
@@ -126,60 +126,60 @@ public class Board {
     	Sites b9 = new Sites("Connecticut Avenue",120,9,"Blue",new int[] { 2,4,10,30,90,160,250}, 100) ;
     	Sites b11 = new Sites("St Charles Place",140,11,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);
     	Sites b13 = new Sites("States Avenue",140,13,"Pink",new int[] { 2,4,10,30,90,160,250},150);
-    	Sites b14 = new Sites("Virginia Avenue",160,14,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);    	
-    	Sites b16 = new Sites("St Jamses Place",180,16,"Orange",new int[] { 2,4,10,30,90,160,250},200);   	
+    	Sites b14 = new Sites("Virginia Avenue",160,14,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);
+    	Sites b16 = new Sites("St Jamses Place",180,16,"Orange",new int[] { 2,4,10,30,90,160,250},200);
     	Sites b18 = new Sites("Tennessee Avenue",180,18,"Orange",new int[] { 2,4,10,30,90,160,250},200);
-    	Sites b19 = new Sites("New York Avenue",200,19,"Orange",new int[] { 2,4,10,30,90,160,250},200);   	
-    	Sites b21 = new Sites("Kentucky Avenue",220,21,"Red",new int[] { 2,4,10,30,90,160,250},250);    	
+    	Sites b19 = new Sites("New York Avenue",200,19,"Orange",new int[] { 2,4,10,30,90,160,250},200);
+    	Sites b21 = new Sites("Kentucky Avenue",220,21,"Red",new int[] { 2,4,10,30,90,160,250},250);
     	Sites b23 = new Sites("Indiana Avenue",220,23,"Red",new int[] { 2,4,10,30,90,160,250},250);
-    	Sites b24 = new Sites("Illinois Avenue",240,24,"Red",new int[] { 2,4,10,30,90,160,250},250);    	
+    	Sites b24 = new Sites("Illinois Avenue",240,24,"Red",new int[] { 2,4,10,30,90,160,250},250);
     	Sites b26 = new Sites("Atlantic Avenue",260,26,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
-    	Sites b27 = new Sites("Ventnor Avenue",260,27,"Yellow",new int[] { 2,4,10,30,90,160,250},300);    	
-    	Sites b29 = new Sites("Marvin Gardens",280,29,"Yellow",new int[] { 2,4,10,30,90,160,250},300);   	
+    	Sites b27 = new Sites("Ventnor Avenue",260,27,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
+    	Sites b29 = new Sites("Marvin Gardens",280,29,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
     	Sites b31 = new Sites("Pecific Avenue",300,31,"Green",new int[] { 2,4,10,30,90,160,250},300);
-    	Sites b32 = new Sites("North Carolina Avenue",300,32,"Green",new int[] { 2,4,10,30,90,160,250},300);    	
-    	Sites b34 = new Sites("Pennsylvania Avenue",320,34,"Green",new int[] { 2,4,10,30,90,160,250},300);    	   
+    	Sites b32 = new Sites("North Carolina Avenue",300,32,"Green",new int[] { 2,4,10,30,90,160,250},300);
+    	Sites b34 = new Sites("Pennsylvania Avenue",320,34,"Green",new int[] { 2,4,10,30,90,160,250},300);
     	Sites b37 = new Sites("Park Place",350,31,"Purple",new int[] { 2,4,10,30,90,160,250},300);
     	Sites b39 = new Sites("Park Place",350,39,"Purple",new int[] { 2,4,10,30,90,160,250},300);
-    	
+
     	ArrayList<Sites> brown = new ArrayList<Sites>();
     	brown.add(b1);
         brown.add(b3);
-        
+
         ArrayList<Sites> blue = new ArrayList<Sites>();
     	blue.add(b6);
         blue.add(b8);
         blue.add(b9);
-        
+
         ArrayList<Sites> pink = new ArrayList<Sites>();
         pink.add(b11);
         pink.add(b13);
         pink.add(b14);
-        
+
         ArrayList<Sites> orange = new ArrayList<Sites>();
     	orange.add(b16);
         orange.add(b18);
         orange.add(b19);
-        
+
         ArrayList<Sites> red = new ArrayList<Sites>();
     	red.add(b21);
         red.add(b23);
         red.add(b24);
-        
+
         ArrayList<Sites> yellow = new ArrayList<Sites>();
     	yellow.add(b26);
         yellow.add(b27);
         yellow.add(b29);
-        
+
         ArrayList<Sites> green = new ArrayList<Sites>();
     	green.add(b31);
         green.add(b32);
         green.add(b34);
-        
+
         ArrayList<Sites> purple = new ArrayList<Sites>();
     	purple.add(b37);
         purple.add(b39);
-        
+
         Board.map.put("Brown", brown);
         Board.map.put("Blue", blue);
         Board.map.put("Pink", pink);
@@ -189,7 +189,7 @@ public class Board {
         Board.map.put("Green", green);
         Board.map.put("Purple", purple);
 
-        
+
     	Board.sitesBoard.add(b1);
     	Board.sitesBoard.add(b3);
     	Board.sitesBoard.add(b6);
@@ -212,7 +212,7 @@ public class Board {
     	Board.sitesBoard.add(b34);
     	Board.sitesBoard.add(b37);
     	Board.sitesBoard.add(b39);
-    	
+
     	this.testBoard.add(b0);
     	this.testBoard.add(b1);
     	this.testBoard.add(b2);
@@ -255,9 +255,9 @@ public class Board {
     	this.testBoard.add(b39);
     }
 
-    
+
    /* public void setSitesBoard() {
-    	
+
     	Sites b0 = new Sites("Medeteranian Avenue",60,1,"Brown",new int[] { 2,4,10,30,90,160,250},50);
     	Sites b1 = new Sites("Baltic Avenue",60,3,"Brown",new int[] { 2,4,10,30,90,160,250},50);
     	Sites bl0 = new Sites("Oriantal Avenue",100,6,"Blue",new int[] { 2,4,10,30,90,160,250}, 100);
@@ -265,61 +265,61 @@ public class Board {
     	Sites bl2 = new Sites("Connecticut Avenue",120,9,"Blue",new int[] { 2,4,10,30,90,160,250}, 100) ;
     	Sites p0 = new Sites("St Charles Place",140,11,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);
     	Sites p1 = new Sites("States Avenue",140,13,"Pink",new int[] { 2,4,10,30,90,160,250},150);
-    	Sites p2 = new Sites("Virginia Avenue",160,14,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);    	
-    	Sites o0 = new Sites("St Jamses Place",180,16,"Orange",new int[] { 2,4,10,30,90,160,250},200);   	
+    	Sites p2 = new Sites("Virginia Avenue",160,14,"Pink",new int[] { 2,4,10,30,90,160,250}, 150);
+    	Sites o0 = new Sites("St Jamses Place",180,16,"Orange",new int[] { 2,4,10,30,90,160,250},200);
     	Sites o1 = new Sites("Tennessee Avenue",180,18,"Orange",new int[] { 2,4,10,30,90,160,250},200);
-    	Sites o2 = new Sites("New York Avenue",200,19,"Orange",new int[] { 2,4,10,30,90,160,250},200);   	
-    	Sites r0 = new Sites("Kentucky Avenue",220,21,"Red",new int[] { 2,4,10,30,90,160,250},250);    	
+    	Sites o2 = new Sites("New York Avenue",200,19,"Orange",new int[] { 2,4,10,30,90,160,250},200);
+    	Sites r0 = new Sites("Kentucky Avenue",220,21,"Red",new int[] { 2,4,10,30,90,160,250},250);
     	Sites r1 = new Sites("Indiana Avenue",220,23,"Red",new int[] { 2,4,10,30,90,160,250},250);
-    	Sites r2 = new Sites("Illinois Avenue",240,24,"Red",new int[] { 2,4,10,30,90,160,250},250);    	
+    	Sites r2 = new Sites("Illinois Avenue",240,24,"Red",new int[] { 2,4,10,30,90,160,250},250);
     	Sites y0 = new Sites("Atlantic Avenue",260,26,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
-    	Sites y1 = new Sites("Ventnor Avenue",260,27,"Yellow",new int[] { 2,4,10,30,90,160,250},300);    	
-    	Sites y2 = new Sites("Marvin Gardens",280,29,"Yellow",new int[] { 2,4,10,30,90,160,250},300);   	
+    	Sites y1 = new Sites("Ventnor Avenue",260,27,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
+    	Sites y2 = new Sites("Marvin Gardens",280,29,"Yellow",new int[] { 2,4,10,30,90,160,250},300);
     	Sites g0 = new Sites("Pecific Avenue",300,31,"Green",new int[] { 2,4,10,30,90,160,250},300);
-    	Sites g1 = new Sites("North Carolina Avenue",300,32,"Green",new int[] { 2,4,10,30,90,160,250},300);    	
-    	Sites g2 = new Sites("Pennsylvania Avenue",320,34,"Green",new int[] { 2,4,10,30,90,160,250},300);    	   
+    	Sites g1 = new Sites("North Carolina Avenue",300,32,"Green",new int[] { 2,4,10,30,90,160,250},300);
+    	Sites g2 = new Sites("Pennsylvania Avenue",320,34,"Green",new int[] { 2,4,10,30,90,160,250},300);
     	Sites pu0 = new Sites("Park Place",350,31,"Purple",new int[] { 2,4,10,30,90,160,250},300);
     	Sites pu1 = new Sites("Park Place",350,39,"Purple",new int[] { 2,4,10,30,90,160,250},300);
-    	
-    	
+
+
     	ArrayList<Sites> brown = new ArrayList<Sites>();
     	brown.add(b0);
         brown.add(b1);
-        
+
         ArrayList<Sites> blue = new ArrayList<Sites>();
     	blue.add(bl0);
         blue.add(bl1);
         blue.add(bl2);
-        
+
         ArrayList<Sites> pink = new ArrayList<Sites>();
         pink.add(p0);
         pink.add(p1);
         pink.add(p2);
-        
+
         ArrayList<Sites> orange = new ArrayList<Sites>();
     	orange.add(o0);
         orange.add(o1);
         orange.add(o2);
-        
+
         ArrayList<Sites> red = new ArrayList<Sites>();
     	red.add(r0);
         red.add(r1);
         red.add(r2);
-        
+
         ArrayList<Sites> yellow = new ArrayList<Sites>();
     	yellow.add(y0);
         yellow.add(y1);
         yellow.add(y2);
-        
+
         ArrayList<Sites> green = new ArrayList<Sites>();
     	green.add(g0);
         green.add(g1);
         green.add(g2);
-        
+
         ArrayList<Sites> purple = new ArrayList<Sites>();
     	purple.add(bl0);
         purple.add(bl1);
-        
+
         Board.map.put("Brown", brown);
         Board.map.put("Blue", blue);
         Board.map.put("Pink", pink);
@@ -328,7 +328,7 @@ public class Board {
         Board.map.put("Yellow", yellow);
         Board.map.put("Green", green);
         Board.map.put("Purple", purple);
-    	
+
     	Board.sitesBoard.add(b0);
     	Board.sitesBoard.add(b1);
     	Board.sitesBoard.add(bl0);
@@ -351,7 +351,7 @@ public class Board {
     	Board.sitesBoard.add(g2);
     	Board.sitesBoard.add(pu0);
     	Board.sitesBoard.add(pu1);
-    	
+
     	Board.map.put("Brown", brown);
         Board.map.put("Blue", blue);
         Board.map.put("Pink", pink);
@@ -362,58 +362,5 @@ public class Board {
         Board.map.put("Purple", purple);
     }*/
 
-    // just a simple board to test functionality of penalty components.
-    public void setPenaltyBoard() {
-    	
-    	BoardSpace b0 = new Penalties(0, 100, "Income Tax");
-    	BoardSpace b1 = new Penalties(1, 100, "Income Tax");
-    	BoardSpace b2 = new Penalties(2, 100, "Income Tax");
-    	BoardSpace b3 = new Penalties(3, 100, "Income Tax");
-    	BoardSpace b4 = new Penalties(4, 100, "Income Tax");
-    	BoardSpace b5 = new Penalties(5, 100, "Income Tax");
-    	BoardSpace b6 = new Penalties(6, 100, "Speeding Fine");
-    	BoardSpace b7 = new Penalties(7, 100, "Speeding Fine");
-    	BoardSpace b8 = new Penalties(8, 100, "Speeding Fine");
-    	BoardSpace b9 = new Penalties(9, 100, "Speeding Fine");
-    	BoardSpace b10 = new Penalties(10, 100, "Speeding Fine");
 
-    	this.penaltyBoard.add(b0);
-    	this.penaltyBoard.add(b1);
-    	this.penaltyBoard.add(b2);
-    	this.penaltyBoard.add(b3);
-    	this.penaltyBoard.add(b4);
-    	this.penaltyBoard.add(b5);
-    	this.penaltyBoard.add(b6);
-    	this.penaltyBoard.add(b7);
-    	this.penaltyBoard.add(b8);
-    	this.penaltyBoard.add(b9);
-    	this.penaltyBoard.add(b10);
-
-    }
-
-    public ArrayList<BoardSpace> getPenaltyBoard() {
-    	return this.penaltyBoard;
-	}
-    
-    public ArrayList<BoardSpace> getTestBoard() {
-    	return this.testBoard;
-	}
-    
-
-
- /*   public void setBoard() {
-    	propertyBoard[0] = new Utility("Water works",60,1);
-    	((Utility)propertyBoard[0]).readDetails();
-    	
-    	propertyBoard[1] = new Utility("Electric Company",60,1);
-    	((Utility)propertyBoard[1]).readDetails();
-    
-    	propertyBoard[2] = new Sites("Oriental Avenue",100,6,"LightBlue");
-    	propertyBoard[3] = new Sites("Vermont Avenue",100,8,"LightBlue");
-    	propertyBoard[4] = new Sites("Connecticut Avenue",120,9,"LightBlue");
-    	
-    }
-*/
-    // ArrayList<BoardSpace> communityChestCards;
-    //<BoardSpace> currentCommunityChest =
 }

@@ -1,7 +1,6 @@
 package jwrc.game;
 
 import jwrc.board.Board;
-import jwrc.board.BoardSpace;
 import jwrc.player.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,17 +17,14 @@ public class Game {
     private static int maxPlayers = 6, minPlayers = 2;
     private ArrayList <Player> playerList;
     private int whoseTurn;
-    private Board board;
-    private ArrayList<BoardSpace> boardArray;
     private ArrayList<Integer> commDeckIndices;
     private ArrayList<Integer> chanceDeckIndices;
     public static Scanner scanner;
+    public Board board;
 
     public Game() {
         this.playerList = new ArrayList<Player>();
         this.whoseTurn = 0;
-        this.board = new Board();
-        this.boardArray = board.getTestBoard();
         this.commDeckIndices = this.generateDeck();
         this.chanceDeckIndices = this.generateDeck();
         scanner = new Scanner(System.in);
@@ -36,6 +32,8 @@ public class Game {
 
     public void preGame() {
         int numPlayers = 0;
+
+        this.board = new Board();
 
         //  user interaction
         System.out.println("Welkom!");
@@ -67,7 +65,7 @@ public class Game {
     public void start() {
         Player currentPlayer;
 
-        Turn turn = new Turn(boardArray, this.commDeckIndices, this.chanceDeckIndices);
+        Turn turn = new Turn(this.commDeckIndices, this.chanceDeckIndices);
         
 
         while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
