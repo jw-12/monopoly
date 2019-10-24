@@ -24,7 +24,7 @@ public class Board {
 				new ArrayList<>(Arrays.asList(
 					new BlankSpace(0),
 					new Sites("Mediterranean Avenue", 60, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50),
-					new BlankSpace(2),
+					new CommunityChest(2),
 					new Sites("Baltic Avenue", 60, 3, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50),
 					new Penalties(4, 200, "Income Tax"),
 					new TransportSpaces("Reading Railroad", 200, 5),
