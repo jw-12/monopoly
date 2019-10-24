@@ -22,21 +22,20 @@ public class PropertyOverlord {
 			return 99;
 		}
 		
-		if(p.propertiesOwned.isEmpty()) {
-			System.out.println("You own no Properties yet!");
+		if(p.sitesOwned.isEmpty()) {
+			System.out.println("You own no Sites yet!");
 			return 99;
 		}
 		
-		System.out.println("These are the Properties you own and their corresponding board position.\nPlease enter the position of the site you would like to take action on:");
-		p.readProperties();
+		System.out.println("These are the Sites you own and their corresponding board position.\nPlease enter the position of the site you would like to take action on:");
+		p.readSites();
 		int choice = 99;
 		boolean check = false;
 		
 		try {
             choice = Game.scanner.nextInt();
-            for(Property prop : p.propertiesOwned) {
-    			if(prop.getBoardIndex() == choice) {
-    				System.out.println("VALID");
+            for(Sites s : p.sitesOwned) {
+    			if(s.getBoardIndex() == choice) {
     				check = true;
     			}
     		}
@@ -76,11 +75,34 @@ public class PropertyOverlord {
 		player.changeAccountBalance(houseVal);
 		System.out.println(houseVal + " has been added to your bank account.");
 	}
+	
+	public static void buildHotel(Player player, int siteIndex) {
+		
+		Sites site = (Sites)Board.spaces.get(siteIndex);
+		
+		if(site.noOfHouses == 4) {
+			site.rentIndex++;
+			site.noOfHouses = 0;
+			numOfHouses+=4;
+			site.hasHotel = true;
+			player.changeAccountBalance(-site.getHouseCost());
+			System.out.println("Hotel build on "+ site.getName());
+		}
+		else {
+			System.out.println("You must build 4 houses on this site before building a hotel");
+		}
+	}
 		
 	
 	public static void buildHouse(Player player, int siteIndex) {
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
+		
+		if(site.noOfHouses == 4) {
+			System.out.println("You have reached the maximum number of houses for this Site");
+			return;
+		}
+		
 		String siteKey = site.getColour();
 		ArrayList<Sites> temp = new ArrayList<Sites>();
 		temp = Board.map.get(siteKey);
@@ -98,8 +120,13 @@ public class PropertyOverlord {
 				return;
 			}
 			if(temp.get(i).getNoOfHouses() < minHouses) {
+				if(temp.get(i).hasHotel) {
+					continue;
+				}
+				else {
 				System.out.println("Your must build a house on "+temp.get(i).getName()+ " first!");
 				return;
+				}
 			}
 		}
 		System.out.println("House being built on "+ site.getName());

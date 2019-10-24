@@ -20,8 +20,10 @@ public class Trade {
      * @param participants the ArrayList of Player's who will be bidding in the auction (taken to be in correct order)
      * @param property the Property object which is up for bidding
      */
-    public static void startAuction(ArrayList<Player> participants, Property property, Scanner input) {
+    public static void startAuction(ArrayList<Player> parts, Property property, Scanner input) {
     	
+    	ArrayList<Player> participants = new ArrayList<Player>(parts);
+    		
         Player currentPlayer;
         int currentBid = 0, previousBid = 0;
 
@@ -72,7 +74,6 @@ public class Trade {
         }
         else {
         currentPlayer.changeAccountBalance(-currentBid);
-        currentPlayer.addProperty(property);
         property.changeOwner(currentPlayer.getName());
         System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
         }

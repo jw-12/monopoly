@@ -93,7 +93,7 @@ public class Turn {
                     //bank/property-authority options
                 	//testing buying houses for now.
                 	
-                	System.out.println("0 to buy a house\t1 to sell a house");
+                	System.out.println("0 to buy a house\t1 to sell a house\t2 to buy a hotel");
                 	int choice;
                 	try {
                         choice = Game.scanner.nextInt();
@@ -122,6 +122,16 @@ public class Turn {
                 				PropertyOverlord.sellHouse(player, siteIndex);
                 			}
                 			break;
+                		case 2:
+                			siteIndex = PropertyOverlord.printOptions(player);
+                			if(siteIndex == 99) {
+                				break;
+                			}
+                			else {
+                				PropertyOverlord.buildHotel(player, siteIndex);
+                				break;
+                			}
+                			
                 		default:
                 			System.out.println("not a valid entry");	
                 	}

@@ -8,11 +8,12 @@ import jwrc.player.Player;
 public class Sites extends Property {
 
 	private String colour;
-	private int noOfHouses;
+	public int noOfHouses;
 	private int houseCost;
-	public boolean hotelRights;
+	public boolean hasHotel;
 	private int[] rentValues;//need to implement when all sites of same colour are owned.
-	private int rentIndex;
+	public int rentIndex;
+	//need to add hotelPrice on instantiation. For now just use house price.
 	
 
 	public Sites(String name, int cost, int index, String colour, int[] rentValues, int houseCost) {
@@ -20,7 +21,7 @@ public class Sites extends Property {
 		super(name, cost, index);
 		this.colour = colour;
 		this.noOfHouses = 0;
-		this.hotelRights = false;
+		this.hasHotel = false;
 		this.rentValues = rentValues;
 		this.rentIndex = 0;
 		this.houseCost = houseCost;
@@ -49,8 +50,9 @@ public class Sites extends Property {
 					break;
 				case "n":
 					System.out.println("Go to auction");
-					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
-					Trade.startAuction(auctionPlayers, this, Game.scanner);
+					//ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
+					
+					Trade.startAuction(players, this, Game.scanner);
 					exit = 1;
 					break;
 				default:
@@ -81,28 +83,29 @@ public class Sites extends Property {
 		return this.colour;
 	}
 	public void buySite(Player player, int cost) {
+		
 		this.changeOwner(player.getName());
 		player.changeAccountBalance(-cost);
 		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-		player.addProperty(this);
-		boolean allColours = this.colourGroupCheck();
-		if (allColours) {
-			this.rentIndex++;
-			System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
-		}
+		player.addSite(this);
+		this.colourGroupCheck();
 	}
 	
-	public boolean colourGroupCheck() {
+	public void colourGroupCheck() {
 		String siteKey = this.getColour();
 		ArrayList<Sites> temp = new ArrayList<Sites>();
 		temp = Board.map.get(siteKey);
 		
 		for(int i=0 ; i<temp.size(); i++) {
 			if(this.getOwner() != temp.get(i).getOwner()) {
-				return false;
+				return;
 			}
 		}
-		return true;
+		for(int i=0 ; i<temp.size(); i++) {
+			temp.get(i).rentIndex++;
+			System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
+		}
+		
 	}
 	
 	public void readDetails() {

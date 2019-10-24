@@ -1,6 +1,7 @@
 package jwrc.player;
 import java.util.ArrayList;
 import jwrc.board.Property;
+import jwrc.board.Sites;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,7 +15,7 @@ public class Player {
     private int turnsInJail;
     private int transportsOwned;//will need to decrement this value when a transport is sold/mortgaged
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
-    public ArrayList<Property> propertiesOwned;
+    public ArrayList<Sites> sitesOwned;
 
     public Player(String name) {
         this.name = name;
@@ -24,7 +25,7 @@ public class Player {
         this.turnsInJail = 0;
         this.transportsOwned = 0;
         this.getOutOfJailFreeCard = 0;
-        this.propertiesOwned = new ArrayList<Property>();
+        this.sitesOwned = new ArrayList<Sites>();
     }
 
     public int [] rollDice() {
@@ -115,13 +116,13 @@ public class Player {
         this.getOutOfJailFreeCard = number;
     }
     
-    public void addProperty(Property p){
-        this.propertiesOwned.add(p);
+    public void addSite(Sites s){
+        this.sitesOwned.add(s);
     }
     
-    public void readProperties() {
-    	for(Property p : this.propertiesOwned) {
-    		System.out.println(p.getName() + ":" + p.getBoardIndex());
+    public void readSites() {
+    	for(Sites s : this.sitesOwned) {
+    		System.out.println(s.getName() + ":" + s.getBoardIndex()+ "(Number of houses : "+ s.noOfHouses+")");
     	}
     }
 }
