@@ -92,23 +92,41 @@ public class Turn {
                 case 2:
                     //bank/property-authority options
                 	//testing buying houses for now.
-                	String str="";
-                    System.out.println("<Property Overlord Menu Here>");
-                    System.out.print("what property would you like to build on?");
-                    Game.scanner.nextLine();
-                    str += Game.scanner.nextLine();
-                    System.out.println(str);
-                    Sites constructionSite;
-                    for (Sites s : Board.sitesBoard) {
-                    	if(s.getName().equals(str)) {
-                    		constructionSite = s;
-                    		System.out.println("the owner of site "+constructionSite.getName()+" is "+  constructionSite.getOwner() );
-                    		System.out.println("accepted : calling buildHouse Function");
-                    		PropertyOverlord.BuildHouse(player, constructionSite);
-                    		Board.spaces.get(player.getBoardIndex()).readDetails();
-                    		break;
-                    	}
-                    }                                       
+                	
+                	System.out.println("0 to buy a house\t1 to sell a house");
+                	int choice;
+                	try {
+                        choice = Game.scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        Game.scanner.next();
+                        System.out.println("Must enter an integer");
+                        continue;
+                    }
+                	int siteIndex;
+                	switch(choice) {
+                		case 0:
+                			siteIndex = PropertyOverlord.printOptions(player);
+                			if(siteIndex == 99) {
+                				break;
+                			}
+                			else {
+                				PropertyOverlord.buildHouse(player, siteIndex);
+                			}
+                			break;
+                		case 1:
+                			siteIndex = PropertyOverlord.printOptions(player);
+                			if(siteIndex == 99) {
+                				break;
+                			}
+                			else {
+                				PropertyOverlord.sellHouse(player, siteIndex);
+                			}
+                			break;
+                		default:
+                			System.out.println("not a valid entry");	
+                	
+                	}
+                	                              
                     break;
                 case 3:
                     //check if has rolled, then end

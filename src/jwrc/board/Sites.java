@@ -47,6 +47,7 @@ public class Sites extends Property {
 					this.changeOwner(player.getName());
 					player.changeAccountBalance(-this.getCost());
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+					player.addProperty(this);
 					exit = 1;
 					break;
 				case "n":
@@ -99,6 +100,10 @@ public class Sites extends Property {
 	public void addHouse() {
 		this.noOfHouses++;
 		this.rentIndex++;
+	}
+	public void removeHouse() {
+		this.noOfHouses--;
+		this.rentIndex--;
 	}
 	
 }
