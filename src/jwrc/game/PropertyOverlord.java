@@ -9,10 +9,10 @@ import java.util.InputMismatchException;
 
 public class PropertyOverlord {
 	
-	public static int numOfHouses;
+	public static int numOfHouses=32;
 	
 	public PropertyOverlord() {
-		numOfHouses = 32;
+		
 	}
 	
 	public static int printOptions(Player p) {
@@ -53,7 +53,6 @@ public class PropertyOverlord {
 	}
 	
 	public static void sellHouse(Player player, int siteIndex) {
-		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		if(site.getNoOfHouses() == 0){
 			System.out.println("You have no houses on "+site.getName()+ " to sell");
@@ -65,7 +64,6 @@ public class PropertyOverlord {
 		int maxHouses = site.getNoOfHouses();
 		
 		for(int i=0 ; i<temp.size(); i++) {
-			
 			if(temp.get(i).getNoOfHouses() > maxHouses) {
 				System.out.println("Your must sell from house on "+temp.get(i).getName()+ " first!");
 				return;
@@ -77,8 +75,6 @@ public class PropertyOverlord {
 		int houseVal = site.getHouseCost()/2;
 		player.changeAccountBalance(houseVal);
 		System.out.println(houseVal + " has been added to your bank account.");
-		
-		
 	}
 		
 	
@@ -112,7 +108,5 @@ public class PropertyOverlord {
 		player.changeAccountBalance(-site.getHouseCost());
 		site.addHouse();
 		System.out.println("New rent cost is "+ site.getRentCost());
-		
 	}
-
 }

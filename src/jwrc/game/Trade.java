@@ -1,6 +1,6 @@
 package jwrc.game;
 
-
+import jwrc.board.Sites;
 import jwrc.board.Property;
 import jwrc.player.Player;
 
@@ -21,6 +21,7 @@ public class Trade {
      * @param property the Property object which is up for bidding
      */
     public static void startAuction(ArrayList<Player> participants, Property property, Scanner input) {
+    	
         Player currentPlayer;
         int currentBid = 0, previousBid = 0;
 
@@ -64,10 +65,17 @@ public class Trade {
         }
 
         currentPlayer = participants.get(0);
+        
+        if (property instanceof Sites) {
+        	((Sites) property).buySite(currentPlayer, currentBid);
+        	 System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
+        }
+        else {
         currentPlayer.changeAccountBalance(-currentBid);
         currentPlayer.addProperty(property);
         property.changeOwner(currentPlayer.getName());
         System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
+        }
     }
 
     public static void tradeMenu(Player player, ArrayList<Player> players) {

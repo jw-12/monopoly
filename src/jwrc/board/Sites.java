@@ -44,15 +44,13 @@ public class Sites extends Property {
 			String ans = Game.scanner.next();
 			switch(ans) {
 				case "y":
-					this.changeOwner(player.getName());
-					player.changeAccountBalance(-this.getCost());
-					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-					player.addProperty(this);
+					this.buySite(player,this.houseCost);
 					exit = 1;
 					break;
 				case "n":
 					System.out.println("Go to auction");
-					Trade.startAuction(players, this, Game.scanner);
+					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
+					Trade.startAuction(auctionPlayers, this, Game.scanner);
 					exit = 1;
 					break;
 				default:
@@ -81,6 +79,30 @@ public class Sites extends Property {
 	
 	public String getColour() {
 		return this.colour;
+	}
+	public void buySite(Player player, int cost) {
+		this.changeOwner(player.getName());
+		player.changeAccountBalance(-cost);
+		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+		player.addProperty(this);
+		boolean allColours = this.colourGroupCheck();
+		if (allColours) {
+			this.rentIndex++;
+			System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
+		}
+	}
+	
+	public boolean colourGroupCheck() {
+		String siteKey = this.getColour();
+		ArrayList<Sites> temp = new ArrayList<Sites>();
+		temp = Board.map.get(siteKey);
+		
+		for(int i=0 ; i<temp.size(); i++) {
+			if(this.getOwner() != temp.get(i).getOwner()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public void readDetails() {

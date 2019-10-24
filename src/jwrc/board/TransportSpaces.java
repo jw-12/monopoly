@@ -31,7 +31,8 @@ public class TransportSpaces extends Property {
 				break;
 			case "n":
 				System.out.println("Go to auction");
-				Trade.startAuction(players, this, Game.scanner);
+				ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
+				Trade.startAuction(auctionPlayers, this, Game.scanner);
 				exit = 1;
 				break;
 			default:

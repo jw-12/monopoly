@@ -124,7 +124,6 @@ public class Turn {
                 			break;
                 		default:
                 			System.out.println("not a valid entry");	
-                	
                 	}
                 	                              
                     break;
