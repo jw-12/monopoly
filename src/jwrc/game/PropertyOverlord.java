@@ -29,7 +29,7 @@ public class PropertyOverlord {
 		
 		System.out.println("These are the Sites you own and their corresponding board position.\nPlease enter the position of the site you would like to take action on:");
 		p.readSites();
-		int choice = 99;
+		int choice = 99;       // set 99 as an error code to stop action.
 		boolean check = false;
 		
 		try {
@@ -98,6 +98,11 @@ public class PropertyOverlord {
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		
+		if(site.hasHotel) {
+			System.out.println(site.getName() + " has a hotel built so no more houses can be added");
+			return;
+		}
+		
 		if(site.noOfHouses == 4) {
 			System.out.println("You have reached the maximum number of houses for this Site");
 			return;
@@ -119,7 +124,7 @@ public class PropertyOverlord {
 				System.out.println("You must own all Sites of colour "+ site.getColour()+ " to build houses!");
 				return;
 			}
-			if(temp.get(i).getNoOfHouses() < minHouses) {
+			if(temp.get(i).getNoOfHouses() < minHouses && !temp.get(i).hasHotel) {
 				if(temp.get(i).hasHotel) {
 					continue;
 				}
