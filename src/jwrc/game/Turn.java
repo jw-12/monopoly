@@ -90,52 +90,8 @@ public class Turn {
                     System.out.println("<Trade menu here>");
                     break;
                 case 2:
-                    //bank/property-authority options
-                	//testing buying houses for now.
                 	
-                	System.out.println("0 to buy a house\t1 to sell a house\t2 to buy a hotel");
-                	int choice;
-                	try {
-                        choice = Game.scanner.nextInt();
-                    } catch (InputMismatchException e) {
-                        Game.scanner.next();
-                        System.out.println("Must enter an integer");
-                        continue;
-                    }
-                	int siteIndex;
-                	switch(choice) {
-                		case 0:
-                			siteIndex = PropertyOverlord.printOptions(player);
-                			if(siteIndex == 99) {
-                				break;
-                			}
-                			else {
-                				PropertyOverlord.buildHouse(player, siteIndex);
-                			}
-                			break;
-                		case 1:
-                			siteIndex = PropertyOverlord.printOptions(player);
-                			if(siteIndex == 99) {
-                				break;
-                			}
-                			else {
-                				PropertyOverlord.sellHouse(player, siteIndex);
-                			}
-                			break;
-                		case 2:
-                			siteIndex = PropertyOverlord.printOptions(player);
-                			if(siteIndex == 99) {
-                				break;
-                			}
-                			else {
-                				PropertyOverlord.buildHotel(player, siteIndex);
-                				break;
-                			}
-                			
-                		default:
-                			System.out.println("not a valid entry");	
-                	}
-                	                              
+                	PropertyOptions.flow(player);        
                     break;
                 case 3:
                     //check if has rolled, then end

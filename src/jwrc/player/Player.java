@@ -122,7 +122,7 @@ public class Player {
     
     public void readSites() {
     	for(Sites s : this.sitesOwned) {
-    		System.out.println(s.getName() + ":" + s.getBoardIndex()+ "(Number of houses : "+ s.noOfHouses+")");
+    		System.out.println(s.getName() + ":" + s.getBoardIndex()+ "(Number of houses : "+ s.noOfHouses+") ( hasHotel = "+s.hasHotel+")");
     	}
     }
 }
