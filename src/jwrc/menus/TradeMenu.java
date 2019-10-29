@@ -72,7 +72,7 @@ public class TradeMenu {
 
                 if (inputInt == 0) {
                     return;
-                } else if (inputInt < otherPlayers.size()) {
+                } else if (inputInt <= otherPlayers.size()) {
                     otherPlayer = otherPlayers.get(inputInt - 1);
                     System.out.println("Sell property here!!!!");
                 } else {
@@ -103,9 +103,8 @@ public class TradeMenu {
                 if (inputInt == 0) {
                     break;
                 }
-                else if (inputInt < otherPlayers.size()) {
+                else if (inputInt <= otherPlayers.size()) {
                     otherPlayer = otherPlayers.get(inputInt - 1);  //NB due to 0 to exit
-                    System.out.println(otherPlayer.getName());
                     if (otherPlayer.getGetOutOfJailFreeCard() > 0) {
                         // ask how much offering to pay
                         System.out.println("How much are you offering to pay? (0 to cancel)");
@@ -162,7 +161,7 @@ public class TradeMenu {
 
                 if (inputInt == 0) {
                     return;
-                } else if (inputInt < otherPlayers.size()) {
+                } else if (inputInt <= otherPlayers.size()) {
                     otherPlayer = otherPlayers.get(inputInt - 1);
                     System.out.println("How much are you requesting for this card? (0 to cancel)");
                     try {
