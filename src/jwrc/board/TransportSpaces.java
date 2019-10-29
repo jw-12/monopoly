@@ -25,7 +25,7 @@ public class TransportSpaces extends Property {
 			case "y":
 				this.changeOwner(player.getName());
 				player.changeAccountBalance(-this.getCost());
-				player.transportBought();
+				player.changeTransportsOwned(1);
 				System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 				exit = 1;
 				break;

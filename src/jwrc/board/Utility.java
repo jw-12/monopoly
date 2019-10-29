@@ -28,6 +28,7 @@ public class Utility extends Property {
 					this.changeOwner(player.getName());
 					player.changeAccountBalance(-this.getCost());
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+					player.changeUtilitiesOwned(1);
 					exit = 1;
 					break;
 				case "n":

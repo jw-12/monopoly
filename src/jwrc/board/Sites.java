@@ -50,8 +50,6 @@ public class Sites extends Property {
 					break;
 				case "n":
 					System.out.println("Go to auction");
-					//ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
-					
 					Trade.startAuction(players, this, Game.scanner);
 					exit = 1;
 					break;

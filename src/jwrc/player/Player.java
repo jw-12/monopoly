@@ -14,6 +14,7 @@ public class Player {
     private int doubles;  //how many doubles a player has rolled in successive turns
     private int turnsInJail;
     private int transportsOwned;//will need to decrement this value when a transport is sold/mortgaged
+    private int utilitiesOwned;
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
     public ArrayList<Sites> sitesOwned;
 
@@ -24,6 +25,7 @@ public class Player {
         this.doubles = 0;
         this.turnsInJail = 0;
         this.transportsOwned = 0;
+        this.utilitiesOwned = 0;
         this.getOutOfJailFreeCard = 0;
         this.sitesOwned = new ArrayList<Sites>();
     }
@@ -56,14 +58,6 @@ public class Player {
 
     public int getAccountBalance() {
         return this.accountBalance;
-    }
-    
-    public int getTransportsOwned() {
-    	return this.transportsOwned;
-    }
-    
-    public void transportBought() {
-    	this.transportsOwned++;
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.
@@ -120,9 +114,28 @@ public class Player {
         this.sitesOwned.add(s);
     }
     
+    public void removeSite(Sites s){
+        int index = sitesOwned.indexOf(s);
+        sitesOwned.remove(index);
+    }
+    
     public void readSites() {
     	for(Sites s : this.sitesOwned) {
     		System.out.println(s.getName() + ":" + s.getBoardIndex()+ "(Number of houses : "+ s.noOfHouses+") ( hasHotel = "+s.hasHotel+")");
     	}
     }
+    public int getTransportsOwned() {
+    	return this.transportsOwned;
+    }
+    public void changeTransportsOwned(int delta) {
+    	this.transportsOwned += delta;
+    }
+    
+    public int getUtilitiesOwned() {
+    	return this.utilitiesOwned;
+    }
+    public void changeUtilitiesOwned(int delta) {
+    	this.utilitiesOwned += delta;
+    }
+    
 }

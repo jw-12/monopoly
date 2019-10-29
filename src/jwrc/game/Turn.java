@@ -87,7 +87,7 @@ public class Turn {
                     break;
                 case 1:
                     //trade
-                    System.out.println("<Trade menu here>");
+                   Trade.tradeMenu(player, playerList);
                     break;
                 case 2:
                 	
