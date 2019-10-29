@@ -10,7 +10,6 @@ public abstract class Property extends BoardSpace implements Sellable {
 	
 	private String name;
 	private int cost;
-	private int ownerIndex;
 	private String owner;
 	
 	public Property(String name, int cost, int index) {
@@ -31,21 +30,12 @@ public abstract class Property extends BoardSpace implements Sellable {
 		return this.cost;
 	}
 	
-	public int getOwnerIndex() {
-		return this.ownerIndex;
-	}
-	
 	public void changeOwner(String owner) {
 		this.owner = owner;
 	}
 	
-	
 	public String getOwner() {
 		return this.owner;
 	}
-
-	//public SpaceType getSpaceType() {
-	//	return this.spaceType;
-	//}
 
 }

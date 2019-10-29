@@ -3,6 +3,8 @@ package jwrc.game;
 import jwrc.board.Sites;
 import jwrc.board.Property;
 import jwrc.player.Player;
+import jwrc.board.Utility;
+import jwrc.board.TransportSpaces;
 
 import java.util.*;
 
@@ -127,6 +129,28 @@ public class Trade {
     * returns true if user wishes to exit
     * returns false if user entered an invalid character
     * */
+    
+    public static void sellProperty(Property p,Player seller, Player buyer, int price) {
+    	
+    	p.changeOwner(buyer.getName());
+    	seller.changeAccountBalance(price);
+    	buyer.changeAccountBalance(-price);
+    	
+    	if(p instanceof Sites) {
+    		seller.removeSite((Sites)p);
+    		buyer.addSite((Sites)p);
+    	}
+    	else if(p instanceof Utility) {
+    		seller.changeUtilitiesOwned(-1);;
+    		buyer.changeUtilitiesOwned(1);;
+    	}
+    	else {
+    		seller.changeTransportsOwned(-1);
+    		buyer.changeTransportsOwned(1);
+    	}
+    }
+    
+    
     private static boolean exitChecker() {
         String inputStr = Game.scanner.next();
         if (inputStr.equals("e")) {
