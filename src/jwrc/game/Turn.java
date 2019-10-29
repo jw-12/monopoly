@@ -1,6 +1,7 @@
 package jwrc.game;
 
 import jwrc.board.*;
+import jwrc.menus.TradeMenu;
 import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -87,7 +88,7 @@ public class Turn {
                     break;
                 case 1:
                     //trade
-                   Trade.tradeMenu(player, playerList);
+                    TradeMenu.options(player, playerList);
                     break;
                 case 2:
                 	

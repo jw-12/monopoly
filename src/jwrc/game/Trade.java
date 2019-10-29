@@ -19,7 +19,7 @@ public class Trade {
 
     /**
      * begin an auction to find who will own it
-     * @param participants the ArrayList of Player's who will be bidding in the auction (taken to be in correct order)
+     * @param parts the ArrayList of Player's who will be bidding in the auction (taken to be in correct order)
      * @param property the Property object which is up for bidding
      */
     public static void startAuction(ArrayList<Player> parts, Property property, Scanner input) {
@@ -81,91 +81,48 @@ public class Trade {
         }
     }
 
-    public static void tradeMenu(Player player, ArrayList<Player> players) {
 
-        /*
-        * otherPlayers is every player except for the current player
-        * */
-        ArrayList<Player> otherPlayers = new ArrayList<>(players);
-        otherPlayers.remove(player);
+    /**
+     * Represents trade interaction where buyer attempts to buy from seller by amount specified
+     * @param seller
+     * @param buyer
+     * @param amount price offered by buyer to seller. Assumed that buyer has sufficient money
+     * @param isBuyer true if the current player is looking to buy the property, false if selling
+     */
+    public static void tradeGOOJFCard(Player seller, Player buyer, int amount, boolean isBuyer) {
 
-        int inputInt;
+        if (isBuyer) {
+            System.out.println(seller.getName() + ", " + buyer.getName() +
+                    " is looking to buy your \"Get out of Jail Free\" card for $"
+                    + amount + "\nDo you accept the offer? (y/n)");
+        } else {
+            System.out.println(buyer.getName() + ", " + seller.getName() +
+                    " is looking to sell you a \"Get out of Jail Free\" card for $"
+                    + amount + "\nDo you accept the offer? (y/n)");
+        }
 
-        while(true) {
-            System.out.println("----<TRADE MENU>");
-            System.out.println("----0 to sell a property,\t1 to buy a \"Get Out of Jail Free\" card,\t2 to sell a \"Get Out of Jail Free\" card,\te to exit");
-            try {
-                inputInt = Game.scanner.nextInt();
-                switch (inputInt) {
-                    case 0:
-                        while (true) {
-                            System.out.println("--------Who would you like to sell a property to?");
-                            System.out.print("--------");
-                            for (int i=0; i<otherPlayers.size(); i++) {
-                                System.out.printf("%d for %s,\t", i, otherPlayers.get(i).getName());
-                            }
-                            System.out.println("e to exit");
-                            try {
-                                inputInt = Game.scanner.nextInt();
-                                System.out.println("--------You selected index: " + inputInt);
-                                System.out.println("--------This refers to player: " + otherPlayers.get(inputInt).getName());
-                                break;  //break from while
-                            } catch (InputMismatchException ex) {
-                                if(exitChecker()) {
-                                    return;
-                                }
-                            }
-                        }
-                        break;  //break from case
-                    case 1:
-                        while (true) {
-                            System.out.println("--------Who would you like to buy a \"Get Out of Jail Free\" card from?");
-                            System.out.print("--------");
-                            for (int i=0; i<otherPlayers.size(); i++) {
-                                System.out.printf("%d for %s,\t", i, otherPlayers.get(i).getName());
-                            }
-                            System.out.println("e to exit");
-                            try {
-                                inputInt = Game.scanner.nextInt();
+        String input;
 
-                                System.out.println("--------You selected index: " + inputInt);
-                                System.out.println("--------This refers to player: " + otherPlayers.get(inputInt).getName());
-                                break;  // break from while loop
-                            } catch (InputMismatchException ex) {
-                                if(exitChecker()) {
-                                    return;
-                                }
-                            }
-                        }
-                        break;  // break from case
-                    case 2:
-                        while (true) {
-                            System.out.println("--------Who would you like to sell a \"Get Out of Jail Free\" card to?");
-                            System.out.print("--------");
-                            for (int i=0; i<otherPlayers.size(); i++) {
-                                System.out.printf("%d for %s,\t", i, otherPlayers.get(i).getName());
-                            }
-                            System.out.println("e to exit");
-                            try {
-                                inputInt = Game.scanner.nextInt();
+        while (true) {
+            input = Game.scanner.next();
 
-                                System.out.println("--------You selected index: " + inputInt);
-                                System.out.println("--------This refers to player: " + otherPlayers.get(inputInt).getName());
-                                break;  // break from while
-                            } catch (InputMismatchException ex) {
-                                if(exitChecker()) {
-                                    return;
-                                }
-                            }
-                        }
-                        break;  //break from case
-                }
-            } catch (InputMismatchException ex) {
-                if (exitChecker()) {
+            switch (input) {
+                case "y":  // proceed with the trade
+                    seller.setGetOutOfJailFreeCard(seller.getGetOutOfJailFreeCard() - 1);
+                    buyer.setGetOutOfJailFreeCard(buyer.getGetOutOfJailFreeCard() + 1);
+                    seller.changeAccountBalance(+amount);
+                    buyer.changeAccountBalance(-amount);
+                    System.out.println("Trade accepted");
                     return;
-                }
+                case "n":
+                    System.out.println("Trade declined");
+                    return;
+                default:
+                    System.out.println("Invalid input");
+                    break;
             }
         }
+
     }
 
     /*
