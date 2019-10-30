@@ -45,7 +45,7 @@ public class Sites extends Property {
 			String ans = Game.scanner.next();
 			switch(ans) {
 				case "y":
-					this.buySite(player,this.houseCost);
+					this.buySite(player,this.getCost());
 					exit = 1;
 					break;
 				case "n":
@@ -85,7 +85,7 @@ public class Sites extends Property {
 		this.changeOwner(player.getName());
 		player.changeAccountBalance(-cost);
 		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-		player.addSite(this);
+		player.addProperty(this);
 		this.colourGroupCheck();
 	}
 	
@@ -101,7 +101,7 @@ public class Sites extends Property {
 		}
 		for(int i=0 ; i<temp.size(); i++) {
 			temp.get(i).rentIndex++;
-			System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
+			System.out.println("You now own all Sites of colour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
 		}
 		
 	}
