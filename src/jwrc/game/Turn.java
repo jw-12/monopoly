@@ -80,8 +80,7 @@ public class Turn {
                                 break;
                             }
                         }
-                        //player.evaluatePosition(diceVal[0] + diceVal[1]);
-                        player.evaluatePosition(1);
+                        player.evaluatePosition(diceVal[0] + diceVal[1]);
                         System.out.println("Moved to position: " + player.getBoardIndex());
                         movePlayerForward(player, playerList);
                     }
