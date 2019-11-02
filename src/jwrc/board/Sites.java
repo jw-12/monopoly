@@ -45,7 +45,7 @@ public class Sites extends Property {
 			String ans = Game.scanner.next();
 			switch(ans) {
 				case "y":
-					this.buySite(player,this.houseCost);
+					this.buySite(player,this.getCost());
 					exit = 1;
 					break;
 				case "n":

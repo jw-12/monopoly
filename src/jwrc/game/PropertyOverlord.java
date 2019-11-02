@@ -39,7 +39,7 @@ public class PropertyOverlord {
     				check = true;
     			}
     		}
-    		if(check == false) {
+    		if(!check) {
     			System.out.println("Not a valid choice of board index");
     			return 99;
     		}
