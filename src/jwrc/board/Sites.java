@@ -46,7 +46,6 @@ public class Sites extends Property {
 			switch(ans) {
 				case "y":
 					this.buySite(player,this.getCost());
-
 					exit = true;
 					break;
 				case "n":
@@ -86,7 +85,7 @@ public class Sites extends Property {
 		this.changeOwner(player.getName());
 		player.changeAccountBalance(-cost);
 		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-		player.addProperty(this);
+		player.addSite(this);
 		this.colourGroupCheck();
 	}
 	

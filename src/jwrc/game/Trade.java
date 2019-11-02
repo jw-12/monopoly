@@ -4,6 +4,7 @@ import jwrc.board.Sites;
 import jwrc.board.Property;
 import jwrc.player.Player;
 import jwrc.board.Utility;
+import jwrc.board.TransportSpaces;
 
 import java.util.*;
 
@@ -123,48 +124,53 @@ public class Trade {
         }
 
     }
+
+    /*
+    * returns true if user wishes to exit
+    * returns false if user entered an invalid character
+    * */
     
     public static void sellProperty(Property p,Player seller, Player buyer, int price) {
-
-        String input;
-
-        System.out.println(
-                buyer.getName() + ", " + seller.getName() + " has offered to sell you "
-                + p.getName() + " for $" + price + ". Do you accept? (y/n)");
-
-        while (true) {
-            input = Game.scanner.next();
-
-            switch (input) {
-                case "y":
-                    System.out.println("Trade offer accepted");
-                    p.changeOwner(buyer.getName());
-                    seller.changeAccountBalance(price);
-                    buyer.changeAccountBalance(-price);
-                    seller.removeProperty(p);
-                    buyer.addProperty(p);
-
-                    if(p instanceof Sites) {
-                        seller.removeProperty(p);
-                        buyer.addProperty(p);
-                    }
-                    else if(p instanceof Utility) {
-                        seller.changeUtilitiesOwned(-1);;
-                        buyer.changeUtilitiesOwned(1);;
-                    }
-                    else {
-                        seller.changeTransportsOwned(-1);
-                        buyer.changeTransportsOwned(1);
-                    }
-                    return;
-
-                case "n":
-                    System.out.println("Trade offer declined.");
-                    return;
-                default:
-                    System.out.println("Invalid input");
-            }
+    	
+    	p.changeOwner(buyer.getName());
+    	seller.changeAccountBalance(price);
+    	buyer.changeAccountBalance(-price);
+    	
+    	if(p instanceof Sites) {
+    		seller.removeSite((Sites)p);
+    		buyer.addSite((Sites)p);
+    	}
+    	else if(p instanceof Utility) {
+    		seller.changeUtilitiesOwned(-1);;
+    		buyer.changeUtilitiesOwned(1);;
+    	}
+    	else {
+    		seller.changeTransportsOwned(-1);
+    		buyer.changeTransportsOwned(1);
+    	}
+    }
+    
+    
+    private static boolean exitChecker() {
+        String inputStr = Game.scanner.next();
+        if (inputStr.equals("e")) {
+            System.out.println("----Exiting trade menu...");
+            return true; //player wishes to exit the trade menu
+        } else {
+            System.out.println("----Must enter valid integer or e to exit");
+            return false;
         }
     }
 
+    public static void testAuction() {
+        ArrayList<Player> players = new ArrayList<Player>();
+        players.add(new Player("james"));
+        players.add(new Player("ronan"));
+        players.add(new Player("cathy"));
+        players.add(new Player("gav"));
+       // Scanner scanner = new Scanner(System.in);
+
+       // Auction.startAuction(players, new Property("Seamount", 200, 54), scanner);
+
+    }
 }
