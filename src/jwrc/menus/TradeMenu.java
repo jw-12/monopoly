@@ -1,5 +1,6 @@
 package jwrc.menus;
 
+import jwrc.board.Property;
 import jwrc.game.Game;
 import jwrc.game.Trade;
 import jwrc.player.Player;
@@ -59,9 +60,46 @@ public class TradeMenu {
     public static void sellPropertyCase(Player player, ArrayList<Player> otherPlayers) {
         int inputInt;
         Player otherPlayer; //player to sell to
+        ArrayList<Property> ownedProperties = player.getPropertiesOwned();
+        Property pToSell = null;
 
         while (true) {
-            System.out.println("--------Who would you like to sell a property to?");
+
+            if (ownedProperties.isEmpty()) {
+                System.out.println("No owned properties");
+                return;
+            }
+
+            System.out.println("----Enter index of property would you like to sell: (0 to exit)");
+            for (Property p : ownedProperties) {
+                System.out.println("Index: " + p.getBoardIndex() + " Name: " + p.getName());
+            }
+
+            try {
+                inputInt = Game.scanner.nextInt();
+            } catch (InputMismatchException ex) {
+                Game.scanner.next();
+                System.out.println("Invalid input");
+                continue;
+            }
+
+            if (inputInt == 0) {
+                return;
+            } else {
+                for (Property p : ownedProperties) {
+                    if (p.getBoardIndex() == inputInt) {
+                        //selected a valid property
+                        pToSell = p;
+                        break;
+                    }
+                }
+                if (pToSell == null) {
+                    System.out.println("Invalid index");
+                    continue;
+                }
+            }
+
+            System.out.println("--------Who would you like to sell this property to?");
             System.out.print("--------0 to exit, ");
             for (int i=1; i<otherPlayers.size() + 1; i++) {
                 System.out.printf("%d for %s,\t", i, otherPlayers.get(i - 1).getName());
@@ -74,11 +112,30 @@ public class TradeMenu {
                     return;
                 } else if (inputInt <= otherPlayers.size()) {
                     otherPlayer = otherPlayers.get(inputInt - 1);
-                    System.out.println("Sell property here!!!!");
+                    //asking price
+                    System.out.println("How much money are you asking for the property? (0 to cancel)");
+                    try {
+                        inputInt = Game.scanner.nextInt();
+
+                        if (inputInt == 0) {
+                            return;
+                        } else if (inputInt < 0) {
+                            System.out.println("Amount must be positive");
+                        } else if (inputInt > otherPlayer.getAccountBalance()) {
+                            System.out.println("Amount exceeds their account balance");
+                        } else {
+                            // good to sell
+                            Trade.sellProperty(pToSell, player, otherPlayer, inputInt);
+                            return;
+                        }
+
+                    } catch (InputMismatchException ex) {
+                        Game.scanner.next();
+                        System.out.println("Invalid input");
+                    }
                 } else {
                     System.out.println("Invalid option");
                 }
-                return;  //return from function
             } catch (InputMismatchException ex) {
                 Game.scanner.next();
                 System.out.println("Invalid input");
