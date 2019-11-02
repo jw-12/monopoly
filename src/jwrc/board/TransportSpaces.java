@@ -7,8 +7,8 @@ import jwrc.player.Player;
 
 public class TransportSpaces extends Property {
 	
-	public TransportSpaces(String name, int cost, int index) {
-		super(name,cost,index);
+	public TransportSpaces(String name, int mortgageValue, int index) {
+		super(name,mortgageValue,index);
 	}
 	
 	public void takeAction(Player player, ArrayList <Player> players) {
@@ -17,8 +17,8 @@ public class TransportSpaces extends Property {
 			System.out.println("You own this Transport.");
 		}
 		else if(this.getOwner() == "null") {
-			int exit =0;
-			while(exit == 0) {
+			boolean exit = false;
+			while(!exit) {
 			System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
 			String ans = Game.scanner.next();
 			switch(ans) {
@@ -27,13 +27,13 @@ public class TransportSpaces extends Property {
 				player.changeAccountBalance(-this.getCost());
 				player.changeTransportsOwned(1);
 				System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-				exit = 1;
+				exit = true;
 				break;
 			case "n":
 				System.out.println("Go to auction");
 				ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
 				Trade.startAuction(auctionPlayers, this, Game.scanner);
-				exit = 1;
+				exit = true;
 				break;
 			default:
 				System.out.println("not a valid input!");

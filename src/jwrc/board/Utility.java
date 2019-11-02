@@ -9,8 +9,8 @@ import jwrc.player.Player;
 
 public class Utility extends Property {
 
-	public Utility(String name, int cost, int index) {
-		super(name,cost,index);
+	public Utility(String name, int mortageValue, int index) {
+		super(name,mortageValue,index);
 	}
 	
 	public void takeAction(Player player, ArrayList <Player> players) {
@@ -19,8 +19,8 @@ public class Utility extends Property {
 				System.out.println("You own this Utility.");
 		}
 		else if(this.getOwner() == "null") {
-			int exit =0;
-			while(exit == 0) {
+			boolean exit = false;
+			while(!exit) {
 			System.out.println("Would you like to buy this Utility? Enter y/n. Cost = "+ this.getCost());
 			String ans = Game.scanner.next();
 			switch(ans) {
@@ -29,13 +29,13 @@ public class Utility extends Property {
 					player.changeAccountBalance(-this.getCost());
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 					player.changeUtilitiesOwned(1);
-					exit = 1;
+					exit = true;
 					break;
 				case "n":
 					System.out.println("Go to auction");
 					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
 					Trade.startAuction(auctionPlayers, this, Game.scanner);
-					exit = 1;
+					exit = true;
 					break;
 				default:
 					System.out.println("not a valid input!");

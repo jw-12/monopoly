@@ -16,9 +16,9 @@ public class Sites extends Property {
 	//need to add hotelPrice on instantiation. For now just use house price.
 	
 
-	public Sites(String name, int cost, int index, String colour, int[] rentValues, int houseCost) {
+	public Sites(String name, int mortgageValue, int index, String colour, int[] rentValues, int houseCost) {
 		
-		super(name, cost, index);
+		super(name, mortgageValue, index);
 		this.colour = colour;
 		this.noOfHouses = 0;
 		this.hasHotel = false;
@@ -39,19 +39,19 @@ public class Sites extends Property {
 		}
 		else if(this.getOwner() == "null") {
 			
-			int exit =0;
-			while(exit == 0) {
+			boolean exit = false;
+			while(!exit) {
 			System.out.println("Would you like to buy this Site? Enter y/n. Cost = "+ this.getCost());
 			String ans = Game.scanner.next();
 			switch(ans) {
 				case "y":
 					this.buySite(player,this.getCost());
-					exit = 1;
+					exit = true;
 					break;
 				case "n":
 					System.out.println("Go to auction");
 					Trade.startAuction(players, this, Game.scanner);
-					exit = 1;
+					exit = true;
 					break;
 				default:
 					System.out.println("not a valid input!");
@@ -101,8 +101,8 @@ public class Sites extends Property {
 		}
 		for(int i=0 ; i<temp.size(); i++) {
 			temp.get(i).rentIndex++;
-			System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
 		}
+		System.out.println("You now own all Sites of coulour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
 		
 	}
 	

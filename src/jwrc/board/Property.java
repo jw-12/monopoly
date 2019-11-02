@@ -11,11 +11,14 @@ public abstract class Property extends BoardSpace implements Sellable {
 	private String name;
 	private int cost;
 	private String owner;
+	private int mortgageValue;
+	public boolean mortgageActive;
 	
-	public Property(String name, int cost, int index) {
+	public Property(String name, int mortgageValue, int index) {
 		super(index);
 		this.name = name;
-		this.cost = cost;
+		this.mortgageValue = mortgageValue;
+		this.cost = mortgageValue*2;
 		this.owner = "null";
 	}
 
@@ -24,6 +27,13 @@ public abstract class Property extends BoardSpace implements Sellable {
 
 	public String getName() {
 		return this.name;
+	}
+	public int getmortgageValue() {
+		return this.mortgageValue;
+	}
+	
+	public void mortgageProperty() {
+		
 	}
 	
 	public int getCost() {
