@@ -16,15 +16,13 @@ public class PropertyOverlord {
 	}
 	
 	public static int printOptions(Player p) {
-
-		ArrayList<Sites> sitesArrayList = p.getSites();
-
+		
 		if(numOfHouses == 0) {
 			System.out.println("This are no houses left to buy");
 			return 99;
 		}
 		
-		if(sitesArrayList.isEmpty()) {
+		if(p.sitesOwned.isEmpty()) {
 			System.out.println("You own no Sites yet!");
 			return 99;
 		}
@@ -36,12 +34,12 @@ public class PropertyOverlord {
 		
 		try {
             choice = Game.scanner.nextInt();
-            for(Sites s : sitesArrayList) {
+            for(Sites s : p.sitesOwned) {
     			if(s.getBoardIndex() == choice) {
     				check = true;
     			}
     		}
-    		if(check == false) {
+    		if(!check) {
     			System.out.println("Not a valid choice of board index");
     			return 99;
     		}
