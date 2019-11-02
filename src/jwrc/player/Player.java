@@ -16,7 +16,7 @@ public class Player {
     private int transportsOwned;//will need to decrement this value when a transport is sold/mortgaged
     private int utilitiesOwned;
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
-    public ArrayList<Sites> sitesOwned;
+    private ArrayList<Property> propertiesOwned;
 
     public Player(String name) {
         this.name = name;
@@ -27,7 +27,7 @@ public class Player {
         this.transportsOwned = 0;
         this.utilitiesOwned = 0;
         this.getOutOfJailFreeCard = 0;
-        this.sitesOwned = new ArrayList<Sites>();
+        this.propertiesOwned = new ArrayList<>();
     }
 
     public int [] rollDice() {
@@ -110,20 +110,38 @@ public class Player {
         this.getOutOfJailFreeCard = number;
     }
     
-    public void addSite(Sites s){
-        this.sitesOwned.add(s);
+    public void addProperty(Property p){
+        this.propertiesOwned.add(p);
     }
-    
-    public void removeSite(Sites s){
-        int index = sitesOwned.indexOf(s);
-        sitesOwned.remove(index);
+
+    public void removeProperty(Property p){
+        this.propertiesOwned.remove(p);
     }
+
     
     public void readSites() {
-    	for(Sites s : this.sitesOwned) {
-    		System.out.println(s.getName() + ":" + s.getBoardIndex()+ "(Number of houses : "+ s.noOfHouses+") ( hasHotel = "+s.hasHotel+")");
+    	
+    	for(Property s : this.propertiesOwned) {
+    	    if (s instanceof Sites) {
+                System.out.println(s.getName() + ": " + s.getBoardIndex()+ " (Number of houses : "+ ((Sites)s).noOfHouses+") ( hasHotel = "+((Sites)s).hasHotel+")");
+            }
     	}
     }
+    
+    public ArrayList<Property> getPropertiesOwned() {
+        return this.propertiesOwned;
+    }
+
+    public ArrayList<Sites> getSites() {
+        ArrayList<Sites> sitesArrayList = new ArrayList<>();
+
+        for(Property p : this.propertiesOwned) {
+            if (p instanceof Sites)
+                sitesArrayList.add((Sites)p);
+        }
+        return sitesArrayList;
+    }
+    
     public int getTransportsOwned() {
     	return this.transportsOwned;
     }
