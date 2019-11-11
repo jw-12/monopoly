@@ -15,14 +15,10 @@ public class PropertyOverlord {
 		
 	}
 	
-	public static int printOptions(Player p) {
+	public static int printSiteOptions(Player p) {
 		
 		ArrayList<Sites> sitesArrayList = p.getSites();
 		
-		if(numOfHouses == 0) {
-			System.out.println("This are no houses left to buy");
-			return 99;
-		}
 		
 		if(sitesArrayList.isEmpty()) {
 			System.out.println("You own no Sites yet!");
@@ -53,7 +49,73 @@ public class PropertyOverlord {
 		return choice;
 	}
 	
-	public static boolean siteCheck(Player player, int siteIndex, int option) {
+	public static int printMortgageOptions(Player p) {
+		ArrayList<Property> propertyArrayList = p.getPropertiesOwned();
+		System.out.println("These are the properties you own and their corresponding board position.\nPlease enter the position of the property you would like to take action on:");
+		p.readProperties();
+		int choice = 99;       // set 99 as an error code to stop action.
+		boolean check = false;
+		
+		try {
+            choice = Game.scanner.nextInt();
+            for(Property property : propertyArrayList) {
+    			if(property.getBoardIndex() == choice) {
+    				if(property instanceof Sites) {
+    					if(((Sites) property).getNoOfHouses() !=0) {
+    						System.out.println("You must sell all houses from "+ property.getName()+ " before you can mortgage");
+    						return 99;
+    					}
+    				}
+    				check = true;
+    			}
+    		}
+    		if(!check) {
+    			System.out.println("Not a valid choice of board index");
+    			return 99;
+    		}
+            
+        }catch (InputMismatchException e) {
+            Game.scanner.next();
+            System.out.println("Must enter an integer");
+        }
+		return choice;
+	}
+	
+	public static void mortgageProperty(Player player, int propertyIndex) {
+		
+		Property prop = (Property)Board.spaces.get(propertyIndex);
+		if (prop instanceof Sites) {
+			String siteKey = ((Sites) prop).getColour();
+			ArrayList<Sites> temp = new ArrayList<Sites>();
+			temp = Board.map.get(siteKey);
+			for(int i=0 ; i<temp.size(); i++) {
+				if(temp.get(i).noOfHouses !=0 || temp.get(i).hasHotel) {
+					System.out.println("You must sell all buildings off "+siteKey+" sites if you want to mortgage "+prop.getName());
+					return;
+				}
+			}
+		}
+		prop.mortgageActive = true;
+		player.changeAccountBalance(prop.getmortgageValue());
+		System.out.println("You have received $"+ prop.getmortgageValue()+" for mortgaging "+prop.getName());
+	}
+	
+	public static void liftMortgage(Player player, int propertyIndex) {
+		Property prop = (Property)Board.spaces.get(propertyIndex);
+		if(!prop.mortgageActive) {
+			System.out.println(prop.getName()+" has not been mportgaged");
+			return;
+		}
+		else {
+			prop.mortgageActive=false;
+			int amount = prop.getmortgageValue()+(int)(prop.getmortgageValue()*0.1);
+			player.changeAccountBalance(-amount);
+			System.out.println("Mortgage has been lifted from "+ prop.getName()+" for a price of $"+amount);
+		}
+		
+	}
+	
+	public static boolean siteColourChecks(Player player, int siteIndex, int option) {
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		String siteKey = site.getColour();
@@ -119,7 +181,7 @@ public class PropertyOverlord {
 		if(site.getNoOfHouses() == 0){
 			System.out.println("You have no houses on "+site.getName()+ " to sell");
 		}
-		if(!PropertyOverlord.siteCheck(player, siteIndex, 1)) {
+		if(!PropertyOverlord.siteColourChecks(player, siteIndex, 1)) {
 			return;
 		}
 		System.out.println("House being sold from "+ site.getName());
@@ -157,7 +219,7 @@ public class PropertyOverlord {
 			System.out.println(site.getName()+ " already has a hotel!");
 			return;
 		}
-		if(!PropertyOverlord.siteCheck(player, siteIndex, 2)) {
+		if(!PropertyOverlord.siteColourChecks(player, siteIndex, 2)) {
 			return;
 		}
 		if(site.noOfHouses == 4) {
@@ -176,6 +238,11 @@ public class PropertyOverlord {
 	
 	public static void buildHouse(Player player, int siteIndex) {
 		
+		if(numOfHouses == 0) {
+			System.out.println("This are no houses left to buy");
+			return;
+		}
+		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		
 		if(site.hasHotel) {
@@ -191,7 +258,7 @@ public class PropertyOverlord {
 			System.out.println("you cannot build on unowned sites");
 			return;
 		}
-		if(!PropertyOverlord.siteCheck(player, siteIndex, 0)) {
+		if(!PropertyOverlord.siteColourChecks(player, siteIndex, 0)) {
 			return;
 		}
 		System.out.println("House being built on "+ site.getName());

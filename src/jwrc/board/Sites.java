@@ -33,9 +33,15 @@ public class Sites extends Property {
 	* e.g. offer them to buy it at this.housePrice, or give option to pass on to an auction
 	* */
 	public void takeAction(Player player, ArrayList <Player> players) {
+		
+		if(this.mortgageActive) {
+			System.out.println(this.getName() + " is currently mortgaged so no action is taken");
+			return;
+		}
 			
 		if (player.getName() == this.getOwner()) {
 			System.out.println("You own this Site.");
+			return;
 		}
 		else if(this.getOwner() == "null") {
 			

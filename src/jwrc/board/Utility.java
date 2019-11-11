@@ -15,8 +15,13 @@ public class Utility extends Property {
 	
 	public void takeAction(Player player, ArrayList <Player> players) {
 		
+		if(this.mortgageActive) {
+			System.out.println(this.getName() + " is currently mortgaged so no action is taken");
+			return;
+		}
 		if (player.getName() == this.getOwner()) {
 				System.out.println("You own this Utility.");
+				return;
 		}
 		else if(this.getOwner() == "null") {
 			boolean exit = false;
