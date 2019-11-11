@@ -60,7 +60,6 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 4:
                 System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which he/she {he} is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
-                System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
                 i = player.getBoardIndex();
                 bs = Board.spaces.get(player.getBoardIndex());
 
