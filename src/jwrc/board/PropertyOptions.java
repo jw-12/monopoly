@@ -35,7 +35,7 @@ public class PropertyOptions {
 			return;
 		}
 		
-		siteIndex = PropertyOverlord.printOptions(player);
+		siteIndex = PropertyOverlord.siteIndexSelector(player);
 		if(siteIndex == 99) {
 			return;
 		}

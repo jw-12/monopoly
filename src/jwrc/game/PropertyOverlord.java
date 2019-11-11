@@ -14,15 +14,11 @@ public class PropertyOverlord {
 	public PropertyOverlord() {
 		
 	}
-	
-	public static int printOptions(Player p) {
+
+
+	public static int siteIndexSelector(Player p) {
 		
 		ArrayList<Sites> sitesArrayList = p.getSites();
-		
-		if(numOfHouses == 0) {
-			System.out.println("This are no houses left to buy");
-			return 99;
-		}
 		
 		if(sitesArrayList.isEmpty()) {
 			System.out.println("You own no Sites yet!");
@@ -175,6 +171,11 @@ public class PropertyOverlord {
 		
 	
 	public static void buildHouse(Player player, int siteIndex) {
+
+		if(numOfHouses == 0) {
+			System.out.println("This are no houses left to buy");
+			return;
+		}
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		
