@@ -120,11 +120,15 @@ public class Player {
 
     
     public void readSites() {
-    	
     	for(Property s : this.propertiesOwned) {
     	    if (s instanceof Sites) {
                 System.out.println(s.getName() + ": " + s.getBoardIndex()+ " (Number of houses : "+ ((Sites)s).noOfHouses+") ( hasHotel = "+((Sites)s).hasHotel+")");
             }
+    	}
+    }
+    public void readProperties() {
+    	for(Property p : this.propertiesOwned) {
+    		System.out.println(p.getName() + ": " + p.getBoardIndex()+"(Mortgage value = $"+ p.getmortgageValue()+")");
     	}
     }
     

@@ -13,31 +13,36 @@ public class TransportSpaces extends Property {
 	
 	public void takeAction(Player player, ArrayList <Player> players) {
 		
+		if(this.mortgageActive) {
+			System.out.println(this.getName() + " is currently mortgaged so no action is taken");
+			return;
+		}
 		if (player.getName() == this.getOwner()) {
 			System.out.println("You own this Transport.");
+			return;
 		}
 		else if(this.getOwner() == "null") {
 			boolean exit = false;
 			while(!exit) {
-			System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
-			String ans = Game.scanner.next();
-			switch(ans) {
-			case "y":
-				this.changeOwner(player.getName());
-				player.changeAccountBalance(-this.getCost());
-				player.changeTransportsOwned(1);
-				System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
-				exit = true;
-				break;
-			case "n":
-				System.out.println("Go to auction");
-				ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
-				Trade.startAuction(auctionPlayers, this, Game.scanner);
-				exit = true;
-				break;
-			default:
-				System.out.println("not a valid input!");
-			}
+				System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
+				String ans = Game.scanner.next();
+				switch(ans) {
+				case "y":
+					this.changeOwner(player.getName());
+					player.changeAccountBalance(-this.getCost());
+					player.changeTransportsOwned(1);
+					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+					exit = true;
+					break;
+				case "n":
+					System.out.println("Go to auction");
+					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
+					Trade.startAuction(auctionPlayers, this, Game.scanner);
+					exit = true;
+					break;
+				default:
+					System.out.println("not a valid input!");
+				}
 			}
 		}
 		else {
