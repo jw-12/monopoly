@@ -2,6 +2,8 @@ package jwrc.player;
 import java.util.ArrayList;
 import jwrc.board.Property;
 import jwrc.board.Sites;
+import jwrc.game.Game;
+import jwrc.menus.BrokeMenu;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,6 +19,7 @@ public class Player {
     private int utilitiesOwned;
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
     private ArrayList<Property> propertiesOwned;
+    public boolean isKicked;
 
     public Player(String name) {
         this.name = name;
@@ -28,6 +31,7 @@ public class Player {
         this.utilitiesOwned = 0;
         this.getOutOfJailFreeCard = 0;
         this.propertiesOwned = new ArrayList<>();
+        this.isKicked = false;
     }
 
     public int [] rollDice() {
@@ -61,6 +65,11 @@ public class Player {
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.
+
+        if (-delta > this.accountBalance) {
+            BrokeMenu.options(this, Game.playerList, -delta);
+        }
+
         this.accountBalance += delta;
     }
 

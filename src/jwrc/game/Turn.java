@@ -33,7 +33,7 @@ public class Turn {
         System.out.println(player.getName() + " it's your turn.");
         player.printPlayerDetails();
 
-        while (!endTurn) {
+        while (!endTurn && !player.isKicked) {
 
             inJail = player.getJailStatus();
 
@@ -80,7 +80,8 @@ public class Turn {
                                 break;
                             }
                         }
-                        player.evaluatePosition(diceVal[0] + diceVal[1]);
+                        //player.evaluatePosition(diceVal[0] + diceVal[1]);
+                        player.evaluatePosition(1);
                         System.out.println("Moved to position: " + player.getBoardIndex());
                         movePlayerForward(player, playerList);
                     }
@@ -90,7 +91,6 @@ public class Turn {
                     TradeMenu.options(player, playerList);
                     break;
                 case 2:
-                	
                 	PropertyOptions.flow(player);        
                     break;
                 case 3:

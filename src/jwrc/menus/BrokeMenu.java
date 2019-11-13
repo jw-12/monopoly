@@ -48,15 +48,19 @@ public class BrokeMenu {
                     break;
                 case 2:
                     System.out.println("Sell houses/hotels here");
-                    //selectedSiteIndex = PropertyOverlord.siteIndexSelector(player);
-                    PropertyOverlord.sellHouse(player, PropertyOverlord.siteIndexSelector(player));
+                    if ((selectedSiteIndex = PropertyOverlord.siteIndexSelector(player)) == 99) {
+                        break;
+                    }
+                    PropertyOverlord.sellHouse(player, selectedSiteIndex);
                     break;
                 case 3:
                     TradeMenu.sellGOOJFCase(player, otherPlayers);
                     break;
                 case 4:
-                    System.out.println("Declare bankruptcy");
-                    break;
+                    System.out.println("Declaring bankruptcy");
+                    //todo: player.liquidateAssets first
+                    Game.kickPlayerFromGame(player);
+                    return;
             }
         }
     }

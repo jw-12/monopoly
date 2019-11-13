@@ -13,21 +13,22 @@ import java.util.Scanner;
 
 public class Game {
 
-    private int numPlayers;
     private static int maxPlayers = 6, minPlayers = 2;
-    private ArrayList <Player> playerList;
+    public static ArrayList <Player> playerList;
     private int whoseTurn;
     private ArrayList<Integer> commDeckIndices;
     private ArrayList<Integer> chanceDeckIndices;
     public static Scanner scanner;
     public Board board;
+    private static int playersKicked;
 
     public Game() {
-        this.playerList = new ArrayList<Player>();
+        playerList = new ArrayList<Player>();
         this.whoseTurn = 0;
         this.commDeckIndices = this.generateDeck();
         this.chanceDeckIndices = this.generateDeck();
         scanner = new Scanner(System.in);
+        playersKicked = 0;
     }
 
     public void preGame() {
@@ -49,15 +50,13 @@ public class Game {
                 System.out.println("Must enter integer between 2 and 6");
             }
         }
-        this.numPlayers = numPlayers;
-        System.out.println("Number of players: " + this.numPlayers);
 
         for (int i=0; i<numPlayers; i++) {
             String str;
             System.out.println("Name for Player " + (i + 1) + ": ");
             str = scanner.next();
             Player player = new Player(str);
-            this.playerList.add(player);
+            playerList.add(player);
         }
 
     }
@@ -68,15 +67,35 @@ public class Game {
         Turn turn = new Turn(this.commDeckIndices, this.chanceDeckIndices);
         
 
-        while(numPlayers > 1) {  // todo: need to make a check with bank after every turn if number of players bankrupt exceeds 2
-            currentPlayer = this.playerList.get(whoseTurn);
+        while(playersKicked < 2 && (playerList.size() > 1)) {
+            currentPlayer = playerList.get(whoseTurn);
             turn.takeTurn(currentPlayer, playerList);
-            this.whoseTurn++;
-            this.whoseTurn = this.whoseTurn % this.numPlayers;  // whoseTurn always in range [0, numPlayers-1]
+            Collections.rotate(playerList, -1);
         }
+
+        //todo: need to calculate assets here
+        this.endGame();
 
         scanner.close();
 
+    }
+
+    private void endGame() {
+        System.out.println("Remaining players:");
+
+        for (Player p : playerList) {
+            System.out.println(p.getName() + " with valuation of: $ " + p.getAccountBalance());
+        }
+
+        System.out.println("Highest valued player wins!");
+    }
+
+    public static void kickPlayerFromGame(Player player) {
+        playerList.remove(player);
+        player.isKicked = true;
+        playersKicked += 1;
+        System.out.println(player.getName() + " has been kicked from the game.");
+        Collections.rotate(playerList, 1);
     }
 
     public ArrayList<Integer> generateDeck() {
