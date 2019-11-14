@@ -24,7 +24,6 @@ public class Turn {
 
     public void takeTurn(Player player, ArrayList<Player> playerList) {
         int userInput;
-        int[] diceVal;
         String promptString = "";
         boolean hasRolled = false;
         boolean inJail;
@@ -60,13 +59,13 @@ public class Turn {
                         System.out.println("You have already rolled on this turn, can't roll again.");
                         break;
                     }
-                    diceVal = player.rollDice();
+                    player.rollDice();
                     hasRolled = true;
-                    System.out.println("Rolled a " + diceVal[0] + " and a " + diceVal[1]);
+                    System.out.println("Rolled a " + player.diceVal[0] + " and a " + player.diceVal[1]);
                     if (inJail) {
-                        tryLeaveJail(player, playerList, diceVal);
+                        tryLeaveJail(player, playerList, player.diceVal);
                     } else {
-                        if (diceVal[0] == diceVal[1]) {
+                        if (player.diceVal[0] == player.diceVal[1]) {
                             System.out.println("You have rolled doubles, and get to go again.");
                             hasRolled = false;  // as if player has not rolled yet
                             player.setDoubles(player.getDoubles() + 1);

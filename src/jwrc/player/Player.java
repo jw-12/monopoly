@@ -20,6 +20,7 @@ public class Player {
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
     private ArrayList<Property> propertiesOwned;
     public boolean isKicked;
+    public int[] diceVal; //array of two dice values
 
     public Player(String name) {
         this.name = name;
@@ -32,10 +33,11 @@ public class Player {
         this.getOutOfJailFreeCard = 0;
         this.propertiesOwned = new ArrayList<>();
         this.isKicked = false;
+        this.diceVal = null;
     }
 
-    public int [] rollDice() {
-        return new int[] {ThreadLocalRandom.current().nextInt(1, 7), ThreadLocalRandom.current().nextInt(1, 7)};  //must be max+1
+    public void rollDice() {
+        this.diceVal = new int[] {ThreadLocalRandom.current().nextInt(1, 7), ThreadLocalRandom.current().nextInt(1, 7)};  //must be max+1
     }
 
     public void evaluatePosition(int diceVal) {
