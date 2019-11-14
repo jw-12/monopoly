@@ -23,7 +23,7 @@ public class Penalties extends BoardSpace {
     public void takeAction(Player player) {
         this.readDetails();
         player.changeAccountBalance(-penaltyAmount);
-        System.out.println("New account balance: €" + player.getAccountBalance());
+        System.out.println("New account balance: $" + player.getAccountBalance());
     }
 
     public String getPenaltyName() {

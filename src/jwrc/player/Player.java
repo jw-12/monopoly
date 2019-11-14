@@ -75,7 +75,7 @@ public class Player {
 
     public void printPlayerDetails() {
         System.out.println(
-                "Balance: €" + this.getAccountBalance() +
+                "Balance: $" + this.getAccountBalance() +
                 "\nBoard Position: " + this.getBoardIndex() + "/40"
         );
     }

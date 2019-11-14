@@ -17,11 +17,11 @@ public class Chance extends BoardSpace implements RandomizedSpace {
 
         switch (deckIndex) {
             case 0:
-                System.out.println("Advance to \"Go\". (Collect €200)");
+                System.out.println("Advance to \"Go\". (Collect $200)");
                 player.setBoardIndex(0);
                 break;
             case 1:
-                System.out.println("Advance to Illinois Avenue. If you pass Go collect €200.");
+                System.out.println("Advance to Illinois Avenue. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 24) {
                     player.changeAccountBalance(+200);
                 }
@@ -29,7 +29,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 Turn.movePlayerForward(player, players);
                 break;
             case 2:
-                System.out.println("Advance to St. Charles Place. If you pass Go collect €200.");
+                System.out.println("Advance to St. Charles Place. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 11) {
                     player.changeAccountBalance(+200);
                 }
@@ -75,7 +75,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 Turn.movePlayerForward(player, players);
                 break;
             case 5:
-                System.out.println("Bank pays you dividend of €50.");
+                System.out.println("Bank pays you dividend of $50.");
                 player.changeAccountBalance(+50);
                 break;
             case 6:

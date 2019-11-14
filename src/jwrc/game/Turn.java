@@ -115,7 +115,7 @@ public class Turn {
                     //pay out of jail
                     if (inJail) {
                         if (player.getAccountBalance() >= 50) {
-                            System.out.println("Paying bail of €50. You have now been released from jail.");
+                            System.out.println("Paying bail of $50. You have now been released from jail.");
                             player.changeAccountBalance(-50);
                             System.out.println("New account balance: " + player.getAccountBalance());
                         } else {
