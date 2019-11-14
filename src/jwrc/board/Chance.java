@@ -1,8 +1,10 @@
 package jwrc.board;
 
+import jwrc.game.Game;
 import jwrc.game.Turn;
 import jwrc.player.Player;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Chance extends BoardSpace implements RandomizedSpace {
 
@@ -132,6 +134,8 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 player.changeAccountBalance(+100);
                 break;
         }
+
+        Collections.rotate(Game.chanceDeckIndices, -1);
 
     }
 

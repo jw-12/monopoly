@@ -1,7 +1,9 @@
 package jwrc.board;
 
+import jwrc.game.Game;
 import jwrc.player.Player;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class CommunityChest extends BoardSpace implements RandomizedSpace {
@@ -88,6 +90,7 @@ public class CommunityChest extends BoardSpace implements RandomizedSpace {
                 break;
         }
 
+        Collections.rotate(Game.commDeckIndices, -1);
     }
 
     public void readDetails() {

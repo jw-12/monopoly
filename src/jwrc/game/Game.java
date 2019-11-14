@@ -16,8 +16,8 @@ public class Game {
     private static int maxPlayers = 6, minPlayers = 2;
     public static ArrayList <Player> playerList;
     private int whoseTurn;
-    private ArrayList<Integer> commDeckIndices;
-    private ArrayList<Integer> chanceDeckIndices;
+    public static ArrayList<Integer> commDeckIndices; //todo: maybe private static inside community chest etc
+    public static ArrayList<Integer> chanceDeckIndices;
     public static Scanner scanner;
     public Board board;
     private static int playersKicked;
