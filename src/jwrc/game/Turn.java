@@ -37,9 +37,9 @@ public class Turn {
             inJail = player.getJailStatus();
 
             if (inJail) {
-                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
+                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
             } else {
-                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
+                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
             }
 
             System.out.println(promptString);
