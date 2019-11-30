@@ -15,7 +15,6 @@ public class Game {
 
     private static int maxPlayers = 6, minPlayers = 2;
     public static ArrayList <Player> playerList;
-    private int whoseTurn;
     public static ArrayList<Integer> commDeckIndices; //todo: maybe private static inside community chest etc
     public static ArrayList<Integer> chanceDeckIndices;
     public static Scanner scanner;
@@ -24,9 +23,8 @@ public class Game {
 
     public Game() {
         playerList = new ArrayList<Player>();
-        this.whoseTurn = 0;
-        this.commDeckIndices = this.generateDeck();
-        this.chanceDeckIndices = this.generateDeck();
+        commDeckIndices = this.generateDeck();
+        chanceDeckIndices = this.generateDeck();
         scanner = new Scanner(System.in);
         playersKicked = 0;
     }
@@ -64,11 +62,11 @@ public class Game {
     public void start() {
         Player currentPlayer;
 
-        Turn turn = new Turn(this.commDeckIndices, this.chanceDeckIndices);
+        Turn turn = new Turn(commDeckIndices, chanceDeckIndices);
         
 
         while(playersKicked < 2 && (playerList.size() > 1)) {
-            currentPlayer = playerList.get(whoseTurn);
+            currentPlayer = playerList.get(0);
             turn.takeTurn(currentPlayer, playerList);
             Collections.rotate(playerList, -1);
         }
