@@ -1,5 +1,6 @@
 package jwrc.menus;
 
+import jwrc.board.Property;
 import jwrc.game.Game;
 import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
@@ -18,8 +19,9 @@ public class BrokeMenu {
      * @param player the player who needs to acquire money
      * @param cost the cost of the transaction in question
      */
-    public static void brokeOptions(Player player, ArrayList<Player> players, int cost) {
+    public static void options(Player player, ArrayList<Player> players, int cost) {
 
+        int selectedSiteIndex;
         int inputInt;
         ArrayList<Player> otherPlayers = new ArrayList<>(players);
         otherPlayers.remove(player);  //otherPlayers is every player except the current player
@@ -39,7 +41,6 @@ public class BrokeMenu {
 
             switch (inputInt) {
                 case 0:
-                    System.out.println("Sell property here");
                     TradeMenu.sellPropertyCase(player, otherPlayers);
                     break;
                 case 1:
@@ -47,14 +48,19 @@ public class BrokeMenu {
                     break;
                 case 2:
                     System.out.println("Sell houses/hotels here");
+                    if ((selectedSiteIndex = PropertyOverlord.siteIndexSelector(player)) == 99) {
+                        break;
+                    }
+                    PropertyOverlord.sellHouse(player, selectedSiteIndex);
                     break;
                 case 3:
-                    System.out.println("Sell GOOJF");
                     TradeMenu.sellGOOJFCase(player, otherPlayers);
                     break;
                 case 4:
-                    System.out.println("Declare bankruptcy");
-                    break;
+                    System.out.println("Declaring bankruptcy");
+                    //todo: player.liquidateAssets first
+                    Game.kickPlayerFromGame(player);
+                    return;
             }
         }
     }

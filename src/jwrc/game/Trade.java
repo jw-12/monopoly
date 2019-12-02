@@ -50,7 +50,7 @@ public class Trade {
                     continue;
                 }
                 else if (previousBid >= currentBid) {
-                    System.out.println("Bid must greater than €" + previousBid);
+                    System.out.println("Bid must greater than $" + previousBid);
                     continue;
                 } else if (currentBid > currentPlayer.getAccountBalance()) {
                     System.out.println("Bid cannot exceed account balance");
@@ -71,12 +71,12 @@ public class Trade {
         
         if (property instanceof Sites) {
         	((Sites) property).buySite(currentPlayer, currentBid);
-        	 System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
+        	 System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
         }
         else {
         currentPlayer.changeAccountBalance(-currentBid);
         property.changeOwner(currentPlayer.getName());
-        System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for €" + currentBid);
+        System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
         }
     }
 

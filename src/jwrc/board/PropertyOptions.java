@@ -29,7 +29,7 @@ public class PropertyOptions {
 	        return;
 	    }
 		if(choice >= 0 && choice <=3) {
-			propertyIndex = PropertyOverlord.printSiteOptions(player);
+			propertyIndex = PropertyOverlord.siteIndexSelector(player);
 			if(propertyIndex == 99) {
 				return;
 			}

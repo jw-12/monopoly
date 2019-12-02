@@ -1,8 +1,10 @@
 package jwrc.board;
 
+import jwrc.game.Game;
 import jwrc.game.Turn;
 import jwrc.player.Player;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Chance extends BoardSpace implements RandomizedSpace {
 
@@ -17,11 +19,11 @@ public class Chance extends BoardSpace implements RandomizedSpace {
 
         switch (deckIndex) {
             case 0:
-                System.out.println("Advance to \"Go\". (Collect €200)");
+                System.out.println("Advance to \"Go\". (Collect $200)");
                 player.setBoardIndex(0);
                 break;
             case 1:
-                System.out.println("Advance to Illinois Avenue. If you pass Go collect €200.");
+                System.out.println("Advance to Illinois Avenue. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 24) {
                     player.changeAccountBalance(+200);
                 }
@@ -29,7 +31,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 Turn.movePlayerForward(player, players);
                 break;
             case 2:
-                System.out.println("Advance to St. Charles Place. If you pass Go collect €200.");
+                System.out.println("Advance to St. Charles Place. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 11) {
                     player.changeAccountBalance(+200);
                 }
@@ -60,7 +62,6 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 4:
                 System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which he/she {he} is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
-                System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
                 i = player.getBoardIndex();
                 bs = Board.spaces.get(player.getBoardIndex());
 
@@ -76,7 +77,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 Turn.movePlayerForward(player, players);
                 break;
             case 5:
-                System.out.println("Bank pays you dividend of €50.");
+                System.out.println("Bank pays you dividend of $50.");
                 player.changeAccountBalance(+50);
                 break;
             case 6:
@@ -133,6 +134,8 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 player.changeAccountBalance(+100);
                 break;
         }
+
+        Collections.rotate(Game.chanceDeckIndices, -1);
 
     }
 

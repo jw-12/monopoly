@@ -14,8 +14,9 @@ public class GoToJail extends BoardSpace {
         super(index);
     }
 
-    public void takeAction(Player player, ArrayList<Player> playerList) {
+    public void takeAction(Player player) {
         player.sendToJail();
+
     }
 
     public void readDetails() {

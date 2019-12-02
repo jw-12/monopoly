@@ -24,23 +24,22 @@ public class Turn {
 
     public void takeTurn(Player player, ArrayList<Player> playerList) {
         int userInput;
-        int[] diceVal;
         String promptString = "";
-        boolean hasRolled = false;
+        player.hasRolled = false;
         boolean inJail;
         boolean endTurn = false;
 
         System.out.println(player.getName() + " it's your turn.");
         player.printPlayerDetails();
 
-        while (!endTurn) {
+        while (!endTurn && !player.isKicked) {
 
             inJail = player.getJailStatus();
 
             if (inJail) {
-                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
+                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
             } else {
-                promptString = "0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
+                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
             }
 
             System.out.println(promptString);
@@ -56,31 +55,36 @@ public class Turn {
             switch (userInput) {
                 case 0:
                     //roll
-                    if (hasRolled) {
+                    if (player.hasRolled) {
                         System.out.println("You have already rolled on this turn, can't roll again.");
                         break;
                     }
-                    diceVal = player.rollDice();
-                    hasRolled = true;
-                    System.out.println("Rolled a " + diceVal[0] + " and a " + diceVal[1]);
+                    player.rollDice();
+                    player.hasRolled = true;
+                    System.out.println("Rolled a " + player.diceVal[0] + " and a " + player.diceVal[1]);
                     if (inJail) {
-                        tryLeaveJail(player, playerList, diceVal);
+                        tryLeaveJail(player, playerList, player.diceVal);
                     } else {
-                        if (diceVal[0] == diceVal[1]) {
+
+                        player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+                        //player.evaluatePosition(30);
+
+                        if (player.getBoardIndex() == 30) {
+                            endTurn = true;
+                        } else if (player.diceVal[0] == player.diceVal[1]) {
                             System.out.println("You have rolled doubles, and get to go again.");
-                            hasRolled = false;  // as if player has not rolled yet
+                            player.hasRolled = false;  // as if player has not rolled yet
                             player.setDoubles(player.getDoubles() + 1);
 
                             if (player.getDoubles() >= 3) {
                                 //three in succession
                                 System.out.println("You have been caught speeding (rolling three doubles in succession). Go straight to jail.");
                                 player.sendToJail();
-                                player.setDoubles(0);
-                                hasRolled = true;
+                                endTurn = true;
                                 break;
                             }
                         }
-                        player.evaluatePosition(diceVal[0] + diceVal[1]);
+
                         System.out.println("Moved to position: " + player.getBoardIndex());
                         movePlayerForward(player, playerList);
                     }
@@ -90,12 +94,11 @@ public class Turn {
                     TradeMenu.options(player, playerList);
                     break;
                 case 2:
-                	
                 	PropertyOptions.flow(player);        
                     break;
                 case 3:
                     //check if has rolled, then end
-                    if (hasRolled) {
+                    if (player.hasRolled) {
                         endTurn = true;
                     } else {
                         System.out.println("You must roll the dice before being able to end your turn");
@@ -115,9 +118,10 @@ public class Turn {
                     //pay out of jail
                     if (inJail) {
                         if (player.getAccountBalance() >= 50) {
-                            System.out.println("Paying bail of €50. You have now been released from jail.");
+                            System.out.println("Paying bail of $50. You have now been released from jail.");
                             player.changeAccountBalance(-50);
                             System.out.println("New account balance: " + player.getAccountBalance());
+                            player.changeJailStatus();
                         } else {
                             System.out.println("Insufficient balance to post bail.");
                         }
@@ -150,6 +154,8 @@ public class Turn {
             ((Chance) bs).takeAction(player, playerList, chanceDeckIndices.get(0));
         } else if (bs instanceof Penalties) {
             ((Penalties) bs).takeAction(player);
+        } else if (bs instanceof GoToJail) {
+            ((GoToJail) bs).takeAction(player);
         }
         // otherwise the BoardSpace doesn't require an action so can continue without further action
     }

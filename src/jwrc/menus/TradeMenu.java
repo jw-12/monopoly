@@ -12,6 +12,7 @@ import java.util.InputMismatchException;
  * Handles all the human interaction with the trading functionality on each turn and otherwise
  */
 
+//todo: maybe make a menuable interface
 public class TradeMenu {
 
     TradeMenu() {

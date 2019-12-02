@@ -2,6 +2,8 @@ package jwrc.player;
 import java.util.ArrayList;
 import jwrc.board.Property;
 import jwrc.board.Sites;
+import jwrc.game.Game;
+import jwrc.menus.BrokeMenu;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,6 +19,9 @@ public class Player {
     private int utilitiesOwned;
     private int getOutOfJailFreeCard;  // number of GOOJF cards owned
     private ArrayList<Property> propertiesOwned;
+    public boolean isKicked;
+    public int[] diceVal; //array of two dice values
+    public boolean hasRolled;
 
     public Player(String name) {
         this.name = name;
@@ -28,14 +33,17 @@ public class Player {
         this.utilitiesOwned = 0;
         this.getOutOfJailFreeCard = 0;
         this.propertiesOwned = new ArrayList<>();
+        this.isKicked = false;
+        this.diceVal = null;
+        this.hasRolled = false;
     }
 
-    public int [] rollDice() {
-        return new int[] {ThreadLocalRandom.current().nextInt(1, 7), ThreadLocalRandom.current().nextInt(1, 7)};  //must be max+1
+    public void rollDice() {
+        this.diceVal = new int[] {ThreadLocalRandom.current().nextInt(1, 7), ThreadLocalRandom.current().nextInt(1, 7)};  //must be max+1
     }
 
-    public void evaluatePosition(int diceVal) {
-        this.boardIndex += diceVal;
+    public void evaluatePosition(int inputDiceVal) {
+        this.boardIndex += inputDiceVal;
 
         // passing 'GO'
         if(this.boardIndex >= 40) {
@@ -61,12 +69,18 @@ public class Player {
     }
 
     public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.
+
+        //todo: have a flag to check if paying to player or bank. If player, then don't give brokeoptions, just send to liquidate-assets function
+        if (-delta > this.accountBalance) {
+            BrokeMenu.options(this, Game.playerList, -delta);
+        }
+
         this.accountBalance += delta;
     }
 
     public void printPlayerDetails() {
         System.out.println(
-                "Balance: €" + this.getAccountBalance() +
+                "Balance: $" + this.getAccountBalance() +
                 "\nBoard Position: " + this.getBoardIndex() + "/40"
         );
     }
@@ -99,6 +113,8 @@ public class Player {
 
     public void sendToJail() {
         this.boardIndex = 10;  // TODO: change this to some sort of macro
+        this.setDoubles(0);
+        this.hasRolled = true;
         this.changeJailStatus();
     }
 

@@ -15,7 +15,7 @@ public class PropertyOverlord {
 		
 	}
 	
-	public static int printSiteOptions(Player p) {
+	public static int siteIndexSelector(Player p) {
 		
 		ArrayList<Sites> sitesArrayList = p.getSites();
 		
