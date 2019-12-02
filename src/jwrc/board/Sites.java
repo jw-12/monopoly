@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
-import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
 
 public class Sites extends Property {
