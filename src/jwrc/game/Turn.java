@@ -67,7 +67,7 @@ public class Turn {
                     } else {
 
                         player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-                        //player.evaluatePosition(30);
+                       // player.evaluatePosition(1);
 
                         if (player.getBoardIndex() == 30) {
                             endTurn = true;
