@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
+import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
 
 public class Sites extends Property {
@@ -135,4 +136,22 @@ public class Sites extends Property {
 		this.rentIndex--;
 	}
 	
+	public static int liquidateBuildings(Player player) {
+		int value=0;
+		ArrayList<Sites> sites = player.getSites();
+		for(Sites s : sites) {
+			if(s.hasHotel) {
+				value+= 5*(s.getHouseCost()/2);
+				s.hasHotel=false;
+			}
+			else {
+				value+= s.getNoOfHouses()*(s.getHouseCost()/2);
+				PropertyOverlord.numOfHouses+= s.getNoOfHouses();
+			}
+			System.out.println("total value for "+s.getName()+" is : "+value);
+			s.noOfHouses = 0;
+			s.rentIndex = 1;
+		}
+		return value;
+	}
 }
