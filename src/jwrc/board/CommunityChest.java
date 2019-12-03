@@ -89,7 +89,7 @@ public class CommunityChest extends BoardSpace implements RandomizedSpace {
                 		cost += 40*site.getNoOfHouses();
                 	}
                 }
-                player.changeAccountBalance(-cost);
+                player.changeAccountBalance(-cost, PaymentType.BANK);
                 System.out.println("Total repair cost: $"+cost+"\nNew account balance: $"+player.getAccountBalance());
                 break;
             case 15:
