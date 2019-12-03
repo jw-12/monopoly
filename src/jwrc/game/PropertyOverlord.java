@@ -96,20 +96,20 @@ public class PropertyOverlord {
 			}
 		}
 		prop.mortgageActive = true;
-		player.changeAccountBalance(prop.getmortgageValue());
+		player.changeAccountBalance(prop.getmortgageValue(), PaymentType.BANK);
 		System.out.println("You have received $"+ prop.getmortgageValue()+" for mortgaging "+prop.getName());
 	}
 	
 	public static void liftMortgage(Player player, int propertyIndex) {
 		Property prop = (Property)Board.spaces.get(propertyIndex);
 		if(!prop.mortgageActive) {
-			System.out.println(prop.getName()+" has not been mportgaged");
+			System.out.println(prop.getName()+" has not been mortgaged");
 			return;
 		}
 		else {
 			prop.mortgageActive=false;
 			int amount = prop.getmortgageValue()+(int)(prop.getmortgageValue()*0.1);
-			player.changeAccountBalance(-amount);
+			player.changeAccountBalance(-amount, PaymentType.BANK);
 			System.out.println("Mortgage has been lifted from "+ prop.getName()+" for a price of $"+amount);
 		}
 		
@@ -188,7 +188,7 @@ public class PropertyOverlord {
 		numOfHouses++;
 		site.removeHouse();
 		int houseVal = site.getHouseCost()/2;
-		player.changeAccountBalance(houseVal);
+		player.changeAccountBalance(houseVal, PaymentType.BANK);
 		System.out.println(houseVal + " has been added to your bank account.");
 	}
 	
@@ -205,7 +205,7 @@ public class PropertyOverlord {
 		site.hasHotel = false;
 		site.noOfHouses = 4;
 		int hotelVal = (site.getHouseCost())/2; // change when I add hotel cost to the sites.
-		player.changeAccountBalance(hotelVal);
+		player.changeAccountBalance(hotelVal, PaymentType.BANK);
 		System.out.println(hotelVal + " has been added to your bank account.");
 		numOfHouses -=4;
 		site.rentIndex--;
@@ -227,7 +227,7 @@ public class PropertyOverlord {
 			site.noOfHouses = 0;
 			numOfHouses+=4;
 			site.hasHotel = true;
-			player.changeAccountBalance(-site.getHouseCost());
+			player.changeAccountBalance(-site.getHouseCost(), PaymentType.BANK);
 			System.out.println("Hotel build on "+ site.getName());
 		}
 		else {
@@ -264,7 +264,7 @@ public class PropertyOverlord {
 		System.out.println("House being built on "+ site.getName());
 		System.out.println("Previous rent cost was "+ site.getRentCost());
 		numOfHouses--;
-		player.changeAccountBalance(-site.getHouseCost());
+		player.changeAccountBalance(-site.getHouseCost(), PaymentType.BANK);
 		site.addHouse();
 		System.out.println("New rent cost is "+ site.getRentCost());
 	}

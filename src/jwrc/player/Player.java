@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import jwrc.board.Property;
 import jwrc.board.Sites;
 import jwrc.game.Game;
+import jwrc.game.Trade;
 import jwrc.menus.BrokeMenu;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -48,7 +49,7 @@ public class Player {
         // passing 'GO'
         if(this.boardIndex >= 40) {
             this.boardIndex = this.boardIndex % 40;
-            changeAccountBalance(+200);  // and add 200$ to account
+            changeAccountBalance(+200, PaymentType.BANK);  // and add 200$ to account
         }
     }
 
@@ -68,14 +69,33 @@ public class Player {
         return this.accountBalance;
     }
 
-    public void changeAccountBalance(int delta) {  // delta +ve for gains or -ve for fines etc.
+    public void changeAccountBalance(int delta, PaymentType type) {  // delta +ve for gains or -ve for fines etc.
 
-        //todo: have a flag to check if paying to player or bank. If player, then don't give brokeoptions, just send to liquidate-assets function
-        if (-delta > this.accountBalance) {
+        if (-delta > this.accountBalance && type == PaymentType.BANK) {
             BrokeMenu.options(this, Game.playerList, -delta);
         }
 
         this.accountBalance += delta;
+    }
+
+    /* Pay amount to 'this' player from payer player */
+    public void payToPlayer(Player payer, int amount) {
+
+        if (amount > payer.getAccountBalance()) {
+            //sell all houses, hotels etc. Then transfer ownership to 'this' player
+            // Then kick payer from game
+
+            //todo: insert sell houses func. here
+
+            for (Property p : payer.getPropertiesOwned())
+                Trade.safeTrade(payer, this, p);
+
+            Game.kickPlayerFromGame(payer);
+
+        } else {
+            payer.changeAccountBalance(-amount, PaymentType.PLAYER);
+            this.changeAccountBalance(amount, PaymentType.PLAYER);
+        }
     }
 
     public void printPlayerDetails() {

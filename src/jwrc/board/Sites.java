@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
+import jwrc.player.PaymentType;
 import jwrc.player.Player;
 
 public class Sites extends Property {
@@ -76,8 +77,7 @@ public class Sites extends Property {
 			System.out.println("Owned by "+ payPlayer.getName());
 			payAmount = this.rentValues[this.rentIndex];
 			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
-			player.changeAccountBalance(-payAmount);
-			payPlayer.changeAccountBalance(+payAmount);
+            payPlayer.payToPlayer(player, payAmount);
 			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
 			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}
@@ -89,7 +89,7 @@ public class Sites extends Property {
 	public void buySite(Player player, int cost) {
 		
 		this.changeOwner(player.getName());
-		player.changeAccountBalance(-cost);
+		player.changeAccountBalance(-cost, PaymentType.BANK);
 		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 		player.addProperty(this);
 		this.colourGroupCheck();

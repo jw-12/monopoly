@@ -2,6 +2,7 @@ package jwrc.game;
 
 import jwrc.board.Sites;
 import jwrc.board.Property;
+import jwrc.player.PaymentType;
 import jwrc.player.Player;
 import jwrc.board.Utility;
 
@@ -74,7 +75,7 @@ public class Trade {
         	 System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
         }
         else {
-        currentPlayer.changeAccountBalance(-currentBid);
+        currentPlayer.changeAccountBalance(-currentBid, PaymentType.BANK);
         property.changeOwner(currentPlayer.getName());
         System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
         }
@@ -109,8 +110,7 @@ public class Trade {
                 case "y":  // proceed with the trade
                     seller.setGetOutOfJailFreeCard(seller.getGetOutOfJailFreeCard() - 1);
                     buyer.setGetOutOfJailFreeCard(buyer.getGetOutOfJailFreeCard() + 1);
-                    seller.changeAccountBalance(+amount);
-                    buyer.changeAccountBalance(-amount);
+                    seller.payToPlayer(buyer, amount);
                     System.out.println("Trade accepted");
                     return;
                 case "n":
@@ -138,24 +138,8 @@ public class Trade {
             switch (input) {
                 case "y":
                     System.out.println("Trade offer accepted");
-                    p.changeOwner(buyer.getName());
-                    seller.changeAccountBalance(price);
-                    buyer.changeAccountBalance(-price);
-                    seller.removeProperty(p);
-                    buyer.addProperty(p);
-
-                    if(p instanceof Sites) {
-                        seller.removeProperty(p);
-                        buyer.addProperty(p);
-                    }
-                    else if(p instanceof Utility) {
-                        seller.changeUtilitiesOwned(-1);;
-                        buyer.changeUtilitiesOwned(1);;
-                    }
-                    else {
-                        seller.changeTransportsOwned(-1);
-                        buyer.changeTransportsOwned(1);
-                    }
+                    seller.payToPlayer(buyer, price);
+                    safeTrade(seller, buyer, p);
                     return;
 
                 case "n":
@@ -164,6 +148,26 @@ public class Trade {
                 default:
                     System.out.println("Invalid input");
             }
+        }
+    }
+
+    public static void safeTrade(Player seller, Player buyer, Property p) {
+
+        p.changeOwner(buyer.getName());
+        seller.removeProperty(p);
+        buyer.addProperty(p);
+
+        if(p instanceof Sites) {
+            seller.removeProperty(p);
+            buyer.addProperty(p);
+        }
+        else if(p instanceof Utility) {
+            seller.changeUtilitiesOwned(-1);
+            buyer.changeUtilitiesOwned(1);
+        }
+        else {
+            seller.changeTransportsOwned(-1);
+            buyer.changeTransportsOwned(1);
         }
     }
 

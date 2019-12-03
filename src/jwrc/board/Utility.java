@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
+import jwrc.player.PaymentType;
 import jwrc.player.Player;
 
 
@@ -31,7 +32,7 @@ public class Utility extends Property {
 			switch(ans) {
 				case "y":
 					this.changeOwner(player.getName());
-					player.changeAccountBalance(-this.getCost());
+					player.changeAccountBalance(-this.getCost(), PaymentType.BANK);
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
 					player.changeUtilitiesOwned(1);
 					player.addProperty(this);
@@ -59,8 +60,7 @@ public class Utility extends Property {
 			//int payAmount = (player.rollDice())*4; //just for now. should be previous roll, not a new dice roll.
 			int payAmount = 5;
 			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
-			player.changeAccountBalance(-payAmount);
-			payPlayer.changeAccountBalance(+payAmount);
+			payPlayer.payToPlayer(player, payAmount);
 			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
 			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}

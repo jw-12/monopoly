@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
+import jwrc.player.PaymentType;
 import jwrc.player.Player;
 
 public class TransportSpaces extends Property {
@@ -29,7 +30,7 @@ public class TransportSpaces extends Property {
 				switch(ans) {
 				case "y":
 					this.changeOwner(player.getName());
-					player.changeAccountBalance(-this.getCost());
+					player.changeAccountBalance(-this.getCost(), PaymentType.BANK);
 					player.changeTransportsOwned(1);
 					player.addProperty(this);
 					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
@@ -70,8 +71,7 @@ public class TransportSpaces extends Property {
 				break;
 			}
 			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
-			player.changeAccountBalance(-payAmount);
-			payPlayer.changeAccountBalance(+payAmount);
+			payPlayer.payToPlayer(player, payAmount);
 			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
 			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}
