@@ -1,8 +1,5 @@
-package jwrc.game;
+package jwrc.board;
 import jwrc.player.Player;
-import jwrc.board.Board;
-import jwrc.board.Property;
-import jwrc.board.Sites;
 
 import static org.junit.Assert.*;
 

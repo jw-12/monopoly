@@ -1,6 +1,7 @@
 package jwrc.game;
 
 import jwrc.board.*;
+import jwrc.menus.BankMenu;
 import jwrc.menus.TradeMenu;
 import jwrc.player.Player;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class Turn {
                     } else {
 
                         player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-                        //player.evaluatePosition(30);
+                       // player.evaluatePosition(1);
 
                         if (player.getBoardIndex() == 30) {
                             endTurn = true;
@@ -94,7 +95,7 @@ public class Turn {
                     TradeMenu.options(player, playerList);
                     break;
                 case 2:
-                	PropertyOptions.flow(player);        
+                	BankMenu.options(player);        
                     break;
                 case 3:
                     //check if has rolled, then end

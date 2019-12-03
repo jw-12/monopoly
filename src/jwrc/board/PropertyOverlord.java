@@ -1,7 +1,5 @@
-package jwrc.game;
-import jwrc.board.Board;
-import jwrc.board.Property;
-import jwrc.board.Sites;
+package jwrc.board;
+import jwrc.game.Game;
 import jwrc.player.*;
 
 import java.util.ArrayList;
@@ -261,7 +259,7 @@ public class PropertyOverlord {
 		if(!PropertyOverlord.siteColourChecks(player, siteIndex, 0)) {
 			return;
 		}
-		System.out.println("House being built on "+ site.getName());
+		System.out.println("House built on "+ site.getName());
 		System.out.println("Previous rent cost was "+ site.getRentCost());
 		numOfHouses--;
 		player.changeAccountBalance(-site.getHouseCost());

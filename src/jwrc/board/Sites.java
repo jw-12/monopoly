@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import jwrc.game.Trade;
 import jwrc.game.Game;
-import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
 
 public class Sites extends Property {
@@ -48,7 +47,7 @@ public class Sites extends Property {
 			
 			boolean exit = false;
 			while(!exit) {
-			System.out.println("Would you like to buy this Site? Enter y/n. Cost = "+ this.getCost());
+			System.out.println("Would you like to buy this Site? Enter y/n. Cost = $"+ this.getCost());
 			String ans = Game.scanner.next();
 			switch(ans) {
 				case "y":
@@ -79,8 +78,8 @@ public class Sites extends Property {
 			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);
-			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
-			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
+			System.out.println(player.getName()+" your new balance is $"+player.getAccountBalance());
+			System.out.println(payPlayer.getName()+ " your new balance is $"+ payPlayer.getAccountBalance());
 		}
 	}
 	
@@ -91,7 +90,7 @@ public class Sites extends Property {
 		
 		this.changeOwner(player.getName());
 		player.changeAccountBalance(-cost);
-		System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+		System.out.println(player.getName() + " your new balance is: $"+ player.getAccountBalance());
 		player.addProperty(this);
 		this.colourGroupCheck();
 	}
@@ -109,7 +108,7 @@ public class Sites extends Property {
 		for(int i=0 ; i<temp.size(); i++) {
 			temp.get(i).rentIndex++;
 		}
-		System.out.println("You now own all Sites of colour "+ this.getColour()+". Rent has increased to "+this.rentValues[this.rentIndex]+ " and you can now build Houses");
+		System.out.println("You now own all Sites of colour "+ this.getColour()+". Rent has increased and you can now build Houses");
 		
 	}
 	
@@ -148,7 +147,6 @@ public class Sites extends Property {
 				value+= s.getNoOfHouses()*(s.getHouseCost()/2);
 				PropertyOverlord.numOfHouses+= s.getNoOfHouses();
 			}
-			System.out.println("total value for "+s.getName()+" is : "+value);
 			s.noOfHouses = 0;
 			s.rentIndex = 1;
 		}

@@ -24,7 +24,7 @@ public class TransportSpaces extends Property {
 		else if(this.getOwner() == "null") {
 			boolean exit = false;
 			while(!exit) {
-				System.out.println("Would you like to buy this Transport? Enter y/n. Cost = "+ this.getCost());
+				System.out.println("Would you like to buy this Transport? Enter y/n. Cost = $"+ this.getCost());
 				String ans = Game.scanner.next();
 				switch(ans) {
 				case "y":
@@ -32,7 +32,7 @@ public class TransportSpaces extends Property {
 					player.changeAccountBalance(-this.getCost());
 					player.changeTransportsOwned(1);
 					player.addProperty(this);
-					System.out.println(player.getName() + " your new balance is: "+ player.getAccountBalance());
+					System.out.println(player.getName() + " your new balance is: $"+ player.getAccountBalance());
 					exit = true;
 					break;
 				case "n":
@@ -69,11 +69,11 @@ public class TransportSpaces extends Property {
 				payAmount = 200;
 				break;
 			}
-			System.out.println("You must pay "+ payPlayer.getName() + " " +payAmount);
+			System.out.println("You must pay "+ payPlayer.getName() + " $" +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);
-			System.out.println(player.getName()+" your new balance is "+player.getAccountBalance());
-			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
+			System.out.println(player.getName()+" your new balance is $"+player.getAccountBalance());
+			System.out.println(payPlayer.getName()+ " your new balance is $"+ payPlayer.getAccountBalance());
 		}
 	}
 	
