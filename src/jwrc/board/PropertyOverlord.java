@@ -204,7 +204,7 @@ public class PropertyOverlord {
 		site.noOfHouses = 4;
 		int hotelVal = (site.getHouseCost())/2; // change when I add hotel cost to the sites.
 		player.changeAccountBalance(hotelVal);
-		System.out.println(hotelVal + " has been added to your bank account.");
+		System.out.println("$"+hotelVal + " has been added to your bank account.");
 		numOfHouses -=4;
 		site.rentIndex--;
 		
@@ -226,7 +226,7 @@ public class PropertyOverlord {
 			numOfHouses+=4;
 			site.hasHotel = true;
 			player.changeAccountBalance(-site.getHouseCost());
-			System.out.println("Hotel build on "+ site.getName());
+			System.out.println("Hotel built on "+ site.getName());
 		}
 		else {
 			System.out.println("You must build 4 houses on this site before building a hotel");
@@ -260,10 +260,10 @@ public class PropertyOverlord {
 			return;
 		}
 		System.out.println("House built on "+ site.getName());
-		System.out.println("Previous rent cost was "+ site.getRentCost());
+		System.out.println("Previous rent cost was $"+ site.getRentCost());
 		numOfHouses--;
 		player.changeAccountBalance(-site.getHouseCost());
 		site.addHouse();
-		System.out.println("New rent cost is "+ site.getRentCost());
+		System.out.println("New rent cost is $"+ site.getRentCost());
 	}
 }

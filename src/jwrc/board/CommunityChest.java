@@ -81,8 +81,17 @@ public class CommunityChest extends BoardSpace implements RandomizedSpace {
                 break;
             case 14:
                 System.out.println("You are assessed for street repairs: Pay $40 per house and $115 per hotel you own.");
-                System.out.println("NOT YET IMPLEMENTED");
-                //todo: implement this
+                int cost = 0;
+                for(Sites site : player.getSites()) {
+                	if(site.hasHotel) {
+                		cost += 115;
+                	}
+                	else {
+                		cost += 40*site.getNoOfHouses();
+                	}
+                }
+                player.changeAccountBalance(-cost);
+                System.out.println("Total repair cost: $"+cost+"\nNew account balance: $"+player.getAccountBalance());
                 break;
             case 15:
                 System.out.println("You have won second prize in a beauty contest. Collect $10.");

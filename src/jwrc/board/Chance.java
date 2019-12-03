@@ -95,7 +95,17 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 9:
                 System.out.println("Make general repairs on all your property: For each house pay $25, For each hotel $100.");
-                System.out.println("THIS IS NOT IMPLEMENTED YET!!!"); //todo: implement
+                int cost = 0;
+                for(Sites site : player.getSites()) {
+                	if(site.hasHotel) {
+                		cost += 100;
+                	}
+                	else {
+                		cost += 25*site.getNoOfHouses();
+                	}
+                }
+                player.changeAccountBalance(-cost);
+                System.out.println("Total repair cost: $"+cost+"\nNew account balance: $"+player.getAccountBalance());
                 break;
             case 10:
                 System.out.println("Pay poor tax of $15");

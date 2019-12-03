@@ -60,19 +60,19 @@ public class DetailsMenu {
 		System.out.println("\t|     Sites \t|");
 		for(Property p : props) {
 			if(p instanceof Sites) {
-				System.out.println("Name: "+p.getName()+"    \tIndex: "+((Sites)p).getBoardIndex()+"\tMortgage Value: "+((Sites)p).getmortgageValue()+"\tColour: "+((Sites)p).getColour()+"\t  Houses: "+((Sites)p).getNoOfHouses()+"\tHotel: "+((Sites)p).hasHotel+"\tRent Cost: "+((Sites)p).getRentCost());
+				System.out.println("Name: "+p.getName()+"     \tIndex: "+((Sites)p).getBoardIndex()+"\tMortgage Value: "+((Sites)p).getmortgageValue()+"\tColour: "+((Sites)p).getColour()+"\t  Houses: "+((Sites)p).getNoOfHouses()+"\tHotel: "+((Sites)p).hasHotel+"\tRent Cost: "+((Sites)p).getRentCost());
 			}
 		}
 		System.out.println("\n\t|  Transports \t|");
 		for(Property p : props) {
 			if(p instanceof TransportSpaces) {
-				System.out.println("Name: "+p.getName()+"    \tIndex: "+((TransportSpaces)p).getBoardIndex()+"\tMortgage Value: "+((TransportSpaces)p).getmortgageValue());
+				System.out.println("Name: "+p.getName()+"        \tIndex: "+((TransportSpaces)p).getBoardIndex()+"\tMortgage Value: "+((TransportSpaces)p).getmortgageValue());
 			}
 		}
 		System.out.println("\n\t|  Utilities \t|");
 		for(Property p : props) {
 			if(p instanceof Utility) {
-				System.out.println("Name: "+p.getName()+"    \tIndex: "+((Utility)p).getBoardIndex()+"\tMortgage Value: "+((Utility)p).getmortgageValue());
+				System.out.println("Name: "+p.getName()+"          \tIndex: "+((Utility)p).getBoardIndex()+"\tMortgage Value: "+((Utility)p).getmortgageValue());
 			}
 		}
 	}
