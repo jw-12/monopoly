@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class Game {
 
+    private static Game uniqueInstance = null;
+
     private static int maxPlayers = 6, minPlayers = 2;
     public static ArrayList <Player> playerList;
     public static ArrayList<Integer> commDeckIndices; //todo: maybe private static inside community chest etc
@@ -21,12 +23,18 @@ public class Game {
     public Board board;
     private static int playersKicked;
 
-    public Game() {
+    private Game() {
         playerList = new ArrayList<Player>();
         commDeckIndices = this.generateDeck();
         chanceDeckIndices = this.generateDeck();
         scanner = new Scanner(System.in);
         playersKicked = 0;
+    }
+
+    public static Game getInstance() {
+        if (uniqueInstance == null)
+            uniqueInstance = new Game();
+        return uniqueInstance;
     }
 
     public void preGame() {
