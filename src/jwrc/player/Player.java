@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import jwrc.board.Property;
 import jwrc.board.Sites;
 import jwrc.game.Game;
+import jwrc.game.PropertyOverlord;
 import jwrc.game.Trade;
 import jwrc.menus.BrokeMenu;
 
@@ -85,10 +86,14 @@ public class Player {
             //sell all houses, hotels etc. Then transfer ownership to 'this' player
             // Then kick payer from game
 
-            //todo: insert sell houses func. here
 
-            for (Property p : payer.getPropertiesOwned())
-                Trade.safeTrade(payer, this, p);
+            int houseVal = Sites.liquidateBuildings(payer);
+
+            while (payer.getPropertiesOwned().size() > 0) {
+                Trade.safeTrade(payer, this, payer.getPropertiesOwned().get(0));
+            }
+
+            this.changeAccountBalance(houseVal, PaymentType.BANK);
 
             Game.kickPlayerFromGame(payer);
 

@@ -105,7 +105,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 		cost += 25*site.getNoOfHouses();
                 	}
                 }
-                player.changeAccountBalance(-cost);
+                player.changeAccountBalance(-cost, PaymentType.BANK);
                 System.out.println("Total repair cost: $"+cost+"\nNew account balance: $"+player.getAccountBalance());
                 break;
             case 10:

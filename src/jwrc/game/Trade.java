@@ -2,6 +2,7 @@ package jwrc.game;
 
 import jwrc.board.Sites;
 import jwrc.board.Property;
+import jwrc.board.TransportSpaces;
 import jwrc.player.PaymentType;
 import jwrc.player.Player;
 import jwrc.board.Utility;
@@ -157,17 +158,13 @@ public class Trade {
         seller.removeProperty(p);
         buyer.addProperty(p);
 
-        if(p instanceof Sites) {
-            seller.removeProperty(p);
-            buyer.addProperty(p);
+        if(p instanceof TransportSpaces) {
+            seller.changeTransportsOwned(-1);
+            buyer.changeTransportsOwned(1);
         }
         else if(p instanceof Utility) {
             seller.changeUtilitiesOwned(-1);
             buyer.changeUtilitiesOwned(1);
-        }
-        else {
-            seller.changeTransportsOwned(-1);
-            buyer.changeTransportsOwned(1);
         }
     }
 

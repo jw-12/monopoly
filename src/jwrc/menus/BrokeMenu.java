@@ -1,8 +1,7 @@
 package jwrc.menus;
 
-import jwrc.board.Property;
-import jwrc.board.PropertyOverlord;
 import jwrc.game.Game;
+import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
 
 import java.util.ArrayList;

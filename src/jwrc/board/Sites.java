@@ -1,6 +1,7 @@
 package jwrc.board;
 import java.util.ArrayList;
 
+import jwrc.game.PropertyOverlord;
 import jwrc.game.Trade;
 import jwrc.game.Game;
 import jwrc.player.PaymentType;

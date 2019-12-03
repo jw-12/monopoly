@@ -2,7 +2,7 @@ package jwrc.menus;
 
 import java.util.InputMismatchException;
 
-import jwrc.board.PropertyOverlord;
+import jwrc.game.PropertyOverlord;
 import jwrc.game.Game;
 import jwrc.player.Player;
 
