@@ -3,6 +3,7 @@ package jwrc.game;
 import jwrc.board.*;
 import jwrc.menus.BankMenu;
 import jwrc.menus.TradeMenu;
+import jwrc.player.PaymentType;
 import jwrc.menus.DetailsMenu;
 import jwrc.player.Player;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class Turn {
                     TradeMenu.options(player, playerList);
                     break;
                 case 2:
-                	BankMenu.options(player);        
+                	BankMenu.options(player);
                     break;
                 case 3:
                     //check if has rolled, then end
@@ -121,7 +122,7 @@ public class Turn {
                     if (inJail) {
                         if (player.getAccountBalance() >= 50) {
                             System.out.println("Paying bail of $50. You have now been released from jail.");
-                            player.changeAccountBalance(-50);
+                            player.changeAccountBalance(-50, PaymentType.BANK);
                             System.out.println("New account balance: " + player.getAccountBalance());
                             player.changeJailStatus();
                         } else {
@@ -175,8 +176,9 @@ public class Turn {
             movePlayerForward(currentPlayer, playerList);
         } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
             System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
-            //force payment of fine
-            currentPlayer.changeAccountBalance(-50);  //todo: set as macro
+
+            //force payment of fine. If insufficient balance, then player forced to liquidate assets first
+            currentPlayer.changeAccountBalance(-50, PaymentType.BANK);  //todo: set as macro
             currentPlayer.changeJailStatus();
         } else {
             System.out.println("You have failed to escape from jail.");

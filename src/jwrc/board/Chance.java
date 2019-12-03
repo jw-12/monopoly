@@ -2,6 +2,7 @@ package jwrc.board;
 
 import jwrc.game.Game;
 import jwrc.game.Turn;
+import jwrc.player.PaymentType;
 import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
             case 1:
                 System.out.println("Advance to Illinois Avenue. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 24) {
-                    player.changeAccountBalance(+200);
+                    player.changeAccountBalance(+200, PaymentType.BANK);
                 }
                 player.setBoardIndex(24);
                 Turn.movePlayerForward(player, players);
@@ -33,7 +34,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
             case 2:
                 System.out.println("Advance to St. Charles Place. If you pass Go collect $200.");
                 if (player.getBoardIndex() > 11) {
-                    player.changeAccountBalance(+200);
+                    player.changeAccountBalance(+200, PaymentType.BANK);
                 }
                 player.setBoardIndex(11);
                 break;
@@ -47,7 +48,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 }
 
                 if (i >= 40) {
-                    player.changeAccountBalance(+200);
+                    player.changeAccountBalance(+200, PaymentType.BANK);
                 }
 
                 player.setBoardIndex(i % 40);
@@ -70,7 +71,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 }
 
                 if (i >= 40) {
-                    player.changeAccountBalance(+200);
+                    player.changeAccountBalance(+200, PaymentType.BANK);
                 }
 
                 player.setBoardIndex(i % 40);
@@ -78,7 +79,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 5:
                 System.out.println("Bank pays you dividend of $50.");
-                player.changeAccountBalance(+50);
+                player.changeAccountBalance(+50, PaymentType.BANK);
                 break;
             case 6:
                 System.out.println("Get out of Jail Free. This card may be kept until needed, or traded/sold.");
@@ -109,13 +110,13 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 10:
                 System.out.println("Pay poor tax of $15");
-                player.changeAccountBalance(-15);
+                player.changeAccountBalance(-15, PaymentType.BANK);
                 break;
             case 11:
                 System.out.println("Take a trip to Reading Railroad. If you pass Go, collect $200.");
                 i = player.getBoardIndex();
                 if (i > 5) {
-                    player.changeAccountBalance(+200);
+                    player.changeAccountBalance(+200, PaymentType.BANK);
                 }
                 player.setBoardIndex(5);
                 Turn.movePlayerForward(player, players);
@@ -129,8 +130,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 System.out.println("You have been elected Chairman of the Board. Pay each player $50.");
 
                 for (Player otherPlayer : players) {
-                    player.changeAccountBalance(-50);
-                    otherPlayer.changeAccountBalance(+50);
+                    otherPlayer.payToPlayer(player, 50);
                 }
 
                 break;
@@ -141,7 +141,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 break;
             case 15:
                 System.out.println("You have won a crossword competition. Collect $100.");
-                player.changeAccountBalance(+100);
+                player.changeAccountBalance(+100, PaymentType.BANK);
                 break;
         }
 
