@@ -50,14 +50,19 @@ public class Utility extends Property {
 		}
 		else {
 			Player payPlayer = new Player("null");
+			int payAmount = 0;
 			for(Player p : players) {
 				if(p.getName() == this.getOwner()) {
 					payPlayer = p;
 				}
 			}
 			System.out.println("Owned by "+ payPlayer.getName());
-			//int payAmount = (player.rollDice())*4; //just for now. should be previous roll, not a new dice roll.
-			int payAmount = 5;
+			if(player.getUtilitiesOwned() == 1) {
+				payAmount = 4*(player.diceVal[0]+player.diceVal[1]);
+			}
+			else {
+				payAmount = 10*(player.diceVal[0]+player.diceVal[1]);
+			}
 			System.out.println("You must pay "+ payPlayer.getName() + " $" +payAmount);
 			player.changeAccountBalance(-payAmount);
 			payPlayer.changeAccountBalance(+payAmount);

@@ -3,6 +3,7 @@ package jwrc.game;
 import jwrc.board.*;
 import jwrc.menus.BankMenu;
 import jwrc.menus.TradeMenu;
+import jwrc.menus.DetailsMenu;
 import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -40,7 +41,7 @@ public class Turn {
             if (inJail) {
                 promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
             } else {
-                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn";
+                promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t9 to print details";
             }
 
             System.out.println(promptString);
@@ -68,7 +69,7 @@ public class Turn {
                     } else {
 
                         player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-                       // player.evaluatePosition(1);
+                       // player.evaluatePosition(5);
 
                         if (player.getBoardIndex() == 30) {
                             endTurn = true;
@@ -128,6 +129,10 @@ public class Turn {
                         }
                     }
                     break;
+                case 9:
+                	//print details
+                	DetailsMenu.playerDetails(player, playerList);
+                	break;
                 default:
                     System.out.println("Invalid entry");
             }
