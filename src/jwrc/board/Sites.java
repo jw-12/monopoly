@@ -41,11 +41,11 @@ public class Sites extends Property {
 			return;
 		}
 			
-		if (player.getName() == this.getOwner()) {
+		if (player.getName().equals(this.getOwner())) {
 			System.out.println("You own this Site.");
 			return;
 		}
-		else if(this.getOwner() == "null") {
+		else if(this.getOwner() == null) {
 			
 			boolean exit = false;
 			while(!exit) {
@@ -58,7 +58,7 @@ public class Sites extends Property {
 					break;
 				case "n":
 					System.out.println("Go to auction");
-					Trade.startAuction(players, this, Game.scanner);
+					Trade.startAuction(players, this);
 					exit = true;
 					break;
 				default:
@@ -71,7 +71,7 @@ public class Sites extends Property {
 			Player payPlayer = new Player("null");
 			int payAmount = 0;
 			for(Player p : players) {
-				if(p.getName() == this.getOwner()) {
+				if(p.getName().equals(this.getOwner())) {
 					payPlayer = p;
 				}
 			}

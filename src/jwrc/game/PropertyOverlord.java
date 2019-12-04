@@ -254,7 +254,7 @@ public class PropertyOverlord {
 			System.out.println("You have reached the maximum number of houses for this Site");
 			return;
 		}
-		if(site.getOwner().equals("null")) {
+		if(site.getOwner() == null) {
 			System.out.println("you cannot build on unowned sites");
 			return;
 		}

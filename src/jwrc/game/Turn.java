@@ -69,8 +69,8 @@ public class Turn {
                         tryLeaveJail(player, playerList, player.diceVal);
                     } else {
 
-                        player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-                        //player.evaluatePosition(1);
+                        //player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+                        player.evaluatePosition(1);
 
                         if (player.getBoardIndex() == 30) {
                             endTurn = true;
