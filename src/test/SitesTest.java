@@ -1,4 +1,4 @@
-package jwrc.board;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import jwrc.board.Board;
+import jwrc.board.PropertyOverlord;
+import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.player.Player;
 
