@@ -138,6 +138,7 @@ public class Turn {
                     System.out.println("Invalid entry");
             }
         }
+        player.setDoubles(0); //reset doubles at end of the turn
     }
 
     /*
