@@ -25,15 +25,13 @@ public class SitesTest {
 	
 	@BeforeClass
 	public static void BeforeClass() {
-		System.out.println("BeforeClass");
 	}
 	
 	@Before
-	public void setUp() throws Exception{
+	public void setUp(){
 		
-		
-		 game = Game.getInstance();
-		//board = new Board();
+		game = Game.getInstance();
+		game.board = new Board();
 		site = (Sites)Board.spaces.get(1);
 		site2 = (Sites)Board.spaces.get(3);
 		p1 = new Player("Ronan");
@@ -53,6 +51,7 @@ public class SitesTest {
 		p1 = null;
 		p2 = null;
 		p3 = null;
+		game = null;
 	}
 	
 	@AfterClass
@@ -65,22 +64,46 @@ public class SitesTest {
 		assertEquals("test house cost return method",50,site.getHouseCost());
 		
 	}
+	
 	@Test
-	public final void takeActionTest() {
-		
+	public final void takeActionTest_Unowned_Site() {
+		System.out.println("(TEST INSTRUCTION)--Test case when the site is unowned. Enter 'y' to buy site---");
 		site.takeAction(p1, playerList);
-		assertEquals(1440,p1.getAccountBalance());
+		assertEquals("account balance reduce by cost of site(med avenue: $60)",1440,p1.getAccountBalance());
+		assertEquals("site owner updated","Ronan",site.getOwner());
 	}
 	
+	@Test
+	public final void takeActionTest_You_Own_site() {
+		
+		site.buySite(p1, 10); // buy site for 10
+		site.takeAction(p1, playerList);
+		assertEquals("No action needed when you own the site, Balance remains unchanged",1490,p1.getAccountBalance());
+	}
+	
+	@Test
+	public final void takeActionTest_Site_Owned_By_Another_Player() {
+		
+		site.buySite(p1, 10); // buy site for 10
+		site.takeAction(p2, playerList);
+		assertEquals("rent changed when landing on unowned site",1498,p2.getAccountBalance());
+	}
+	
+	@Test
+	public final void takeActionTest_Site_Mortgaged_by_another_player() {
+		
+		site.buySite(p1, 60); // buy site for 60
+		PropertyOverlord.mortgageProperty(p1, 1);
+		site.takeAction(p2, playerList);
+		assertEquals("No rent when site is mortgaged",1500,p2.getAccountBalance());
+	}
 	
 	@Test
 	public final void colourGroupCheckTest() {  // rent index increased when a colour set is owned by a player.
 		site.buySite(p1, 60);
 		assertEquals("lowest rent when only 1 brown site is owned",2,site.getRentCost());
 		site2.buySite(p1, 60); // rent increase as colour set is now owned by Player p1.
-		
-		System.out.println("site1: "+site.getOwner()+" site2: "+site2.getOwner());
-		assertEquals("rent increased when colour set is owned",4,site2.getRentCost());
+		assertEquals("rent increased when colour set is owned",4,site.getRentCost());
 	}
 	
 	@Test
