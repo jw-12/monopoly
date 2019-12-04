@@ -19,7 +19,7 @@ public class BankMenu {
 			System.out.println("----<"+ player.getName() + "-BANK MENU>");
 			System.out.println("----<0 to exit \t1 to buy a house\t2 to sell a house\t3 to buy a hotel\t4 to sell a hotel\t5 to mortgage a property\t6 to lift mortgage ");
 			int choice;
-			int propertyIndex;
+			Integer propertyIndex;
 			
 			try {
 		        choice = Game.scanner.nextInt();
@@ -30,38 +30,37 @@ public class BankMenu {
                      return;
 				case 1 :
 					propertyIndex = PropertyOverlord.siteIndexSelector(player);
-					if(propertyIndex != 99) {
+					if(propertyIndex != null) {
 						PropertyOverlord.buildHouse(player, propertyIndex);
 					}
 					break;
 				case 2:
 					propertyIndex = PropertyOverlord.siteIndexSelector(player);
-					if(propertyIndex != 99) {
+					if(propertyIndex != null) {
 						PropertyOverlord.sellHouse(player, propertyIndex);
 					}
 					break;
 				case 3:
 					propertyIndex = PropertyOverlord.siteIndexSelector(player);
-					if(propertyIndex != 99) {
+					if(propertyIndex != null) {
 						PropertyOverlord.buildHotel(player, propertyIndex);
 					}
 					break;
 				case 4:
 					propertyIndex = PropertyOverlord.siteIndexSelector(player);
-					if(propertyIndex != 99) {
+					if(propertyIndex != null) {
 						PropertyOverlord.sellHotel(player, propertyIndex);
 					}
 					break;
 				case 5:
 					propertyIndex = PropertyOverlord.printMortgageOptions(player);
-					if(propertyIndex == 99) {
-						return;
+					if(propertyIndex != null) {
+						PropertyOverlord.mortgageProperty(player, propertyIndex);
 					}
-					PropertyOverlord.mortgageProperty(player, propertyIndex);
 					break;
 				case 6:
 					propertyIndex = PropertyOverlord.printMortgageOptions(player);
-					if(propertyIndex != 99) {
+					if(propertyIndex != null) {
 						PropertyOverlord.liftMortgage(player, propertyIndex);
 					}
 					break;

@@ -19,7 +19,7 @@ public class PlayerTest {
 	static String name;
 	static Player player;
 	static Game game;
-	
+
 	@BeforeClass
 	public static void BeforeClass() {
 		name = "Ronan";
