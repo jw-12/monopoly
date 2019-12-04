@@ -86,7 +86,7 @@ public class SitesTest {
 		
 		site.buySite(p1, 10); // buy site for 10
 		site.takeAction(p2, playerList);
-		assertEquals("rent changed when landing on unowned site",1498,p2.getAccountBalance());
+		assertEquals("rent charged when landing on unowned site",1498,p2.getAccountBalance());
 	}
 	
 	@Test
