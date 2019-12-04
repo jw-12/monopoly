@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,12 +20,8 @@ import jwrc.player.Player;
 public class SitesTest {
 	
 	static Game game;
-	static Sites site;
-	static Sites site2;
-	static ArrayList <Player> playerList;
-	Player p1 = new Player("Ronan");
-	Player p2 = new Player("James");
-	Player p3 = new Player("Gavin");
+	static Sites site, site2;
+	static Player p1,p2,p3;
 	
 	
 	@BeforeClass
@@ -41,16 +38,12 @@ public class SitesTest {
 		p1 = new Player("Ronan");
 		p2 = new Player("James");
 		p3 = new Player("Gavin");
-		playerList = new ArrayList<Player>();
-		playerList.add(p1);
-		playerList.add(p2);
-		playerList.add(p3);
+		Game.playerList.addAll(Arrays.asList(p1,p2,p3));
 	}
 	@After
 	public void tearDown() {
 		site = null;
 		site2 = null;
-		playerList = null;
 		game = null;
 		p1 = null;
 		p2 = null;
@@ -72,7 +65,7 @@ public class SitesTest {
 	@Test
 	public final void takeActionTest_Unowned_Site() {
 		System.out.println("(TEST INSTRUCTION)--Test case when the site is unowned. Enter 'y' to buy site---");
-		site.takeAction(p1, playerList);
+		site.takeAction(p1, Game.playerList);
 		assertEquals("account balance reduce by cost of site(med avenue: $60)",1440,p1.getAccountBalance());
 		assertEquals("site owner updated","Ronan",site.getOwner());
 	}
@@ -81,7 +74,7 @@ public class SitesTest {
 	public final void takeActionTest_You_Own_site() {
 		
 		site.buySite(p1, 10); // buy site for 10
-		site.takeAction(p1, playerList);
+		site.takeAction(p1, Game.playerList);
 		assertEquals("No action needed when you own the site, Balance remains unchanged",1490,p1.getAccountBalance());
 	}
 	
@@ -89,7 +82,7 @@ public class SitesTest {
 	public final void takeActionTest_Site_Owned_By_Another_Player() {
 		
 		site.buySite(p1, 10); // buy site for 10
-		site.takeAction(p2, playerList);
+		site.takeAction(p2, Game.playerList);
 		assertEquals("rent charged when landing on unowned site",1498,p2.getAccountBalance());
 	}
 	
@@ -98,7 +91,7 @@ public class SitesTest {
 		
 		site.buySite(p1, 60); // buy site for 60
 		PropertyOverlord.mortgageProperty(p1, 1);
-		site.takeAction(p2, playerList);
+		site.takeAction(p2, Game.playerList);
 		assertEquals("No rent when site is mortgaged",1500,p2.getAccountBalance());
 	}
 	

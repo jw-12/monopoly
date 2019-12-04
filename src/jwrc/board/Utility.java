@@ -58,7 +58,7 @@ public class Utility extends Property {
 				}
 			}
 			System.out.println("Owned by "+ payPlayer.getName());
-			if(player.getUtilitiesOwned() == 1) {
+			if(payPlayer.getUtilitiesOwned() == 1) {
 				payAmount = 4*(player.diceVal[0]+player.diceVal[1]);
 			}
 			else {
