@@ -23,8 +23,8 @@ public class Trade {
      * @param parts the ArrayList of Player's who will be bidding in the auction (taken to be in correct order)
      * @param property the Property object which is up for bidding
      */
-    public static void startAuction(ArrayList<Player> parts, Property property, Scanner input) {
-    	
+    public static void startAuction(ArrayList<Player> parts, Property property) {
+
     	ArrayList<Player> participants = new ArrayList<Player>(parts);
     		
         Player currentPlayer;
@@ -43,7 +43,7 @@ public class Trade {
 
             System.out.println(currentPlayer.getName() + " enter how much are you going to bid:");
             try {
-                currentBid = input.nextInt();
+                currentBid = Game.scanner.nextInt();
 
                 if (currentBid == 0) {
                     currentBid = previousBid;  // needs to be reset to previous non-zero value
@@ -64,7 +64,7 @@ public class Trade {
                 Collections.rotate(participants, -1);  // re-order participants list
 
             } catch (InputMismatchException e) {
-                input.next();
+                Game.scanner.next();
                 System.out.println("Must be an integer");
             }
         }
@@ -74,11 +74,10 @@ public class Trade {
         if (property instanceof Sites) {
         	((Sites) property).buySite(currentPlayer, currentBid);
         	 System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
-        }
-        else {
-        currentPlayer.changeAccountBalance(-currentBid, PaymentType.BANK);
-        property.changeOwner(currentPlayer.getName());
-        System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
+        } else {
+            currentPlayer.changeAccountBalance(-currentBid, PaymentType.BANK);
+            property.changeOwner(currentPlayer.getName());
+            System.out.println(currentPlayer.getName() + " you bought " + property.getName() + " for $" + currentBid);
         }
     }
 
@@ -155,16 +154,17 @@ public class Trade {
     public static void safeTrade(Player seller, Player buyer, Property p) {
 
         p.changeOwner(buyer.getName());
-        seller.removeProperty(p);
         buyer.addProperty(p);
+        seller.removeProperty(p);
 
         if(p instanceof TransportSpaces) {
             seller.changeTransportsOwned(-1);
             buyer.changeTransportsOwned(1);
-        }
-        else if(p instanceof Utility) {
+        } else if(p instanceof Utility) {
             seller.changeUtilitiesOwned(-1);
             buyer.changeUtilitiesOwned(1);
+        } else {
+            ((Sites) p).colourGroupCheck();
         }
     }
 

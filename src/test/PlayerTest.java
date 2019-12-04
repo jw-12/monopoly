@@ -29,6 +29,7 @@ public class PlayerTest {
 	public void setUp() throws Exception{
 		player = new Player(name);
 		System.out.println("SetUp");
+		Game game = Game.getInstance();
 	}
 
 	@Test
@@ -85,7 +86,7 @@ public class PlayerTest {
 
 	@Test
 	public void test_payToPlayer_transferOfProperites() {
-		//Game game = new Game();
+
 		Sites s1 = new Sites("Mediterranean Avenue", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
 		Sites s2 = new Sites("Other Ave", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
 		Utility u1 = new Utility("Water Works", 75, 28);

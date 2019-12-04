@@ -31,7 +31,8 @@ public class SitesTest {
 	@Before
 	public void setUp() throws Exception{
 		
-		//game = new Game();
+		
+		 game = Game.getInstance();
 		//board = new Board();
 		site = (Sites)Board.spaces.get(1);
 		site2 = (Sites)Board.spaces.get(3);

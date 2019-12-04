@@ -20,40 +20,40 @@ public class Utility extends Property {
 			System.out.println(this.getName() + " is currently mortgaged so no action is taken");
 			return;
 		}
-		if (player.getName() == this.getOwner()) {
+		if (player.getName().equals(this.getOwner())) {
 				System.out.println("You own this Utility.");
 				return;
 		}
-		else if(this.getOwner() == "null") {
+		else if(this.getOwner() == null) {
 			boolean exit = false;
 			while(!exit) {
-			System.out.println("Would you like to buy this Utility? Enter y/n. Cost = $"+ this.getCost());
-			String ans = Game.scanner.next();
-			switch(ans) {
-				case "y":
-					this.changeOwner(player.getName());
-					player.changeAccountBalance(-this.getCost(), PaymentType.BANK);
-					System.out.println(player.getName() + " your new balance is: $"+ player.getAccountBalance());
-					player.changeUtilitiesOwned(1);
-					player.addProperty(this);
-					exit = true;
-					break;
-				case "n":
-					System.out.println("Go to auction");
-					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
-					Trade.startAuction(auctionPlayers, this, Game.scanner);
-					exit = true;
-					break;
-				default:
-					System.out.println("not a valid input!");
+				System.out.println("Would you like to buy this Utility? Enter y/n. Cost = $"+ this.getCost());
+				String ans = Game.scanner.next();
+				switch(ans) {
+					case "y":
+						this.changeOwner(player.getName());
+						player.changeAccountBalance(-this.getCost(), PaymentType.BANK);
+						System.out.println(player.getName() + " your new balance is: $"+ player.getAccountBalance());
+						player.changeUtilitiesOwned(1);
+						player.addProperty(this);
+						exit = true;
+						break;
+					case "n":
+						System.out.println("Go to auction");
+						ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
+						Trade.startAuction(auctionPlayers, this);
+						exit = true;
+						break;
+					default:
+						System.out.println("not a valid input!");
+					}
 				}
-			}
 		}
 		else {
 			Player payPlayer = new Player("null");
 			int payAmount = 0;
 			for(Player p : players) {
-				if(p.getName() == this.getOwner()) {
+				if(p.getName().equals(this.getOwner())) {
 					payPlayer = p;
 				}
 			}
@@ -70,7 +70,7 @@ public class Utility extends Property {
 			System.out.println(payPlayer.getName()+ " your new balance is $"+ payPlayer.getAccountBalance());
 		}
 	}
-			
+
 	public void readDetails() {
 		System.out.println("This is a Utility called "+ this.getName() +" at board index " +this.getBoardIndex());
 	}

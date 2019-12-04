@@ -19,7 +19,7 @@ public abstract class Property extends BoardSpace implements Sellable {
 		this.name = name;
 		this.mortgageValue = mortgageValue;
 		this.cost = mortgageValue*2;
-		this.owner = "null";
+		this.owner = null;
 	}
 
 	public abstract void takeAction(Player player, ArrayList <Player> players);

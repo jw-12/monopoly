@@ -18,11 +18,11 @@ public class TransportSpaces extends Property {
 			System.out.println(this.getName() + " is currently mortgaged so no action is taken");
 			return;
 		}
-		if (player.getName() == this.getOwner()) {
+		if (player.getName().equals(this.getOwner())) {
 			System.out.println("You own this Transport.");
 			return;
 		}
-		else if(this.getOwner() == "null") {
+		else if(this.getOwner() == null) {
 			boolean exit = false;
 			while(!exit) {
 				System.out.println("Would you like to buy this Transport? Enter y/n. Cost = $"+ this.getCost());
@@ -39,7 +39,7 @@ public class TransportSpaces extends Property {
 				case "n":
 					System.out.println("Go to auction");
 					ArrayList<Player> auctionPlayers = new ArrayList<Player>(players);
-					Trade.startAuction(auctionPlayers, this, Game.scanner);
+					Trade.startAuction(auctionPlayers, this);
 					exit = true;
 					break;
 				default:
@@ -51,7 +51,7 @@ public class TransportSpaces extends Property {
 			Player payPlayer = new Player("null");
 			int payAmount = 0;
 			for(Player p : players) {
-				if(p.getName() == this.getOwner()) {
+				if(p.getName().equals(this.getOwner())) {
 					payPlayer = p;
 				}
 			}

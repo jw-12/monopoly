@@ -1,5 +1,7 @@
 package jwrc.menus;
 
+import jwrc.board.Property;
+import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.game.PropertyOverlord;
 import jwrc.player.Player;
@@ -57,8 +59,10 @@ public class BrokeMenu {
                     break;
                 case 4:
                     System.out.println("Declaring bankruptcy");
-                    //todo: player.liquidateAssets first
+                    Sites.liquidateBuildings(player);
                     Game.kickPlayerFromGame(player);
+
+                    for (Property property : player.getPropertiesOwned())
                     return;
             }
         }
