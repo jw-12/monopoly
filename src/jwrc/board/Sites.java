@@ -71,7 +71,7 @@ public class Sites extends Property {
 			Player payPlayer = new Player("null");
 			int payAmount = 0;
 			for(Player p : players) {
-				if(p.getName().equals(this.getOwner())) {
+				if(p.getName() == (this.getOwner())) {
 					payPlayer = p;
 				}
 			}

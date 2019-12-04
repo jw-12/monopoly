@@ -70,7 +70,7 @@ public class TransportSpaces extends Property {
 				payAmount = 200;
 				break;
 			}
-			System.out.println("You must pay $"+ payPlayer.getName() + " " +payAmount);
+			System.out.println("You must pay "+ payPlayer.getName() + " $" +payAmount);
 			payPlayer.payToPlayer(player, payAmount);
 			System.out.println(player.getName()+" your new balance is $"+player.getAccountBalance());
 			System.out.println(payPlayer.getName()+ " your new balance is $"+ payPlayer.getAccountBalance());

@@ -4,15 +4,10 @@ import jwrc.board.*;
 import jwrc.game.Game;
 import jwrc.game.Trade;
 import jwrc.player.Player;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,10 +18,16 @@ public class TradeTest {
     static Sites s1, s2;
     static Utility u1, u2;
     static TransportSpaces t1, t2;
+    static Board board;
 
     @BeforeClass
     public static void BeforeClass() {
-        Board board = new Board();
+        board = new Board();
+    }
+
+    @AfterClass
+    public static void AfterClass() {
+        board = null;
     }
 
     @Before

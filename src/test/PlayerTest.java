@@ -18,6 +18,7 @@ public class PlayerTest {
 	
 	static String name;
 	static Player player;
+	static Game game;
 	
 	@BeforeClass
 	public static void BeforeClass() {
@@ -74,6 +75,7 @@ public class PlayerTest {
 	@After
 	public void tearDown() {
 		player = null;
+		game = null;
 		System.out.println("Tear Down");
 	}
 	
@@ -85,7 +87,7 @@ public class PlayerTest {
 
 	@Test
 	public void test_payToPlayer_transferOfProperites() {
-		Game game = Game.getInstance();
+		game = Game.getInstance();
 		Sites s1 = new Sites("Mediterranean Avenue", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
 		Sites s2 = new Sites("Other Ave", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
 		Utility u1 = new Utility("Water Works", 75, 28);

@@ -21,6 +21,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
         switch (deckIndex) {
             case 0:
                 System.out.println("Advance to \"Go\". (Collect $200)");
+                player.changeAccountBalance(+200, PaymentType.BANK);
                 player.setBoardIndex(0);
                 break;
             case 1:
@@ -43,38 +44,25 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
                 i = player.getBoardIndex();
                 bs = Board.spaces.get(player.getBoardIndex());
-
                 while (!(bs instanceof Utility)) {
-                    bs = Board.spaces.get((player.getBoardIndex() + (++i)) % 40); // overflows
+                    bs = Board.spaces.get((++i) % 40); // overflows
                 }
-
                 if (i >= 40) {
                     player.changeAccountBalance(+200, PaymentType.BANK);
                 }
-
                 player.setBoardIndex(i % 40);
                 Turn.movePlayerForward(player, players);
-
-                /*
-                * todo: ensure Utility.takeAction requires you to roll dice in this case
-                *  Could ensure this by requiring a diceVal as a prop in the function for Utility.takeAction
-                * This would allow us to specify externally what the dice val would be
-                * */
-
                 break;
             case 4:
                 System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which he/she {he} is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
                 i = player.getBoardIndex();
                 bs = Board.spaces.get(player.getBoardIndex());
-
                 while (!(bs instanceof TransportSpaces)) {
-                    bs = Board.spaces.get((player.getBoardIndex() + (++i)) % 40); // overflows
+                    bs = Board.spaces.get((++i) % 40); // overflows                }
                 }
-
                 if (i >= 40) {
                     player.changeAccountBalance(+200, PaymentType.BANK);
                 }
-
                 player.setBoardIndex(i % 40);
                 Turn.movePlayerForward(player, players);
                 break;
