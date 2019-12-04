@@ -4,6 +4,7 @@ import jwrc.board.Property;
 import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.game.PropertyOverlord;
+import jwrc.game.Trade;
 import jwrc.player.Player;
 
 import java.util.ArrayList;
@@ -59,10 +60,12 @@ public class BrokeMenu {
                     break;
                 case 4:
                     System.out.println("Declaring bankruptcy");
-                    Sites.liquidateBuildings(player);
+                    Sites.liquidateBuildings(player); //remove houses and hotels
                     Game.kickPlayerFromGame(player);
 
-                    for (Property property : player.getPropertiesOwned())
+                    for (Property property : player.getPropertiesOwned()) {
+                        Trade.startAuction(otherPlayers, property);
+                    }
                     return;
             }
         }

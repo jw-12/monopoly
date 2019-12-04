@@ -37,6 +37,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                     player.changeAccountBalance(+200, PaymentType.BANK);
                 }
                 player.setBoardIndex(11);
+                Turn.movePlayerForward(player, players);
                 break;
             case 3:
                 System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.");
@@ -135,9 +136,8 @@ public class Chance extends BoardSpace implements RandomizedSpace {
 
                 break;
             case 14:
-                System.out.println("Your building {and} loan matures. Receive {Collect} $150.");
-                System.out.println("TO BE IMPLEMENTED");
-                //todo: implement
+                System.out.println("Your building loan matures. Receive $150.");
+                player.changeAccountBalance(+150, PaymentType.BANK);
                 break;
             case 15:
                 System.out.println("You have won a crossword competition. Collect $100.");
