@@ -13,9 +13,8 @@ public class Sites extends Property {
 	public int noOfHouses;
 	private int houseCost;
 	public boolean hasHotel;
-	private int[] rentValues;//need to implement when all sites of same colour are owned.
+	private int[] rentValues;
 	public int rentIndex;
-	//need to add hotelPrice on instantiation. For now just use house price.
 	
 
 	public Sites(String name, int mortgageValue, int index, String colour, int[] rentValues, int houseCost) {
@@ -28,7 +27,6 @@ public class Sites extends Property {
 		this.rentIndex = 0;
 		this.houseCost = houseCost;
 	}
-	
 	
 	/*
 	* Define what actions take place when the player lands on any property.

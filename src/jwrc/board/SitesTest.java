@@ -9,13 +9,14 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import jwrc.game.Game;
 import jwrc.player.Player;
 
 public class SitesTest {
 	
-	
+	static Game game;
 	static Sites site;
+	static Sites site2;
 	static ArrayList <Player> playerList;
 	Player p1 = new Player("Ronan");
 	Player p2 = new Player("James");
@@ -29,7 +30,11 @@ public class SitesTest {
 	
 	@Before
 	public void setUp() throws Exception{
-		site = new Sites("Mediterranean Avenue", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
+		
+		//game = new Game();
+		//board = new Board();
+		site = (Sites)Board.spaces.get(1);
+		site2 = (Sites)Board.spaces.get(3);
 		p1 = new Player("Ronan");
 		p2 = new Player("James");
 		p3 = new Player("Gavin");
@@ -41,8 +46,12 @@ public class SitesTest {
 	@After
 	public void tearDown() {
 		site = null;
+		site2 = null;
 		playerList = null;
-		System.out.println("Tear Down");
+		game = null;
+		p1 = null;
+		p2 = null;
+		p3 = null;
 	}
 	
 	@AfterClass
@@ -54,6 +63,23 @@ public class SitesTest {
 	public final void getHouseCostTest() {
 		assertEquals("test house cost return method",50,site.getHouseCost());
 		
+	}
+	@Test
+	public final void takeActionTest() {
+		
+		site.takeAction(p1, playerList);
+		assertEquals(1440,p1.getAccountBalance());
+	}
+	
+	
+	@Test
+	public final void colourGroupCheckTest() {  // rent index increased when a colour set is owned by a player.
+		site.buySite(p1, 60);
+		assertEquals("lowest rent when only 1 brown site is owned",2,site.getRentCost());
+		site2.buySite(p1, 60); // rent increase as colour set is now owned by Player p1.
+		
+		System.out.println("site1: "+site.getOwner()+" site2: "+site2.getOwner());
+		assertEquals("rent increased when colour set is owned",4,site2.getRentCost());
 	}
 	
 	@Test

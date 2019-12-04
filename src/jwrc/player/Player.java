@@ -46,7 +46,7 @@ public class Player {
 
     public void evaluatePosition(int inputDiceVal) {
         this.boardIndex += inputDiceVal;
-
+        
         // passing 'GO'
         if(this.boardIndex >= 40) {
             this.boardIndex = this.boardIndex % 40;
