@@ -58,6 +58,7 @@ public class EndGameTest {
         p2 = null;
         p3 = null;
         p4 = null;
+        Game.playerList = null;
     }
 
     @Test
