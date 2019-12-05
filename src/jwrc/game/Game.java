@@ -1,6 +1,8 @@
 package jwrc.game;
 
 import jwrc.board.Board;
+import jwrc.board.Sites;
+import jwrc.board.Property;
 import jwrc.player.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,9 +92,18 @@ public class Game {
         System.out.println("Remaining players:");
 
         for (Player p : playerList) {
-            System.out.println(p.getName() + " with valuation of: $ " + p.getAccountBalance());
+        	int value = 0;
+        	value = p.getAccountBalance() + 2*(Sites.liquidateBuildings(p));
+        	for(Property prop : p.getPropertiesOwned()) {
+        		if(prop.mortgageActive) {
+        			value += prop.getmortgageValue();
+        		}
+        		else {
+        			value += 2*(prop.getmortgageValue());
+        		}
+        	}
+            System.out.println(p.getName() + " with valuation of: $ " + value);
         }
-
         System.out.println("Highest valued player wins!");
     }
 

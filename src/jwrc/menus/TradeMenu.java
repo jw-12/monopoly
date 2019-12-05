@@ -2,6 +2,7 @@ package jwrc.menus;
 
 import jwrc.board.Property;
 import jwrc.game.Game;
+import jwrc.board.Sites;
 import jwrc.game.Trade;
 import jwrc.player.Player;
 
@@ -98,6 +99,12 @@ public class TradeMenu {
                     System.out.println("Invalid index");
                     continue;
                 }
+            }
+            if(pToSell instanceof Sites) {
+            	if(((Sites) pToSell).hasHotel || ((Sites)pToSell).getNoOfHouses() > 0) {
+            		System.out.println("You must remove building from "+pToSell.getName()+" before trading.");
+            		continue;
+            	}
             }
 
             System.out.println("--------Who would you like to sell this property to?");
