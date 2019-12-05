@@ -1,83 +1,65 @@
 package jwrc.game;
-import jwrc.board.Board;
-import jwrc.board.Property;
-import jwrc.board.Sites;
 import jwrc.player.*;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
+import jwrc.board.*;
 
 public class PropertyOverlord {
 	
 	public static int numOfHouses=32;
-	
 	public PropertyOverlord() {
 		
 	}
 	
-	public static int siteIndexSelector(Player p) {
+	public static Integer siteIndexSelector(Player p) {
 		
 		ArrayList<Sites> sitesArrayList = p.getSites();
 		
 		
 		if(sitesArrayList.isEmpty()) {
 			System.out.println("You own no Sites yet!");
-			return 99;
+			return null;
 		}
 		
 		System.out.println("These are the Sites you own and their corresponding board position.\nPlease enter the position of the site you would like to take action on:");
 		p.readSites();
-		int choice = 99;       // set 99 as an error code to stop action.
 		boolean check = false;
 		
-		try {
-            choice = Game.scanner.nextInt();
-            for(Sites s : sitesArrayList) {
-    			if(s.getBoardIndex() == choice) {
-    				check = true;
-    			}
-    		}
-    		if(!check) {
-    			System.out.println("Not a valid choice of board index");
-    			return 99;
-    		}
+        Integer choice = Game.scanner.nextInt();
+        for(Sites s : sitesArrayList) {
+			if(s.getBoardIndex() == choice) {
+				check = true;
+			}
+		}
+		if(!check) {
+			System.out.println("Not a valid choice of board index");
+			return null;
+		}
             
-        } catch (InputMismatchException e) {
-            Game.scanner.next();
-            System.out.println("Must enter an integer");
-        }
 		return choice;
 	}
 	
-	public static int printMortgageOptions(Player p) {
+	public static Integer printMortgageOptions(Player p) {
 		ArrayList<Property> propertyArrayList = p.getPropertiesOwned();
 		System.out.println("These are the properties you own and their corresponding board position.\nPlease enter the position of the property you would like to take action on:");
 		p.readProperties();
-		int choice = 99;       // set 99 as an error code to stop action.
 		boolean check = false;
-		
-		try {
-            choice = Game.scanner.nextInt();
-            for(Property property : propertyArrayList) {
-    			if(property.getBoardIndex() == choice) {
-    				if(property instanceof Sites) {
-    					if(((Sites) property).getNoOfHouses() !=0) {
-    						System.out.println("You must sell all houses from "+ property.getName()+ " before you can mortgage");
-    						return 99;
-    					}
-    				}
-    				check = true;
-    			}
-    		}
-    		if(!check) {
-    			System.out.println("Not a valid choice of board index");
-    			return 99;
-    		}
-            
-        }catch (InputMismatchException e) {
-            Game.scanner.next();
-            System.out.println("Must enter an integer");
-        }
+        Integer choice = Game.scanner.nextInt();
+        for(Property property : propertyArrayList) {
+			if(property.getBoardIndex() == choice) {
+				if(property instanceof Sites) {
+					if(((Sites) property).getNoOfHouses() !=0) {
+						System.out.println("You must sell all houses from "+ property.getName()+ " before you can mortgage");
+						return null;
+					}
+				}
+				check = true;
+			}
+		}
+		if(!check) {
+			System.out.println("Not a valid choice of board index");
+			return null;
+		}
 		return choice;
 	}
 	
@@ -103,7 +85,7 @@ public class PropertyOverlord {
 	public static void liftMortgage(Player player, int propertyIndex) {
 		Property prop = (Property)Board.spaces.get(propertyIndex);
 		if(!prop.mortgageActive) {
-			System.out.println(prop.getName()+" has not been mortgaged");
+			System.out.println(prop.getName()+" has not been mportgaged");
 			return;
 		}
 		else {
@@ -180,6 +162,7 @@ public class PropertyOverlord {
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		if(site.getNoOfHouses() == 0){
 			System.out.println("You have no houses on "+site.getName()+ " to sell");
+			return;
 		}
 		if(!PropertyOverlord.siteColourChecks(player, siteIndex, 1)) {
 			return;
@@ -188,7 +171,7 @@ public class PropertyOverlord {
 		numOfHouses++;
 		site.removeHouse();
 		int houseVal = site.getHouseCost()/2;
-		player.changeAccountBalance(houseVal, PaymentType.BANK);
+		player.changeAccountBalance(houseVal,PaymentType.BANK);
 		System.out.println(houseVal + " has been added to your bank account.");
 	}
 	
@@ -196,6 +179,7 @@ public class PropertyOverlord {
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		if(!site.hasHotel) {
 			System.out.println("you do not have a hotel to sell!");
+			return;
 		}
 		if(numOfHouses < 4) {
 			System.out.println("Not enough houses remain to replace a hotel. Consider selling some houses first");
@@ -204,8 +188,8 @@ public class PropertyOverlord {
 		
 		site.hasHotel = false;
 		site.noOfHouses = 4;
-		int hotelVal = (site.getHouseCost())/2; // change when I add hotel cost to the sites.
-		player.changeAccountBalance(hotelVal, PaymentType.BANK);
+		int hotelVal = (site.getHouseCost())/2;
+		player.changeAccountBalance(hotelVal,PaymentType.BANK);
 		System.out.println("$"+hotelVal + " has been added to your bank account.");
 		numOfHouses -=4;
 		site.rentIndex--;
@@ -227,8 +211,8 @@ public class PropertyOverlord {
 			site.noOfHouses = 0;
 			numOfHouses+=4;
 			site.hasHotel = true;
-			player.changeAccountBalance(-site.getHouseCost(), PaymentType.BANK);
-			System.out.println("Hotel build on "+ site.getName());
+			player.changeAccountBalance(-site.getHouseCost(),PaymentType.BANK);
+			System.out.println("Hotel built on "+ site.getName());
 		}
 		else {
 			System.out.println("You must build 4 houses on this site before building a hotel");
@@ -254,7 +238,7 @@ public class PropertyOverlord {
 			System.out.println("You have reached the maximum number of houses for this Site");
 			return;
 		}
-		if(site.getOwner() == null) {
+		if(site.getOwner().equals("null")) {
 			System.out.println("you cannot build on unowned sites");
 			return;
 		}
@@ -264,7 +248,7 @@ public class PropertyOverlord {
 		System.out.println("House built on "+ site.getName());
 		System.out.println("Previous rent cost was $"+ site.getRentCost());
 		numOfHouses--;
-		player.changeAccountBalance(-site.getHouseCost(), PaymentType.BANK);
+		player.changeAccountBalance(-site.getHouseCost(),PaymentType.BANK);
 		site.addHouse();
 		System.out.println("New rent cost is $"+ site.getRentCost());
 	}
