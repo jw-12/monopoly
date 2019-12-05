@@ -36,17 +36,13 @@ public class Turn {
         player.printPlayerDetails();
 
         while (!endTurn && !player.isKicked) {
-
             inJail = player.getJailStatus();
-
             if (inJail) {
                 promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t4 to use \"Get Out of Jail Free\" card\t5 to pay bail";
             } else {
                 promptString = player.getName() + ": 0 to roll the dice\t1 to trade\t2 to open bank options\t3 to end turn\t9 to print details";
             }
-
             System.out.println(promptString);
-
             try {
                 userInput = Game.scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -54,46 +50,11 @@ public class Turn {
                 System.out.println("Must enter an integer");
                 continue;
             }
-
             switch (userInput) {
                 case 0:
-                    //roll
-                    if (player.hasRolled) {
-                        System.out.println("You have already rolled on this turn, can't roll again.");
-                        break;
-                    }
-                    player.rollDice();
-                    player.hasRolled = true;
-                    System.out.println("Rolled a " + player.diceVal[0] + " and a " + player.diceVal[1]);
-                    if (inJail) {
-                        tryLeaveJail(player, playerList, player.diceVal);
-                    } else {
-
-                        //player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-                        player.evaluatePosition(1);
-
-                        if (player.getBoardIndex() == 30) {
-                            endTurn = true;
-                        } else if (player.diceVal[0] == player.diceVal[1]) {
-                            System.out.println("You have rolled doubles, and get to go again.");
-                            player.hasRolled = false;  // as if player has not rolled yet
-                            player.setDoubles(player.getDoubles() + 1);
-
-                            if (player.getDoubles() >= 3) {
-                                //three in succession
-                                System.out.println("You have been caught speeding (rolling three doubles in succession). Go straight to jail.");
-                                player.sendToJail();
-                                endTurn = true;
-                                break;
-                            }
-                        }
-
-                        System.out.println("Moved to position: " + player.getBoardIndex());
-                        movePlayerForward(player, playerList);
-                    }
+                    endTurn = this.rolledDice(player);
                     break;
                 case 1:
-                    //trade
                     TradeMenu.options(player, playerList);
                     break;
                 case 2:
@@ -106,32 +67,22 @@ public class Turn {
                     } else {
                         System.out.println("You must roll the dice before being able to end your turn");
                     }
-                    break;             
-                    /*
-                    * todo: collapse 4 and 5 into JailOptions
-                    * */
-
+                    break;
                 case 4:
                     //get out of jail free card
                     if (inJail) {
-                        System.out.println("<Use Get out of Jail Free Card> (not implemented)");
-                        break;
+                        this.tryUseGOOJFCard(player);
+                    } else {
+                        System.out.println("You're not in jail");
                     }
+                    break;
                 case 5:
                     //pay out of jail
                     if (inJail) {
-                        if (player.getAccountBalance() >= 50) {
-                            System.out.println("Paying bail of $50. You have now been released from jail.");
-                            player.changeAccountBalance(-50, PaymentType.BANK);
-                            System.out.println("New account balance: " + player.getAccountBalance());
-                            player.changeJailStatus();
-                        } else {
-                            System.out.println("Insufficient balance to post bail.");
-                        }
+                        this.tryPostBail(player);
                     }
                     break;
                 case 9:
-                	//print details
                 	DetailsMenu.playerDetails(player, playerList);
                 	break;
                 default:
@@ -174,16 +125,74 @@ public class Turn {
             System.out.println("You rolled doubles and have escaped from jail.");
             currentPlayer.changeJailStatus();  // freed from jail
             currentPlayer.evaluatePosition(diceVal[0] + diceVal[1]);
+            currentPlayer.setTurnsInJail(0);
             movePlayerForward(currentPlayer, playerList);
-        } else if (currentPlayer.getTurnsInJail() >= 2) {  //todo: set as macro
+        } else if (currentPlayer.getTurnsInJail() >= 2) {
             System.out.println("3rd Turn in Jail. Deducting $50 from your account.");
 
             //force payment of fine. If insufficient balance, then player forced to liquidate assets first
-            currentPlayer.changeAccountBalance(-50, PaymentType.BANK);  //todo: set as macro
+            currentPlayer.changeAccountBalance(-50, PaymentType.BANK);
             currentPlayer.changeJailStatus();
+            currentPlayer.setTurnsInJail(0);
         } else {
             System.out.println("You have failed to escape from jail.");
             currentPlayer.setTurnsInJail(currentPlayer.getTurnsInJail() + 1);
+        }
+    }
+
+    public boolean rolledDice(Player player) {
+
+        if (player.hasRolled) {
+            System.out.println("You have already rolled on this turn, can't roll again.");
+            return false;
+        }
+        player.rollDice();
+        player.hasRolled = true;
+        System.out.println("Rolled a " + player.diceVal[0] + " and a " + player.diceVal[1]);
+        if (player.getJailStatus()) {
+            tryLeaveJail(player, Game.playerList, player.diceVal);
+            return false;
+        } else {
+            player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+            if (player.getBoardIndex() == 30) {
+                return true;
+            } else if (player.diceVal[0] == player.diceVal[1]) {
+                System.out.println("You have rolled doubles, and get to go again.");
+                player.hasRolled = false;  // as if player has not rolled yet
+                player.setDoubles(player.getDoubles() + 1);
+                if (player.getDoubles() >= 3) {
+                    //three in succession
+                    System.out.println("You have been caught speeding (rolling three doubles in succession). Go straight to jail.");
+                    player.sendToJail();
+                    return true;
+                }
+            }
+            System.out.println("Moved to position: " + player.getBoardIndex());
+            movePlayerForward(player, Game.playerList);
+            return false;
+        }
+    }
+
+    public void tryPostBail(Player player) {
+        if (player.getAccountBalance() >= 50) {
+            System.out.println("Paying bail of $50. You have now been released from jail.");
+            player.changeAccountBalance(-50, PaymentType.BANK);
+            System.out.println("New account balance: " + player.getAccountBalance());
+            player.changeJailStatus();
+            player.setTurnsInJail(0);
+        } else {
+            System.out.println("Insufficient balance to post bail.");
+        }
+    }
+
+    public void tryUseGOOJFCard(Player player) {
+        if (player.getGetOutOfJailFreeCard() > 0) {
+            player.setGetOutOfJailFreeCard(player.getGetOutOfJailFreeCard() - 1);
+            player.changeJailStatus();
+            System.out.println("You have used a card and are freed from jail");
+            player.setTurnsInJail(0);
+        } else {
+            System.out.println("You do not have a card to use");
         }
     }
 }
