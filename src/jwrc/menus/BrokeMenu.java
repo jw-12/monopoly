@@ -23,7 +23,7 @@ public class BrokeMenu {
      */
     public static void options(Player player, ArrayList<Player> players, int cost) {
 
-        int selectedSiteIndex;
+        Integer selectedSiteIndex;
         int inputInt;
         ArrayList<Player> otherPlayers = new ArrayList<>(players);
         otherPlayers.remove(player);  //otherPlayers is every player except the current player
@@ -50,7 +50,7 @@ public class BrokeMenu {
                     break;
                 case 2:
                     System.out.println("Sell houses/hotels here");
-                    if ((selectedSiteIndex = PropertyOverlord.siteIndexSelector(player)) == 99) {
+                    if ((selectedSiteIndex = PropertyOverlord.siteIndexSelector(player)) == null) {
                         break;
                     }
                     PropertyOverlord.sellHouse(player, selectedSiteIndex);

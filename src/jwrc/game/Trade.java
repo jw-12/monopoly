@@ -1,6 +1,7 @@
 package jwrc.game;
 
 import jwrc.board.Sites;
+import jwrc.board.Board;
 import jwrc.board.Property;
 import jwrc.board.TransportSpaces;
 import jwrc.player.PaymentType;
@@ -164,9 +165,15 @@ public class Trade {
             seller.changeUtilitiesOwned(-1);
             buyer.changeUtilitiesOwned(1);
         } else {
-            ((Sites) p).colourGroupCheck();
+        	if(((Sites) p).fullSet) {
+        		String siteKey = ((Sites) p).getColour();
+        		ArrayList<Sites> temp = Board.map.get(siteKey);
+        		for(int i=0 ; i<temp.size(); i++) {
+        			temp.get(i).fullSet = false;
+        			temp.get(i).rentIndex--;
+        		}
+        	}
+        	((Sites) p).colourGroupCheck();
         }
     }
-
 }
-

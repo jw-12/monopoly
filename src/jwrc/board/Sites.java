@@ -15,6 +15,7 @@ public class Sites extends Property {
 	public boolean hasHotel;
 	private int[] rentValues;
 	public int rentIndex;
+	public boolean fullSet;
 	
 
 	public Sites(String name, int mortgageValue, int index, String colour, int[] rentValues, int houseCost) {
@@ -26,6 +27,7 @@ public class Sites extends Property {
 		this.rentValues = rentValues;
 		this.rentIndex = 0;
 		this.houseCost = houseCost;
+		this.fullSet = false;
 	}
 	
 	/*
@@ -106,6 +108,7 @@ public class Sites extends Property {
 		}
 		for(int i=0 ; i<temp.size(); i++) {
 			temp.get(i).rentIndex++;
+			temp.get(i).fullSet = true;
 		}
 		System.out.println("You now own all Sites of colour "+ this.getColour()+". Rent has increased and you can now build Houses");
 		
