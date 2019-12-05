@@ -38,7 +38,7 @@ public class SitesTest {
 		p1 = new Player("Ronan");
 		p2 = new Player("James");
 		p3 = new Player("Gavin");
-		Game.playerList.addAll(Arrays.asList(p1,p2,p3));
+		Game.playerList = new ArrayList<>(Arrays.asList(p1,p2,p3));
 	}
 	@After
 	public void tearDown() {
@@ -48,7 +48,7 @@ public class SitesTest {
 		p1 = null;
 		p2 = null;
 		p3 = null;
-		game = null;
+		Game.playerList = null;
 	}
 	
 	@AfterClass

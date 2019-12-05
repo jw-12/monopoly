@@ -30,6 +30,8 @@ public class UtilityTest {
 
 	@AfterClass
 	public static void tearDownAfterClass(){
+		game = null;
+		Game.playerList = null;
 	}
 
 	@Before
@@ -41,7 +43,7 @@ public class UtilityTest {
 		p1 = new Player("Ronan");
 		p2 = new Player("James");
 		p3 = new Player("Gavin");
-		Game.playerList.addAll(Arrays.asList(p1,p2,p3));
+		Game.playerList = new ArrayList<>(Arrays.asList(p1,p2,p3));
 	}
 
 	@After
@@ -49,10 +51,10 @@ public class UtilityTest {
 		utility1 = null;
 		utility2 = null;
 		game = null;
+		Game.playerList = null;
 		p1 = null;
 		p2 = null;
 		p3 = null;
-		game = null;
 	}
 	
 

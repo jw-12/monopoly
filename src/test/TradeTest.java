@@ -37,6 +37,7 @@ public class TradeTest {
         p2 = new Player("Player2");
         p3 = new Player("Player3");
         p4 = new Player("Player4");
+        Game.playerList = new ArrayList<>();
         Game.playerList.addAll(Arrays.asList(p1,p2,p3,p4));
         s1 = new Sites("Mediterranean Avenue", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);
         s2 = new Sites("Other Ave", 30, 1, "Brown", new int[]{2, 4, 10, 30, 90, 160, 250}, 50);

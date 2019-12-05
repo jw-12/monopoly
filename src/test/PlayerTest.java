@@ -76,12 +76,14 @@ public class PlayerTest {
 	public void tearDown() {
 		player = null;
 		game = null;
-		System.out.println("Tear Down");
+		Game.playerList = null;
 	}
 	
 	@AfterClass
 	public static void AfterClass(){
 		name = null;
+		game = null;
+		Game.playerList = null;
 		System.out.println("AfterClass");
 	}
 

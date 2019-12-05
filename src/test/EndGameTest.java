@@ -43,6 +43,7 @@ public class EndGameTest {
         p2 = new Player("Player2");
         p3 = new Player("Player3");
         p4 = new Player("Player4");
+        Game.playerList = new ArrayList<>();
         Game.playerList.add(p1);
         Game.playerList.add(p2);
         Game.playerList.add(p3);
