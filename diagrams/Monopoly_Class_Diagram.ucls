@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="jwrc.board.BlankSpace" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/BlankSpace.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1032" y="412"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="jwrc.board.Board" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Board.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="140" width="234" x="1827" y="151"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="jwrc.board.BoardSpace" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/BoardSpace.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="802" y="120"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="jwrc.board.Chance" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Chance.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="154" y="421"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="jwrc.board.CommunityChest" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/CommunityChest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="420" y="422"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="jwrc.board.GoToJail" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/GoToJail.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="840" y="389"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="jwrc.board.Penalties" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Penalties.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="685" y="456"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="jwrc.board.Property" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Property.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="303" width="229" x="1148" y="190"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="jwrc.board.RandomizedSpace" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/RandomizedSpace.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="218" y="80"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="jwrc.board.Sellable" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Sellable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1580" y="84"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="jwrc.board.Sites" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Sites.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="407" width="227" x="1377" y="646"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="jwrc.board.TransportSpaces" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/TransportSpaces.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="922" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="jwrc.board.Utility" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/board/Utility.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="227" x="1112" y="658"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="jwrc.game.Game" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/game/Game.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1743" y="447"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="jwrc.game.PropertyOverlord" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/game/PropertyOverlord.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="269" width="216" x="60" y="1266"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="jwrc.game.Trade" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/game/Trade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="490" y="1362"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="jwrc.game.Turn" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/game/Turn.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1002" y="1394"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="jwrc.menus.BankMenu" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/menus/BankMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="108" width="122" x="303" y="1067"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="jwrc.menus.BrokeMenu" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/menus/BrokeMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="118" y="1032"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="jwrc.menus.DetailsMenu" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/menus/DetailsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="211" x="527" y="1080"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="jwrc.menus.Menuable" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/menus/Menuable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="330" y="634"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="jwrc.menus.TradeMenu" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/menus/TradeMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="838" y="966"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="jwrc.player.Player" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/player/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="613" width="251" x="1915" y="684"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="24" language="java" name="jwrc.player.PaymentType" project="jwrc1_monopoly" 
+    file="/jwrc1_monopoly/src/jwrc/player/PaymentType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="756" y="1348"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <realization id="25">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="26">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="31" name="playerList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="35" name="spaces">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="36" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="38">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="39" name="propertiesOwned">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="42" name="uniqueInstance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="47">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="52">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="53" name="board">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
