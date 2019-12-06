@@ -55,7 +55,7 @@ public class Game {
         this.board = new Board(); //initialize board component
 
         /* user interaction getting names etc*/
-        System.out.println("------------------------------------------------\n\t\t\tWelcome to Monopoly!\n------------------------------------------------");
+        System.out.println("------------------------------------------------\n\t\tWelcome to Monopoly!\n------------------------------------------------");
         // ensure valid number before proceeding
         int maxPlayers = 6;
         int minPlayers = 2;
