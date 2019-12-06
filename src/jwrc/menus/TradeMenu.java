@@ -24,8 +24,8 @@ public class TradeMenu implements Menuable {
     /**
      * Handle user input and flow through the trading options they currently have. Acts as a skeleton for
      * the different trading functions.
-     * @param player
-     * @param players
+     * @param player the current active player
+     * @param players the current list of players in the game
      */
     public static void options(Player player, ArrayList<Player> players) {
         /*

@@ -16,7 +16,7 @@ public class TransportSpaces extends Property {
 	/**
 	 * This Constructs a Transport with specified name, mortgage value and board index.
 	 * @param name The name of the Transport.
-	 * @param mortageValue The mortgage value of the Transport.
+	 * @param mortgageValue The mortgage value of the Transport.
 	 * @param index The board index of the Transport.
 	 */
 	public TransportSpaces(String name, int mortgageValue, int index) {
