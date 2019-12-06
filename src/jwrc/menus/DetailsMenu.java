@@ -1,8 +1,6 @@
 package jwrc.menus;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-
 import jwrc.board.Sites;
 import jwrc.board.TransportSpaces;
 import jwrc.board.Utility;
@@ -10,15 +8,13 @@ import jwrc.game.Game;
 import jwrc.player.Player;
 import jwrc.board.Property;
 
-public class DetailsMenu {
+public class DetailsMenu implements Menuable {
 	
 	DetailsMenu() {
 
-	    }
-	
-	
-	public static void playerDetails(Player player, ArrayList<Player> players) {
-		
+	}
+
+	public static void options(Player player, ArrayList<Player> players) {
 		while(true) {
 			String playerName;
 			Player chosenPlayer = null;
@@ -54,7 +50,7 @@ public class DetailsMenu {
 	}
 	
 	
-	public static void readProperties(Player player) {
+	private static void readProperties(Player player) {
 		
 		ArrayList<Property> props = player.getPropertiesOwned();
 		System.out.println("\t|     Sites \t|");

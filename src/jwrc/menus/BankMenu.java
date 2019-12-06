@@ -6,13 +6,27 @@ import jwrc.game.PropertyOverlord;
 import jwrc.game.Game;
 import jwrc.player.Player;
 
-public class BankMenu { 
-	
-	
+
+/**
+ * Handles user input and interactions relating to the Bank functionality
+ * e.g. buying house/hotel, mortgage
+ */
+public class BankMenu implements Menuable {
+
+
+	/**
+	 * constructor for the menu
+	 */
 	public BankMenu() {
-		
+
 	}
-	
+
+	/**
+	 * Allow user navigate through their options to perform actions.
+	 * Override the interface method in Menuable
+	 * @param player the current active player relating to the user
+	 *                that is navigating the menu
+	 */
 	public static void options(Player player) {
 		
 		while(true) {
@@ -67,8 +81,11 @@ public class BankMenu {
 				default:
 					System.out.println("Invalid");
 					break;
-			}   
-		        
+				}
+
+				/*
+				* catch exception if user enters a non integer input
+				* */
 		    } catch (InputMismatchException e) {
 		        Game.scanner.next();
 		        System.out.println("invalid option");

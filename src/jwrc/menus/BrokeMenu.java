@@ -10,14 +10,18 @@ import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class BrokeMenu {
+public class BrokeMenu implements Menuable {
 
+    /**
+     * constructor for Broke Menu
+     */
     BrokeMenu() {
 
     }
 
     /**
      * Menu offering selling/mortgaging options to a player who does not have sufficient money to proceed
+     * Should only access this menu through Bank transaction failure as per specification.
      * @param player the player who needs to acquire money
      * @param cost the cost of the transaction in question
      */
@@ -28,6 +32,9 @@ public class BrokeMenu {
         ArrayList<Player> otherPlayers = new ArrayList<>(players);
         otherPlayers.remove(player);  //otherPlayers is every player except the current player
 
+        /*
+        * Can't leave this menu until they have sufficient money to proceed or they declare bankruptcy
+        * */
         while(player.getAccountBalance() < cost) {
             System.out.println("You do not currently have a sufficient account balance to proceed. You are required to liquidate some assets before proceeding.");
             System.out.println("Your current balance is: " + player.getAccountBalance());

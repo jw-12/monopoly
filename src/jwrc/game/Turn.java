@@ -106,7 +106,7 @@ public class Turn {
                     }
                     break;
                 case 9:
-                	DetailsMenu.playerDetails(player, playerList);
+                	DetailsMenu.options(player, playerList);
                 	break;
                 default:
                     System.out.println("Invalid entry");
@@ -197,8 +197,7 @@ public class Turn {
             tryLeaveJail(player, Game.playerList, player.diceVal);
             return false;
         } else {
-            player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-            //player.evaluatePosition(30); todo:REMOVE
+            player.evaluatePosition(player.diceVal[0] + player.diceVal[1]); // find position they land on
 
             if (player.getBoardIndex() == 30) {  //landed on GOTOJAIL
                 System.out.println("Moved to position: " + player.getBoardIndex());

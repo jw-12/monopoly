@@ -12,14 +12,21 @@ import java.util.InputMismatchException;
 /**
  * Handles all the human interaction with the trading functionality on each turn and otherwise
  */
+public class TradeMenu implements Menuable {
 
-//todo: maybe make a menuable interface
-public class TradeMenu {
-
+    /**
+     * Constructor for TradeMenu
+     */
     TradeMenu() {
 
     }
 
+    /**
+     * Handle user input and flow through the trading options they currently have. Acts as a skeleton for
+     * the different trading functions.
+     * @param player
+     * @param players
+     */
     public static void options(Player player, ArrayList<Player> players) {
         /*
          * otherPlayers is every player except for the current player
@@ -28,8 +35,8 @@ public class TradeMenu {
         otherPlayers.remove(player);
 
         int inputInt;
-        Player otherPlayer;
 
+        /* Stay in the menu until they exit with a 0 input */
         while(true) {
             System.out.println("----<"+ player.getName() + "-TRADE MENU>");
             System.out.println("----0 to exit, 1 to sell a property, 2 to buy a \"Get Out of Jail Free\" card, 3 to sell a \"Get Out of Jail Free\" card");
@@ -58,25 +65,27 @@ public class TradeMenu {
         }
     }
 
-    //todo: perhaps package-private or something
-    public static void sellPropertyCase(Player player, ArrayList<Player> otherPlayers) {
+    /**
+     * Represents the actions to be carried out when a user is trying to sell a property
+     * to another player
+     * @param player player trying to sell a property
+     * @param otherPlayers all players in the game remaining less the active player
+     */
+    static void sellPropertyCase(Player player, ArrayList<Player> otherPlayers) {
         int inputInt;
         Player otherPlayer; //player to sell to
         ArrayList<Property> ownedProperties = player.getPropertiesOwned();
         Property pToSell = null;
 
         while (true) {
-
             if (ownedProperties.isEmpty()) {
                 System.out.println("No owned properties");
                 return;
             }
-
             System.out.println("----Enter index of property would you like to sell: (0 to exit)");
             for (Property p : ownedProperties) {
                 System.out.println("Index: " + p.getBoardIndex() + " Name: " + p.getName());
             }
-
             try {
                 inputInt = Game.scanner.nextInt();
             } catch (InputMismatchException ex) {
@@ -84,7 +93,6 @@ public class TradeMenu {
                 System.out.println("Invalid input");
                 continue;
             }
-
             if (inputInt == 0) {
                 return;
             } else {
@@ -106,7 +114,6 @@ public class TradeMenu {
             		continue;
             	}
             }
-
             System.out.println("--------Who would you like to sell this property to?");
             System.out.print("--------0 to exit, ");
             for (int i=1; i<otherPlayers.size() + 1; i++) {
@@ -136,7 +143,6 @@ public class TradeMenu {
                             Trade.sellProperty(pToSell, player, otherPlayer, inputInt);
                             return;
                         }
-
                     } catch (InputMismatchException ex) {
                         Game.scanner.next();
                         System.out.println("Invalid input");
@@ -151,7 +157,13 @@ public class TradeMenu {
         }
     }
 
-    public static void buyGOOJFCase(Player player, ArrayList<Player> otherPlayers) {
+    /**
+     * Flow of actions that can be carried out when a player chooses to try buy a Get out of Jail
+     * Free Card
+     * @param player active player currently trying to buy card
+     * @param otherPlayers every other player in the game
+     */
+    private static void buyGOOJFCase(Player player, ArrayList<Player> otherPlayers) {
         int inputInt;
         Player otherPlayer;  //player to sell to
 
@@ -204,18 +216,20 @@ public class TradeMenu {
         }
     }
 
-    public static void sellGOOJFCase(Player player, ArrayList<Player> otherPlayers) {
-
+    /**
+     * Flow of actions that can be carried out when a player chooses to sell buy a Get out of Jail
+     * Free Card
+     * @param player active player currently trying to sell card
+     * @param otherPlayers every other player in the game
+     */
+    static void sellGOOJFCase(Player player, ArrayList<Player> otherPlayers) {
         Player otherPlayer;
         int inputInt;
-
         while (true) {
-
             if (player.getGetOutOfJailFreeCard() < 1) {
                 System.out.println("--------You do not have a GOOJF card to sell");
                 break;
             }
-
             System.out.println("--------Who would you like to sell a \"Get Out of Jail Free\" card to?");
             System.out.print("--------0 to exit, ");
             for (int i=1; i<otherPlayers.size() + 1; i++) {
