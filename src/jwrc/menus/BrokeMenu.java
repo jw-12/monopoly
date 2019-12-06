@@ -54,7 +54,7 @@ public class BrokeMenu implements Menuable {
                     TradeMenu.sellPropertyCase(player, otherPlayers);
                     break;
                 case 1:
-                    System.out.println("Mortgage property here");
+                    PropertyOverlord.printMortgageOptions(player);
                     break;
                 case 2:
                     System.out.println("Sell houses/hotels here");
