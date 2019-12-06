@@ -1,7 +1,5 @@
 package jwrc.board;
 
-import java.util.ArrayList;
-
 import jwrc.player.*;
 
 public class Penalties extends BoardSpace {

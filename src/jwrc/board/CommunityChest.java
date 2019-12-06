@@ -9,7 +9,6 @@ import java.util.Collections;
 
 public class CommunityChest extends BoardSpace implements RandomizedSpace {
 
-    //todo: move deck to a static variable here
     public CommunityChest(int index) {
         super(index);
     }

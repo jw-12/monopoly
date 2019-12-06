@@ -2,9 +2,6 @@ package jwrc.board;
 
 import jwrc.player.Player;
 
-import java.util.ArrayList;
-
-
 /**
  * the BoardSpace associated with sending the player who lands on it to jail
  */

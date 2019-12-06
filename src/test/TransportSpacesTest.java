@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import jwrc.board.Board;
 import jwrc.board.TransportSpaces;
-import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.player.Player;
 

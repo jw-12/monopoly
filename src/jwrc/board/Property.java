@@ -4,8 +4,6 @@ import jwrc.player.Player;
 
 import java.util.ArrayList;
 
-import jwrc.game.*;
-
 /**
  * This is a super class for the three types of property, Utilities, Sites and Transports.
  */

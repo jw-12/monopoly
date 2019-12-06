@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import jwrc.board.Board;
-import jwrc.board.Sites;
 import jwrc.board.Utility;
 import jwrc.game.Game;
 import jwrc.player.Player;

@@ -1,7 +1,6 @@
 package test;
 
 import jwrc.board.Board;
-import jwrc.board.Property;
 import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.game.PropertyOverlord;

@@ -4,7 +4,6 @@ import jwrc.board.Board;
 import jwrc.board.Sites;
 import jwrc.game.Game;
 import jwrc.game.PropertyOverlord;
-import jwrc.game.Trade;
 import jwrc.game.Turn;
 import jwrc.player.PaymentType;
 import jwrc.player.Player;

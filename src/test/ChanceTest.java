@@ -111,7 +111,6 @@ public class ChanceTest {
         Sites s = (Sites) Board.spaces.get(11);
         s.changeOwner(p2.getName());
         p2.addProperty(s); //let p2 own so no User Input Needed
-        int balanceBefore = p1.getAccountBalance();
         p1.evaluatePosition(7); //send to position 7
         Turn.movePlayerForward(p1,players);
         assertEquals("Ensure position is 11 After", 11, p1.getBoardIndex());
