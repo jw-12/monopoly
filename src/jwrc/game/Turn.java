@@ -12,20 +12,34 @@ import java.util.InputMismatchException;
 
 /**
  * Turn class handles actions which proceed before and after the BoardSpace actions take place. e.g. dice rolled here
- * and post-turn prompts (e.g. h to build houses/hotels)
+ * and post-turn prompts. Player taking the turn can build, sell etc whenever they want during the turn due to
+ * the looping menu structure
  */
 
 public class Turn {
 
-    public static ArrayList<Integer> commDeckIndices;
-    public static ArrayList<Integer> chanceDeckIndices;
+    private static ArrayList<Integer> commDeckIndices; // the deck of indexes to be used in Chance/CommChest
+    private static ArrayList<Integer> chanceDeckIndices;
 
+    /**
+     * Constructor for the turn object
+     * @param inputCommDeckIndices shuffled indexes to be used for community chest
+     * @param inputChanceDeckIndices shuffled indexes to be used for chance
+     */
     public Turn(ArrayList<Integer> inputCommDeckIndices, ArrayList<Integer> inputChanceDeckIndices) {
         commDeckIndices = inputCommDeckIndices;
         chanceDeckIndices = inputChanceDeckIndices;
     }
 
-    public void takeTurn(Player player, ArrayList<Player> playerList) {
+    /**
+     * The main looping turn method. In here, the player has freedom to perform trades, view other
+     * player details and all other actions before, and after they roll the dice.
+     * Access is restricted to the package
+     * @param player the player whose turn it is
+     * @param playerList the entire valid list of players for this turn
+     */
+
+    void takeTurn(Player player, ArrayList<Player> playerList) {
         int userInput;
         String promptString = "";
         player.hasRolled = false;
@@ -35,6 +49,10 @@ public class Turn {
         System.out.println(player.getName() + " it's your turn.");
         player.printPlayerDetails();
 
+        /*
+            keep looping - allow player to perform actions until they decide
+            to end turn or are kicked from the game
+        */
         while (!endTurn && !player.isKicked) {
             inJail = player.getJailStatus();
             if (inJail) {
@@ -50,6 +68,11 @@ public class Turn {
                 System.out.println("Must enter an integer");
                 continue;
             }
+
+            /*
+            * Switch on user input to perform actions as they specified
+            * e.g. 0 to roll the dice
+            * */
             switch (userInput) {
                 case 0:
                     endTurn = this.rolledDice(player);
@@ -92,13 +115,20 @@ public class Turn {
         player.setDoubles(0); //reset doubles at end of the turn
     }
 
-    /*
-    * Acts as a filter for defining what action is performed when a player lands on a specific
-    * BoardSpace. Static context means takeAction should not need to be called for a space anywhere
-    * else as this can act as the interface for actions.
-    * */
-
+    /**
+     * Safely move the player forward and take the specific action as specified
+     * by the space they land on
+     * @param player current active player whose turn it is
+     * @param playerList list of players remaining in the game
+     */
     public static void movePlayerForward(Player player, ArrayList<Player> playerList) {
+
+        /*
+         * Acts as a filter for defining what action is performed when a player lands on a specific
+         * BoardSpace. Static context means takeAction should not need to be called for a space anywhere
+         * else as this can act as the interface for actions.
+         * */
+
         BoardSpace bs = Board.spaces.get(player.getBoardIndex());
         bs.readDetails();
         if (bs instanceof Sites) {
@@ -119,7 +149,15 @@ public class Turn {
         // otherwise the BoardSpace doesn't require an action so can continue without further action
     }
 
+    /**
+     * Function where player tries to roll their way out of jail. If they roll double they are free
+     * If they have been in jail too long, they are forced to pay fine
+     * @param currentPlayer player whose turn it is (should be in jail)
+     * @param playerList players remaining in the game
+     * @param diceVal integer array of two dice values that they rolled
+     */
     public void tryLeaveJail(Player currentPlayer, ArrayList<Player> playerList, int[] diceVal) {
+
         //need to verify doubles
         if (diceVal[0] == diceVal[1]) {
             System.out.println("You rolled doubles and have escaped from jail.");
@@ -140,7 +178,13 @@ public class Turn {
         }
     }
 
-    public boolean rolledDice(Player player) {
+    /**
+     * Handles the actions that come about rolling the dice on a turn. Does necessary checks
+     * for doubles and if they have already rolled etc
+     * @param player player whose turn it currently is
+     * @return boolean where true implies a forced end of turn and false allows them to continue
+     */
+    private boolean rolledDice(Player player) {
 
         if (player.hasRolled) {
             System.out.println("You have already rolled on this turn, can't roll again.");
@@ -153,15 +197,19 @@ public class Turn {
             tryLeaveJail(player, Game.playerList, player.diceVal);
             return false;
         } else {
-           // player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
-            player.evaluatePosition(4);
-            if (player.getBoardIndex() == 30) {
+            player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+            //player.evaluatePosition(30); todo:REMOVE
+
+            if (player.getBoardIndex() == 30) {  //landed on GOTOJAIL
+                System.out.println("Moved to position: " + player.getBoardIndex());
+                movePlayerForward(player, Game.playerList);
                 return true;
-            } else if (player.diceVal[0] == player.diceVal[1]) {
+            } else if (player.diceVal[0] == player.diceVal[1]) {  // rolled doubles
                 System.out.println("You have rolled doubles, and get to go again.");
                 player.hasRolled = false;  // as if player has not rolled yet
                 player.setDoubles(player.getDoubles() + 1);
                 if (player.getDoubles() >= 3) {
+
                     //three in succession
                     System.out.println("You have been caught speeding (rolling three doubles in succession). Go straight to jail.");
                     player.sendToJail();
@@ -174,6 +222,11 @@ public class Turn {
         }
     }
 
+
+    /**
+     * Attempt to pay way out of jail provided balance is high enough. To be accessed from jail menu
+     * @param player player object who is active. Should be in jail.
+     */
     public void tryPostBail(Player player) {
         if (player.getAccountBalance() >= 50) {
             System.out.println("Paying bail of $50. You have now been released from jail.");
@@ -186,6 +239,10 @@ public class Turn {
         }
     }
 
+    /**
+     * Get out of jail by using the Get out of Jail free card - if the player has one
+     * @param player player who is active - should be in jail
+     */
     public void tryUseGOOJFCard(Player player) {
         if (player.getGetOutOfJailFreeCard() > 0) {
             player.setGetOutOfJailFreeCard(player.getGetOutOfJailFreeCard() - 1);

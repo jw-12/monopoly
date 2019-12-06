@@ -10,16 +10,15 @@ import java.util.ArrayList;
  */
 public class GoToJail extends BoardSpace {
 
-    public GoToJail(int index) {
+    GoToJail(int index) {
         super(index);
     }
 
     public void takeAction(Player player) {
         player.sendToJail();
-
     }
 
     public void readDetails() {
-        System.out.println("You are being sent to jail, ya durty bowsie.");
+        System.out.println("You are being sent to jail!");
     }
 }
