@@ -10,38 +10,16 @@ __Members__:
 ---
 
 ###Project Structure
+
+- Source code is stored in the ``monopoly/src/jwrc`` directory
+- Test code is stored in the ``monopoly/src/test`` directory
+- JavaDocs are stored in the ``monopoly/doc`` directory
+- Diagrams are stored in the ``monopoly/diagrams`` directory
+- A compiled jar file is stored in ``monopoly/monopoly_team9.jar``
 ```
-└───monopoly
-    ├───bin
-    │   ├───jwrc
-    │   │   ├───board
-    │   │   ├───game
-    │   │   ├───main
-    │   │   ├───menus
-    │   │   └───player
-    │   └───test
+───monopoly
+    ├───diagrams
     ├───doc
-    │   ├───index-files
-    │   ├───jwrc
-    │   │   ├───board
-    │   │   │   └───class-use
-    │   │   ├───game
-    │   │   │   └───class-use
-    │   │   ├───main
-    │   │   │   └───class-use
-    │   │   ├───menus
-    │   │   │   └───class-use
-    │   │   └───player
-    │   │       └───class-use
-    │   ├───resources
-    │   └───script-dir
-    │       ├───external
-    │       │   └───jquery
-    │       ├───images
-    │       ├───jszip
-    │       │   └───dist
-    │       └───jszip-utils
-    │           └───dist
     └───src
         ├───jwrc
         │   ├───board
@@ -51,11 +29,6 @@ __Members__:
         │   └───player
         └───test
 ```
-- Source code is stored in the ``monopoly/src/jwrc`` directory
-- Test code is stored in the ``monopoly/src/test`` directory
-- JavaDocs are stored in the ``monopoly/doc`` directory
-- Diagrams are stored in the **************************************
-- A compiled jar file is stored in ``src/monopoly_team9.jar``
 
 ---
 ### Running the Application
