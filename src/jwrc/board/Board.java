@@ -4,18 +4,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * This class defines the game board. It consists of 40 spaces of type boardSpace. Each space has its specific 
+ * properties e.g each site will specify the rent depending on the number of houses it has.
+ */
 public class Board {
 
 	public static HashMap<String, ArrayList<Sites>> map;
 	public static ArrayList<BoardSpace> spaces;
 
-    
+    /**
+     * This constructs a board with 40 spaces corresponding to the original Monopoly board and a hash map
+     * containing the sites corresponding to each board colour.
+     */
     public Board() {
     	spaces = generateSpaces();
     	map = new HashMap<String,ArrayList<Sites>>();
     	setSiteMap();
     }
 
+    /**
+     * Create the original monopoly board.
+     * @return This returns an arraylist of type boardspace, representing each space on the original monopoly board.
+     */
     private ArrayList<BoardSpace> generateSpaces() {
 		return (
 				new ArrayList<>(Arrays.asList(
@@ -64,6 +75,10 @@ public class Board {
 		);
 	}
 
+    /**
+     * This creates an arraylist of the sites on the board. It then adds them to a hash map where the colour 
+     * is the key for an arraylist of sites corresponding to this colour.
+     */
     private void setSiteMap() {
     	ArrayList<Sites> sitesBoard = new ArrayList<>(
     			Arrays.asList(

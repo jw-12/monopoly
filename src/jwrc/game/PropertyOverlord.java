@@ -4,13 +4,24 @@ import jwrc.player.*;
 import java.util.ArrayList;
 import jwrc.board.*;
 
+/**
+ * This class takes care of the property options such as building houses/hotels and mortgaging properties.
+ */
 public class PropertyOverlord {
 	
 	public static int numOfHouses=32;
+	/**
+	 * Static methods are called from this class.
+	 */
 	public PropertyOverlord() {
-		
 	}
 	
+	/**
+	 * This class prompts the user to select a site from the list of sites they own. Once selected it will check
+	 * the validity of the site and return this value.
+	 * @param p The player selecting a site they own 
+	 * @return Returns the board index of the site they select.
+	 */
 	public static Integer siteIndexSelector(Player p) {
 		
 		ArrayList<Sites> sitesArrayList = p.getSites();
@@ -26,7 +37,7 @@ public class PropertyOverlord {
 		boolean check = false;
 		
         Integer choice = Game.scanner.nextInt();
-        for(Sites s : sitesArrayList) {
+        for(Sites s : sitesArrayList) {      // check if user input site is valid.
 			if(s.getBoardIndex() == choice) {
 				check = true;
 			}
@@ -39,6 +50,11 @@ public class PropertyOverlord {
 		return choice;
 	}
 	
+	/**
+	 *  This class prompts the user to select a property from the list of properties they own. 
+	 * @param p The player selecting a property they own.
+	 * @return Returns the board index of the property the user selects.
+	 */
 	public static Integer printMortgageOptions(Player p) {
 		ArrayList<Property> propertyArrayList = p.getPropertiesOwned();
 		System.out.println("These are the properties you own and their corresponding board position.\nPlease enter the position of the property you would like to take action on:");
@@ -62,7 +78,12 @@ public class PropertyOverlord {
 		}
 		return choice;
 	}
-	
+	/**
+	 * This method sets the mortgage active status of a property to true if mortgage conditions are met.
+	 * The player will also receive the mortgage value to their account.
+	 * @param player The player wishing to mortgage a property.
+	 * @param propertyIndex The board index of the property they'd like to mortgage.
+	 */
 	public static void mortgageProperty(Player player, int propertyIndex) {
 		
 		Property prop = (Property)Board.spaces.get(propertyIndex);
@@ -70,7 +91,7 @@ public class PropertyOverlord {
 			String siteKey = ((Sites) prop).getColour();
 			ArrayList<Sites> temp = new ArrayList<Sites>();
 			temp = Board.map.get(siteKey);
-			for(int i=0 ; i<temp.size(); i++) {
+			for(int i=0 ; i<temp.size(); i++) { // check sites of same colour have no houses.
 				if(temp.get(i).noOfHouses !=0 || temp.get(i).hasHotel) {
 					System.out.println("You must sell all buildings off "+siteKey+" sites if you want to mortgage "+prop.getName());
 					return;
@@ -82,6 +103,11 @@ public class PropertyOverlord {
 		System.out.println("You have received $"+ prop.getmortgageValue()+" for mortgaging "+prop.getName());
 	}
 	
+	/**
+	 * This class lifts a mortgage from a property for the mortgage value plus 10%.
+	 * @param player The player lifting the mortgage
+	 * @param propertyIndex The board index of the property.
+	 */
 	public static void liftMortgage(Player player, int propertyIndex) {
 		Property prop = (Property)Board.spaces.get(propertyIndex);
 		if(!prop.mortgageActive) {
@@ -97,6 +123,13 @@ public class PropertyOverlord {
 		
 	}
 	
+	/**
+	 * This method checks if an action(build house, sell hotel) is vaild given the state of other sites of its colour group.
+	 * @param player the player whoe's sites need to be checked 
+	 * @param siteIndex The index of the site
+	 * @param option This corresponds to the action we are taking. Depending on this value, the method will perform checks for a specific action(e.g 0 - buildHouse, 1- sellHouse).
+	 * @return Returns true if checks are complete and operation can continue.
+	 */
 	public static boolean siteColourChecks(Player player, int siteIndex, int option) {
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
@@ -157,7 +190,11 @@ public class PropertyOverlord {
 		}
 	}
 	
-	
+	/**
+	 * This method sells a house from  a site if selling conditions are met.You will receive half the house cost to your account
+	 * @param player The player wishing to sell a house
+	 * @param siteIndex The board index of the site they want to sell.
+	 */
 	public static void sellHouse(Player player, int siteIndex) {
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		if(site.getNoOfHouses() == 0){
@@ -175,6 +212,11 @@ public class PropertyOverlord {
 		System.out.println(houseVal + " has been added to your bank account.");
 	}
 	
+	/**
+	 * This method sells a hotel if conditions are met. It will replace the hotel with 4 houses and add half the hotel cost to the players account. 
+	 * @param player The player wishing to sell a hotel
+	 * @param siteIndex The board index of the hotel
+	 */
 	public static void sellHotel(Player player, int siteIndex) {
 		Sites site = (Sites)Board.spaces.get(siteIndex);
 		if(!site.hasHotel) {
@@ -196,6 +238,11 @@ public class PropertyOverlord {
 		
 	}
 	
+	/**
+	 * This method builds a hotel if conditions are met. It will remove 4 houses from the site and replace with a hotel with added rent cost.
+	 * @param player The player wishing to build a hotel
+	 * @param siteIndex The board index of the site to build a hotel on.
+	 */
 	public static void buildHotel(Player player, int siteIndex) {
 		
 		Sites site = (Sites)Board.spaces.get(siteIndex);
@@ -219,7 +266,11 @@ public class PropertyOverlord {
 		}
 	}
 		
-	
+	/**
+	 * This class will build a house on a site if conditions are met. This will increase rent cost and house cost deducted from players account.
+	 * @param player The player wishing to build a house.
+	 * @param siteIndex The board index of the site they wish to build on.
+	 */ 
 	public static void buildHouse(Player player, int siteIndex) {
 		
 		if(numOfHouses == 0) {
