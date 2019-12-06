@@ -4,26 +4,24 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import jwrc.board.Utility;
+import jwrc.board.*;
 import jwrc.game.Game;
 import jwrc.player.PaymentType;
 import jwrc.player.Player;
 import org.junit.*;
-
-import jwrc.board.Property;
-import jwrc.board.Sites;
-import jwrc.board.TransportSpaces;
 
 public class PlayerTest {
 	
 	static String name;
 	static Player player;
 	static Game game;
+	static Board board;
 
 	@BeforeClass
 	public static void BeforeClass() {
 		name = "Ronan";
 		System.out.println("BeforeClass");
+		board = new Board();
 	}
 	
 	@Before
@@ -85,6 +83,18 @@ public class PlayerTest {
 		game = null;
 		Game.playerList = null;
 		System.out.println("AfterClass");
+		board = null;
+	}
+
+	@Test
+	public final void changedTransportsOwnedTest_adding_and_removing_Transports() {
+		assertEquals("0 transports owned when none have been bought",0,player.getTransportsOwned());
+		player.changeTransportsOwned(1);
+		assertEquals("increase by 1 when transport is bought",1,player.getTransportsOwned());
+		player.changeTransportsOwned(1);
+		assertEquals("add another transport",2,player.getTransportsOwned());
+		player.changeTransportsOwned(-1);
+		assertEquals("remove a transport",1,player.getTransportsOwned());
 	}
 
 	@Test

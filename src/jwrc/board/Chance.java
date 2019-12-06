@@ -91,7 +91,7 @@ public class Chance extends BoardSpace implements RandomizedSpace {
                 		cost += 100;
                 	}
                 	else {
-                		cost += 25*site.getNoOfHouses();
+                		cost += (25*site.getNoOfHouses());
                 	}
                 }
                 player.changeAccountBalance(-cost, PaymentType.BANK);

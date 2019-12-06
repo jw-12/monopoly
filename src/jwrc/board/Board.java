@@ -6,20 +6,17 @@ import java.util.HashMap;
 
 public class Board {
 
-	public static ArrayList<Sites> sitesBoard;
 	public static HashMap<String, ArrayList<Sites>> map;
-	public static ArrayList<BoardSpace> chanceBoard;
 	public static ArrayList<BoardSpace> spaces;
 
     
     public Board() {
     	spaces = generateSpaces();
-    	sitesBoard = setSitesBoard();
     	map = new HashMap<String,ArrayList<Sites>>();
     	setSiteMap();
     }
 
-    public ArrayList<BoardSpace> generateSpaces() {
+    private ArrayList<BoardSpace> generateSpaces() {
 		return (
 				new ArrayList<>(Arrays.asList(
 					new BlankSpace(0),
@@ -67,9 +64,9 @@ public class Board {
 		);
 	}
 
-    public ArrayList<Sites> setSitesBoard() {
-		return (
-				new ArrayList<>(Arrays.asList(
+    private void setSiteMap() {
+    	ArrayList<Sites> sitesBoard = new ArrayList<>(
+    			Arrays.asList(
 					(Sites)spaces.get(1),
 					(Sites)spaces.get(3),
 					(Sites)spaces.get(6),
@@ -91,13 +88,10 @@ public class Board {
 					(Sites)spaces.get(32),
 					(Sites)spaces.get(34),
 					(Sites)spaces.get(37),
-					(Sites)spaces.get(39)	
+					(Sites)spaces.get(39)
 				)
-			)
 		);
-    }
-    
-    public void setSiteMap() {
+
     	ArrayList<Sites> brown = new ArrayList<Sites>();
     	brown.add(sitesBoard.get(0));
     	brown.add(sitesBoard.get(1));
@@ -106,7 +100,6 @@ public class Board {
     	blue.add(sitesBoard.get(2));
     	blue.add(sitesBoard.get(3));
     	blue.add(sitesBoard.get(4));
-        
 
         ArrayList<Sites> pink = new ArrayList<Sites>();
         pink.add(sitesBoard.get(5));
@@ -136,8 +129,7 @@ public class Board {
         ArrayList<Sites> purple = new ArrayList<Sites>();
     	purple.add(sitesBoard.get(20));
     	purple.add(sitesBoard.get(21));
-    	
-    	
+
     	map.put("Brown", brown);
         map.put("Blue", blue);
         map.put("Pink", pink);
@@ -146,7 +138,5 @@ public class Board {
         map.put("Yellow", yellow);
         map.put("Green", green);
         map.put("Purple", purple);
-    	
     }
-
 }

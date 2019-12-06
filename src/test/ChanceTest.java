@@ -2,6 +2,7 @@ package test;
 
 import jwrc.board.*;
 import jwrc.game.Game;
+import jwrc.game.PropertyOverlord;
 import jwrc.game.Turn;
 import jwrc.player.Player;
 import org.junit.*;
@@ -20,15 +21,18 @@ public class ChanceTest {
     static ArrayList<Player> players;
     static ArrayList<Integer> commDeck;
     static ArrayList<Integer> chanceDeck;
+    static PropertyOverlord po;
 
     @BeforeClass
     public static void BeforeClass() {
         board = new Board();
+        po = new PropertyOverlord();
     }
 
     @AfterClass
     public static void AfterClass() {
         board = null;
+        po = null;
     }
 
     @Before
@@ -229,5 +233,31 @@ public class ChanceTest {
         Turn.movePlayerForward(p1,players);
         assertEquals("Ensure at Jail Index", 10, p1.getBoardIndex());
         assertTrue("Ensure player in jail", p1.getJailStatus());
+    }
+
+    @Test
+    public final void test_takeAction_case9() {
+        commDeck.add(9);
+        chanceDeck.add(9);
+        turn = new Turn(commDeck, chanceDeck);
+        p1.evaluatePosition(7);
+        Sites s1, s2;
+        s1 = (Sites)Board.spaces.get(1);
+        s2 = (Sites)Board.spaces.get(3);
+        p1.addProperty(s1);
+        p1.addProperty(s2);
+        s1.changeOwner(p1.getName());
+        s2.changeOwner(p1.getName());
+
+        PropertyOverlord.buildHouse(p1,1);
+        PropertyOverlord.buildHouse(p1,3);
+        PropertyOverlord.buildHouse(p1,1);
+        PropertyOverlord.buildHouse(p1,3);
+        PropertyOverlord.buildHouse(p1,1);
+        PropertyOverlord.buildHouse(p1,3);
+
+        int balBefore = p1.getAccountBalance();
+        Turn.movePlayerForward(p1,players);
+        assertEquals("Ensure Player1 spent (6*25=$150) on repairs", balBefore-150,p1.getAccountBalance());
     }
 }

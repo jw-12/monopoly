@@ -86,7 +86,7 @@ public class CommunityChest extends BoardSpace implements RandomizedSpace {
                 		cost += 115;
                 	}
                 	else {
-                		cost += 40*site.getNoOfHouses();
+                		cost += (40*site.getNoOfHouses());
                 	}
                 }
                 player.changeAccountBalance(-cost, PaymentType.BANK);
