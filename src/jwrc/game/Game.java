@@ -73,7 +73,7 @@ public class Game {
             String str;
             System.out.println("Name for Player " + (i + 1) + ": ");
             str = scanner.next();
-            Player player = new Player(str);
+            Player player = new Player(str.toUpperCase()); //force uppercase name
             playerList.add(player);
         }
     }
