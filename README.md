@@ -9,13 +9,15 @@ __Members__:
 
 ---
 
-###Project Structure
+### Project Structure
 
-- Source code is stored in the ``monopoly/src/jwrc`` directory
-- Test code is stored in the ``monopoly/src/test`` directory
-- JavaDocs are stored in the ``monopoly/doc`` directory
-- Diagrams are stored in the ``monopoly/diagrams`` directory
-- A compiled jar file is stored in ``monopoly/monopoly_team9.jar``
+- Source code is stored in the ``/src/jwrc`` directory
+- Test code is stored in the ``/src/test`` directory
+- JavaDocs are stored in the ``/doc`` directory
+- Diagrams are stored in the ``/diagrams`` directory
+- A compiled jar file is stored in ``/monopoly_team9.jar``
+
+i.e. directory structure:
 ```
 ───monopoly
     ├───diagrams
