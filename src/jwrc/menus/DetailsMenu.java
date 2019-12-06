@@ -8,12 +8,23 @@ import jwrc.game.Game;
 import jwrc.player.Player;
 import jwrc.board.Property;
 
+/**
+ * give players option to see everyone's details i.e. number of properties etc
+ */
 public class DetailsMenu implements Menuable {
-	
+
+	/**
+	 * constructor to the menu
+	 */
 	DetailsMenu() {
 
 	}
 
+	/**
+	 * method that presents the options to the player what they can view and handles interactions until they leave
+	 * @param player the current active player
+	 * @param players all players remaining in the game
+	 */
 	public static void options(Player player, ArrayList<Player> players) {
 		while(true) {
 			String playerName;
@@ -48,8 +59,12 @@ public class DetailsMenu implements Menuable {
 			readProperties(chosenPlayer);
 		}
 	}
-	
-	
+
+
+	/**
+	 * Method to print the properties in a neat format for a given player
+	 * @param player player to print properties for
+	 */
 	private static void readProperties(Player player) {
 		
 		ArrayList<Property> props = player.getPropertiesOwned();

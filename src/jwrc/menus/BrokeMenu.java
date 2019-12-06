@@ -10,6 +10,10 @@ import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+
+/**
+ * Menu presented to the player when they have gone broke to the bank and must liquidate assets
+ */
 public class BrokeMenu implements Menuable {
 
     /**

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+/**
+ * implements the community chest space on the board
+ */
 public class CommunityChest extends BoardSpace implements RandomizedSpace {
 
     /**

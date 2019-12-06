@@ -2,6 +2,9 @@ package jwrc.board;
 
 import jwrc.player.*;
 
+/**
+ * Implements the penalties board space i.e. income tax etc
+ */
 public class Penalties extends BoardSpace {
 
     private String penaltyName;
