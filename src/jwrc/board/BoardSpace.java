@@ -17,7 +17,7 @@ public abstract class BoardSpace {
 
     /**
      * Return the position of the space
-     * @return
+     * @return board position of the space
      */
     public int getBoardIndex() {
         return index;
