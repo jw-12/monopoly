@@ -7,6 +7,9 @@ import jwrc.game.Game;
 import jwrc.player.PaymentType;
 import jwrc.player.Player;
 
+/**
+ * This class is for Site board spaces. It extends the Property class.
+ */
 public class Sites extends Property {
 
 	private String colour;
@@ -17,7 +20,15 @@ public class Sites extends Property {
 	public int rentIndex;
 	public boolean fullSet;
 	
-
+	/**
+	 * This Constructs a Site with specified name, mortgage value, board index, colour, rent values and house cost.
+	 * @param name The name of the site.
+	 * @param mortgageValue The mortgage value of the site. Site cost is double this value.
+	 * @param index The board index of the site.
+	 * @param colour The colour of the site.
+	 * @param rentValues An array containing the rent prices for each site.
+	 * @param houseCost The cost of building a house on this site. Hotel cost is the same.
+	 */
 	public Sites(String name, int mortgageValue, int index, String colour, int[] rentValues, int houseCost) {
 		
 		super(name, mortgageValue, index);
@@ -83,10 +94,19 @@ public class Sites extends Property {
 			System.out.println(payPlayer.getName()+ " your new balance is "+ payPlayer.getAccountBalance());
 		}
 	}
-	
+	/**
+	 * 
+	 * @return returns the colour of the site.
+	 */
 	public String getColour() {
 		return this.colour;
 	}
+	/**
+	 *  Buys the site for the player at the given price. This involves changing the sites owner 
+	 *  and deducting the site cost from the players account.
+	 * @param player The player that is buying the site
+	 * @param cost The cost of the site
+	 */
 	public void buySite(Player player, int cost) {
 		
 		this.changeOwner(player.getName());
@@ -96,17 +116,21 @@ public class Sites extends Property {
 		this.colourGroupCheck();
 	}
 	
+	/**
+	 * Used to check if a newly bought site completes a colour set of sites. If so Increase rent of all sites 
+	 * and set boolean fullSet to true.
+	 */
 	public void colourGroupCheck() {
 		String siteKey = this.getColour();
 		ArrayList<Sites> temp = new ArrayList<Sites>();
 		temp = Board.map.get(siteKey);
 		
-		for(int i=0 ; i<temp.size(); i++) {
+		for(int i=0 ; i<temp.size(); i++) { // if not all owners are the same then return.
 			if(this.getOwner() != temp.get(i).getOwner()) {
 				return;
 			}
 		}
-		for(int i=0 ; i<temp.size(); i++) {
+		for(int i=0 ; i<temp.size(); i++) { // if all owners are the same, increase rent.
 			temp.get(i).rentIndex++;
 			temp.get(i).fullSet = true;
 		}
@@ -114,29 +138,54 @@ public class Sites extends Property {
 		
 	}
 	
+	/**
+	 * Read the name, colour, number of houses and the owner of a site.
+	 */
 	public void readDetails() {
 		System.out.println("Site: "+ this.getName() + "  Colour: "+ this.getColour()+ "  Houses: "+this.getNoOfHouses()+"  Owner: "+this.getOwner());
 	}
 	
+	/**
+	 * 
+	 * @return Returns the cost of a house on this site.
+	 */
 	public int getHouseCost() {
 		return this.houseCost;
 	}
+	/**
+	 * 
+	 * @return Returns the rent cost of a site.
+	 */
 	public int getRentCost() {
 		return this.rentValues[this.rentIndex];
 	}
-	
+	/**
+	 * 
+	 * @return Return the number of houses a site has.
+	 */
 	public int getNoOfHouses() {
 		return this.noOfHouses;
 	}
+	/**
+	 *  Adds a house to a site and increases the rent index by one.
+	 */
 	public void addHouse() {
 		this.noOfHouses++;
 		this.rentIndex++;
 	}
+	/**
+	 * Removes a house from a site and reduces the rent index by one.
+	 */
 	public void removeHouse() {
 		this.noOfHouses--;
 		this.rentIndex--;
 	}
 	
+	/**
+	 * 
+	 * @param player The player who's sites we want to liquidate.
+	 * @return the value of all their houses and hotels
+	 */
 	public static int liquidateBuildings(Player player) {
 		int value=0;
 		ArrayList<Sites> sites = player.getSites();

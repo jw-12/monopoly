@@ -153,7 +153,8 @@ public class Turn {
             tryLeaveJail(player, Game.playerList, player.diceVal);
             return false;
         } else {
-            player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+           // player.evaluatePosition(player.diceVal[0] + player.diceVal[1]);
+            player.evaluatePosition(4);
             if (player.getBoardIndex() == 30) {
                 return true;
             } else if (player.diceVal[0] == player.diceVal[1]) {
