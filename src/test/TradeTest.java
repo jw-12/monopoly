@@ -71,9 +71,18 @@ public class TradeTest {
         expected.add(s1);
 
 
-        System.out.println("------>TEST INSTRUCTIONS:\nExit Player2 From Auction (Input 0)\nBid some amount with Player3 (Input int > 0)\nExit Player4 from Auction (Input 0)");
+        System.out.println("------>TEST INSTRUCTIONS:\n 1) Exit Player2 From Auction (Input 0)\n 2) Bid some amount with Player3 (Input int > 0)\n 3) Exit Player4 from Auction (Input 0)");
         Trade.startAuction(otherPlayers, s1);
         assertEquals("Player3 should own this property only: ", expected, p3.getPropertiesOwned());
 
+    }
+
+    @Test
+    public final void test_tradeGOOJFCard_sellOne() {
+        p1.setGetOutOfJailFreeCard(1);
+        System.out.println("--------->TEST INSTRUCTIONS: \n 1) Accept the trade offer (Input y)");
+        Trade.tradeGOOJFCard(p1,p2,100,true);
+        assertEquals("Player 1 Should have 0 cards", 0, p1.getGetOutOfJailFreeCard());
+        assertEquals("Player 2 Should have 1 cards", 1, p2.getGetOutOfJailFreeCard());
     }
 }
