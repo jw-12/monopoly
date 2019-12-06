@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import jwrc.board.Property;
 import jwrc.board.Sites;
 import jwrc.game.Game;
-import jwrc.game.PropertyOverlord;
 import jwrc.game.Trade;
 import jwrc.menus.BrokeMenu;
 
