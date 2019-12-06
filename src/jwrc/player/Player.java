@@ -201,7 +201,7 @@ public class Player {
      * Sends a player to jail, setting their board index to 10 and their jail status to true.
      */
     public void sendToJail() {
-        this.boardIndex = 10;  // TODO: change this to some sort of macro
+        this.boardIndex = 10;
         this.setDoubles(0);
         this.hasRolled = true;
         this.changeJailStatus();
