@@ -40,7 +40,7 @@ public class Trade {
                 System.out.println(currentPlayer.getName() + " has left the auction due to insufficient balance.");
                 continue;
             }
-            System.out.println(currentPlayer.getName() + " enter how much are you going to bid:");
+            System.out.println(currentPlayer.getName() + " enter how much are you going to bid (0 to exit):");
             try {
                 currentBid = Game.scanner.nextInt();
 
