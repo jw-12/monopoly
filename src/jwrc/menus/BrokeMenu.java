@@ -23,6 +23,7 @@ public class BrokeMenu implements Menuable {
      * Menu offering selling/mortgaging options to a player who does not have sufficient money to proceed
      * Should only access this menu through Bank transaction failure as per specification.
      * @param player the player who needs to acquire money
+     * @param players the players remaining in the game
      * @param cost the cost of the transaction in question
      */
     public static void options(Player player, ArrayList<Player> players, int cost) {
