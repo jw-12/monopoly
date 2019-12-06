@@ -59,7 +59,6 @@ public class SitesTest {
 	@Test
 	public final void getHouseCostTest() {
 		assertEquals("test house cost return method",50,site.getHouseCost());
-		
 	}
 	
 	@Test

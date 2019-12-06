@@ -93,11 +93,4 @@ public class UtilityTest {
 		assertEquals("rent charged when landing on unowned site",p2NewBalance,p2.getAccountBalance());
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 }

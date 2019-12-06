@@ -3,6 +3,7 @@ package test;
 import jwrc.board.Board;
 import jwrc.board.Sites;
 import jwrc.game.Game;
+import jwrc.game.PropertyOverlord;
 import jwrc.game.Trade;
 import jwrc.game.Turn;
 import jwrc.player.PaymentType;
@@ -74,4 +75,23 @@ public class EndGameTest {
         //p3.evaluatePosition(1);
 
     }
+    
+   
+    @Test
+    public final void test_endGame_evaluation(){
+    	Sites site, site2,site3;
+    	site = (Sites)Board.spaces.get(1);
+		site2 = (Sites)Board.spaces.get(3);
+		site3 = (Sites)Board.spaces.get(6);
+		site.buySite(p1, 60);				//p1 buys both brown sites 
+		site2.buySite(p1, 60);
+		site3.buySite(p2, 100);
+		PropertyOverlord.mortgageProperty(p2, 6);
+		PropertyOverlord.buildHouse(p1, 1); //p1 builds a house on each site.
+		PropertyOverlord.buildHouse(p1, 3);
+		game.endGame();
+		assertEquals("evaluate p1 with houses and sites",1500,p1.getAccountBalance());
+		assertEquals("evaluate p2 with a mortgaged property",1500,p2.getAccountBalance());
+    }
+    
 }

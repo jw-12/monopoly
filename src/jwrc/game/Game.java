@@ -88,21 +88,20 @@ public class Game {
 
     }
 
-    private void endGame() {
+    public void endGame() {
         System.out.println("Remaining players:");
 
         for (Player p : playerList) {
-        	int value = 0;
-        	value = p.getAccountBalance() + 2*(Sites.liquidateBuildings(p));
+        	p.changeAccountBalance(2*(Sites.liquidateBuildings(p)), PaymentType.BANK);
         	for(Property prop : p.getPropertiesOwned()) {
         		if(prop.mortgageActive) {
-        			value += prop.getmortgageValue();
+        			p.changeAccountBalance(prop.getmortgageValue(), PaymentType.BANK);
         		}
         		else {
-        			value += 2*(prop.getmortgageValue());
+        			p.changeAccountBalance(2*(prop.getmortgageValue()), PaymentType.BANK);
         		}
         	}
-            System.out.println(p.getName() + " with valuation of: $ " + value);
+            System.out.println(p.getName() + " with valuation of: $ " + p.getAccountBalance());
         }
         System.out.println("Highest valued player wins!");
     }
