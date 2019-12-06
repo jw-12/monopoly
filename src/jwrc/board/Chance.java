@@ -7,12 +7,27 @@ import jwrc.player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+/**
+ * Implements the chance space functionality in the game
+ */
 public class Chance extends BoardSpace implements RandomizedSpace {
 
+    /**
+     * constructor to the class
+     * @param index index on the board
+     */
     public Chance(int index) {
         super(index);
     }
 
+    /**
+     * Type of action to be performed given the simulated "card pulled". Given an index, a specific action will be
+     * performed
+     * @param player currently active player
+     * @param players all the players in the game remaining
+     * @param deckIndex the random number that has been "taken" from the deck
+     */
     public void takeAction(Player player, ArrayList<Player> players, int deckIndex) {
 
         int i;
@@ -137,6 +152,9 @@ public class Chance extends BoardSpace implements RandomizedSpace {
 
     }
 
+    /**
+     * See super
+     */
     public void readDetails() {
         System.out.println("You landed on Chance. Your card reads:");
     }

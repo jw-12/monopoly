@@ -198,7 +198,6 @@ public class Turn {
             return false;
         } else {
             player.evaluatePosition(player.diceVal[0] + player.diceVal[1]); // find position they land on
-
             if (player.getBoardIndex() == 30) {  //landed on GOTOJAIL
                 System.out.println("Moved to position: " + player.getBoardIndex());
                 movePlayerForward(player, Game.playerList);

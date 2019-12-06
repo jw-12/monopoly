@@ -9,10 +9,21 @@ import java.util.Collections;
 
 public class CommunityChest extends BoardSpace implements RandomizedSpace {
 
+    /**
+     * Constructor to the class
+     * @param index position on the board the space corresponds to
+     */
     public CommunityChest(int index) {
         super(index);
     }
 
+    /**
+     * Type of action to be performed given the simulated "card pulled". Given an index, a specific action will be
+     * performed
+     * @param player currently active player
+     * @param players all the players in the game remaining
+     * @param deckIndex the random number that has been "taken" from the deck
+     */
     public void takeAction(Player player, ArrayList<Player> players, int deckIndex) {
 
         switch (deckIndex) {
@@ -100,6 +111,9 @@ public class CommunityChest extends BoardSpace implements RandomizedSpace {
         Collections.rotate(Game.commDeckIndices, -1);
     }
 
+    /**
+     * See super
+     */
     public void readDetails() {
         System.out.println("You landed on Community Chest. Your card reads:");
     }
